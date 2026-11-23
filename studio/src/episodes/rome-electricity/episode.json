@@ -1,0 +1,151 @@
+{
+ "id": "RomeElectricity",
+ "slug": "rome-electricity",
+ "topic": "What if Ancient Rome discovered electricity?",
+ "title": [
+  "WHAT IF ANCIENT ROME",
+  "FOUND ELECTRICITY?"
+ ],
+ "accent": "ELECTRICITY?",
+ "fps": 24,
+ "power": {
+  "word": "Spark.",
+  "rule": "one spark, and the city answers",
+  "look": "amber electric arcs, a volt dial at 0.7 V and a SPARK chip"
+ },
+ "script": [
+  {
+   "beat": "1 cold open, demo 1: the discovery",
+   "text": "Rome, forty BC. A copper coin. A jar of vinegar. A spark."
+  },
+  {
+   "beat": "1 cold open, demo 2: a lamp",
+   "text": "A slave's kitchen. The wick dies. Spark. The lamp catches."
+  },
+  {
+   "beat": "1 cold open, demo 3: a cold bath",
+   "text": "A cold bath. Spark. Steam rolls off the water."
+  },
+  {
+   "beat": "1 cold open, demo 4: the palace",
+   "text": "A senator's ring. Spark. Every lamp in his villa bows to it."
+  },
+  {
+   "beat": "1 to 2: the rule and the premise",
+   "text": "A spark that jumps. A spark that stays. What if Ancient Rome discovered electricity?"
+  },
+  {
+   "beat": "3 the fun part",
+   "text": "No oil. No smoke. The forum burns bright all night. Hot baths at midnight. Cold wine in summer. The Emperor wants more."
+  },
+  {
+   "beat": "3 the fun part, the order",
+   "text": "He orders a jar in every house. A wire on every street."
+  },
+  {
+   "beat": "4 the turn: the cost, one real fact",
+   "text": "One catch. A copper jar makes a fiftieth of a watt. About enough to tingle your tongue. To heat one small bath, you need six hundred thousand jars. Rome has nine hundred baths. That's half a billion jars. That's real."
+  },
+  {
+   "beat": "5 someone powerful notices",
+   "text": "So the Emperor taxes every copper roof in the empire. Temples. Statues. The coins in your hand."
+  },
+  {
+   "beat": "6 a moral choice with family at stake",
+   "text": "Your sister's lamp is next. The legion is at the door. Give them the spark. Or the city goes dark."
+  },
+  {
+   "beat": "7 cliffhanger",
+   "text": "Rome doesn't fall to barbarians. It falls to a fuse. Part one."
+  }
+ ],
+ "science": [
+  {
+   "claim": "A copper-iron jar in vinegar makes about 0.7 volts and roughly a fiftieth of a watt.",
+   "working": "Standard reduction potentials: Cu2+/Cu +0.34 V, Fe2+/Fe -0.44 V, so the open-circuit cell is 0.78 V; under load about 0.7 V. A large jar with 20 x 20 cm plates and 5% acetic acid has an internal resistance of roughly 5 to 10 ohms: about 0.7 / 10 = 0.07 A short-circuit, and at matched load 0.035 A at 0.35 V, or 0.012 W. With fresh acid and a larger cathode area the matched-load power is about 0.02 W, a fiftieth of a watt. The script says a fiftieth, and the schematic shows 0.7 V.",
+   "source": "CRC Handbook of Chemistry and Physics, standard electrode potentials; Faraday's law of electrolysis"
+  },
+  {
+   "claim": "Heating one small Roman bath pool of 10 cubic metres by 25 degrees Celsius takes about 290 kWh, or 600,000 jars working for a day.",
+   "working": "Q = m c dT = 10,000 kg x 4,186 J/(kg K) x 25 K = 1.046e9 J = 290.6 kWh. Spread over 24 hours, that is 1.046e9 / 86,400 = 12.1 kW. At 0.02 W per jar, 12,100 / 0.02 = 605,000 jars. The script rounds to six hundred thousand; the schematic states 605,000.",
+   "source": "Specific heat capacity of water, 4,186 J/(kg K); thermodynamic energy balance"
+  },
+  {
+   "claim": "Rome's 900 baths would need about half a billion jars.",
+   "working": "The Regionary Catalogues of fourth-century Rome list 856 balnea and 11 thermae, about 867 public baths; the script rounds to nine hundred. 900 x 605,000 = 544,500,000 jars. The schematic counts to 544,500,000 and the script says half a billion.",
+   "source": "Regionary Catalogues of Rome (Curiosum and Notitia), fourth century AD; calculation above"
+  }
+ ],
+ "shots": [
+  { "id": "S1", "size": "CU", "note": "First spark: coin, vinegar jar, copper plate arc" },
+  { "id": "S2", "size": "MCU", "note": "Domus kitchen: oil lamp dies, spark relights lamp" },
+  { "id": "S3", "size": "MS", "note": "Cold bath pool: spark fires electrode, steam rolls off" },
+  { "id": "S4", "size": "WS", "note": "Senator villa: ring spark, lamps flare in unison" },
+  { "id": "S5", "size": "CU", "note": "Macro spark arc across dark frame" },
+  { "id": "S6", "size": "TITLE", "note": "Title Card: WHAT IF ANCIENT ROME DISCOVERED ELECTRICITY?" },
+  { "id": "S7", "size": "EWS", "note": "Forum at night glowing with electric lamps & wires" },
+  { "id": "S8", "size": "MS", "note": "Thermae hot baths at midnight: steaming warm water" },
+  { "id": "S9", "size": "MS", "note": "Emperor on throne demanding more power" },
+  { "id": "S10", "size": "WS", "note": "Decree: wiring every street, jars in houses" },
+  { "id": "S11", "size": "SCH", "note": "Schematic 1: Voltaic Jar (0.7 V, 0.02 W)" },
+  { "id": "S12", "size": "SCH", "note": "Schematic 2: Bath heating math (605,000 jars)" },
+  { "id": "S13", "size": "SCH", "note": "Schematic 3: City scale math (544,500,000 jars)" },
+  { "id": "S14", "size": "CU", "note": "Roof close: Legionaries stripping copper tiles" },
+  { "id": "S15", "size": "MS", "note": "Statues and coin stacks being confiscated" },
+  { "id": "S16", "size": "MCU", "note": "Domus interior: Sister with spark jar, Legionary at door" },
+  { "id": "S17", "size": "EWS", "note": "Forum plunges into blackout darkness" },
+  { "id": "S18", "size": "TITLE", "note": "Cliffhanger: Roman fuse blows, PART ONE" }
+ ],
+ "edit": [
+  { "shot": "S1", "at": "Rome" },
+  { "shot": "S2", "at": "slave's" },
+  { "shot": "S3", "at": "cold" },
+  { "shot": "S4", "at": "senator's" },
+  { "shot": "S5", "at": "jumps" },
+  { "shot": "S6", "at": "What" },
+  { "shot": "S7", "at": "No" },
+  { "shot": "S8", "at": "Hot" },
+  { "shot": "S9", "at": "Emperor" },
+  { "shot": "S10", "at": "orders" },
+  { "shot": "S11", "at": "catch" },
+  { "shot": "S12", "at": "heat" },
+  { "shot": "S13", "at": "nine" },
+  { "shot": "S14", "at": "taxes" },
+  { "shot": "S15", "at": "Temples" },
+  { "shot": "S16", "at": "sister's" },
+  { "shot": "S17", "at": "dark" },
+  { "shot": "S18", "at": "barbarians" }
+ ],
+ "fx": [
+  { "at": "spark#1", "kind": "flash", "color": "#FFD37A", "o": 0.8 },
+  { "at": "Spark#1", "kind": "flash", "color": "#FFD37A", "o": 0.9 },
+  { "at": "Spark#2", "kind": "flash", "color": "#6EEDFF", "o": 0.9 },
+  { "at": "Spark#3", "kind": "flash", "color": "#FFD37A", "o": 0.95 },
+  { "at": "dark", "kind": "shake", "amp": 10, "len": 6 },
+  { "at": "fuse", "kind": "flash", "color": "#FF5533", "o": 0.95 }
+ ],
+ "voice": {
+  "model": "eleven_multilingual_v2",
+  "settings": {
+   "stability": 0.45,
+   "similarity_boost": 0.8,
+   "style": 0.3,
+   "use_speaker_boost": true
+  }
+ },
+ "gaps": {
+  "word": 0.1,
+  "comma": 0.18,
+  "sentence": 0.28,
+  "question": 0.42,
+  "pairs": {
+   "Spark|The": 0.42,
+   "Spark|Every": 0.42,
+   "Spark|Steam": 0.38,
+   "Spark|A": 0.38,
+   "real|So": 0.5,
+   "barbarians|It": 0.4
+  }
+ },
+ "tail": 1.4
+}

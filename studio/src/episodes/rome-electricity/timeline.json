@@ -1,0 +1,358 @@
+{
+ "slug": "rome-electricity",
+ "title": "WHAT IF ANCIENT ROME FOUND ELECTRICITY?",
+ "fps": 24,
+ "total": 1528,
+ "segments": [
+  {
+   "shot": "S1",
+   "a": 0,
+   "b": 119,
+   "t0": 0,
+   "t1": 119,
+   "line": "Rome, forty BC. A copper coin. A jar of vinegar. A spark."
+  },
+  {
+   "shot": "S2",
+   "a": 119,
+   "b": 227,
+   "t0": 0,
+   "t1": 108,
+   "line": "A slave's kitchen. The wick dies. Spark. The lamp catches."
+  },
+  {
+   "shot": "S3",
+   "a": 227,
+   "b": 311,
+   "t0": 0,
+   "t1": 84,
+   "line": "A cold bath. Spark. Steam rolls off the water."
+  },
+  {
+   "shot": "S4",
+   "a": 311,
+   "b": 420,
+   "t0": 0,
+   "t1": 109,
+   "line": "A senator's ring. Spark. Every lamp in his villa bows to it. A spark that"
+  },
+  {
+   "shot": "S5",
+   "a": 420,
+   "b": 469,
+   "t0": 0,
+   "t1": 49,
+   "line": "jumps. A spark that stays."
+  },
+  {
+   "shot": "S6",
+   "a": 469,
+   "b": 524,
+   "t0": 0,
+   "t1": 55,
+   "line": "What if Ancient Rome discovered electricity?"
+  },
+  {
+   "shot": "S7",
+   "a": 524,
+   "b": 614,
+   "t0": 0,
+   "t1": 90,
+   "line": "No oil. No smoke. The forum burns bright all night."
+  },
+  {
+   "shot": "S8",
+   "a": 614,
+   "b": 684,
+   "t0": 0,
+   "t1": 70,
+   "line": "Hot baths at midnight. Cold wine in summer."
+  },
+  {
+   "shot": "S9",
+   "a": 684,
+   "b": 715,
+   "t0": 0,
+   "t1": 31,
+   "line": "The Emperor wants more."
+  },
+  {
+   "shot": "S10",
+   "a": 715,
+   "b": 802,
+   "t0": 0,
+   "t1": 87,
+   "line": "He orders a jar in every house. A wire on every street. One"
+  },
+  {
+   "shot": "S11",
+   "a": 802,
+   "b": 920,
+   "t0": 0,
+   "t1": 118,
+   "line": "catch. A copper jar makes a fiftieth of a watt. About enough to tingle your tongue."
+  },
+  {
+   "shot": "S12",
+   "a": 920,
+   "b": 1016,
+   "t0": 0,
+   "t1": 96,
+   "line": "To heat one small bath, you need six hundred thousand jars. Rome has"
+  },
+  {
+   "shot": "S13",
+   "a": 1016,
+   "b": 1133,
+   "t0": 0,
+   "t1": 117,
+   "line": "nine hundred baths. That's half a billion jars. That's real. So the Emperor"
+  },
+  {
+   "shot": "S14",
+   "a": 1133,
+   "b": 1183,
+   "t0": 0,
+   "t1": 50,
+   "line": "taxes every copper roof in the empire."
+  },
+  {
+   "shot": "S15",
+   "a": 1183,
+   "b": 1265,
+   "t0": 0,
+   "t1": 82,
+   "line": "Temples. Statues. The coins in your hand. Your"
+  },
+  {
+   "shot": "S16",
+   "a": 1265,
+   "b": 1381,
+   "t0": 0,
+   "t1": 116,
+   "line": "sister's lamp is next. The legion is at the door. Give them the spark. Or the city goes"
+  },
+  {
+   "shot": "S17",
+   "a": 1381,
+   "b": 1420,
+   "t0": 0,
+   "t1": 39,
+   "line": "dark. Rome doesn't fall"
+  },
+  {
+   "shot": "S18",
+   "a": 1420,
+   "b": 1528,
+   "t0": 0,
+   "t1": 108,
+   "line": "to barbarians. It falls to a fuse. Part one."
+  }
+ ],
+ "shots": [
+  {
+   "id": "S1",
+   "size": "CU",
+   "key": 59,
+   "len": 119,
+   "first": 0,
+   "line": "Rome, forty BC. A copper coin. A jar of vinegar. A spark.",
+   "note": "First spark: coin, vinegar jar, copper plate arc"
+  },
+  {
+   "id": "S2",
+   "size": "MCU",
+   "key": 54,
+   "len": 108,
+   "first": 119,
+   "line": "A slave's kitchen. The wick dies. Spark. The lamp catches.",
+   "note": "Domus kitchen: oil lamp dies, spark relights lamp"
+  },
+  {
+   "id": "S3",
+   "size": "MS",
+   "key": 42,
+   "len": 84,
+   "first": 227,
+   "line": "A cold bath. Spark. Steam rolls off the water.",
+   "note": "Cold bath pool: spark fires electrode, steam rolls off"
+  },
+  {
+   "id": "S4",
+   "size": "WS",
+   "key": 54,
+   "len": 109,
+   "first": 311,
+   "line": "A senator's ring. Spark. Every lamp in his villa bows to it. A spark that",
+   "note": "Senator villa: ring spark, lamps flare in unison"
+  },
+  {
+   "id": "S5",
+   "size": "CU",
+   "key": 24,
+   "len": 49,
+   "first": 420,
+   "line": "jumps. A spark that stays.",
+   "note": "Macro spark arc across dark frame"
+  },
+  {
+   "id": "S6",
+   "size": "TITLE",
+   "key": 27,
+   "len": 55,
+   "first": 469,
+   "line": "What if Ancient Rome discovered electricity?",
+   "note": "Title Card: WHAT IF ANCIENT ROME DISCOVERED ELECTRICITY?"
+  },
+  {
+   "id": "S7",
+   "size": "EWS",
+   "key": 45,
+   "len": 90,
+   "first": 524,
+   "line": "No oil. No smoke. The forum burns bright all night.",
+   "note": "Forum at night glowing with electric lamps & wires"
+  },
+  {
+   "id": "S8",
+   "size": "MS",
+   "key": 35,
+   "len": 70,
+   "first": 614,
+   "line": "Hot baths at midnight. Cold wine in summer.",
+   "note": "Thermae hot baths at midnight: steaming warm water"
+  },
+  {
+   "id": "S9",
+   "size": "MS",
+   "key": 15,
+   "len": 31,
+   "first": 684,
+   "line": "The Emperor wants more.",
+   "note": "Emperor on throne demanding more power"
+  },
+  {
+   "id": "S10",
+   "size": "WS",
+   "key": 43,
+   "len": 87,
+   "first": 715,
+   "line": "He orders a jar in every house. A wire on every street. One",
+   "note": "Decree: wiring every street, jars in houses"
+  },
+  {
+   "id": "S11",
+   "size": "SCH",
+   "key": 59,
+   "len": 118,
+   "first": 802,
+   "line": "catch. A copper jar makes a fiftieth of a watt. About enough to tingle your tongue.",
+   "note": "Schematic 1: Voltaic Jar (0.7 V, 0.02 W)"
+  },
+  {
+   "id": "S12",
+   "size": "SCH",
+   "key": 48,
+   "len": 96,
+   "first": 920,
+   "line": "To heat one small bath, you need six hundred thousand jars. Rome has",
+   "note": "Schematic 2: Bath heating math (605,000 jars)"
+  },
+  {
+   "id": "S13",
+   "size": "SCH",
+   "key": 58,
+   "len": 117,
+   "first": 1016,
+   "line": "nine hundred baths. That's half a billion jars. That's real. So the Emperor",
+   "note": "Schematic 3: City scale math (544,500,000 jars)"
+  },
+  {
+   "id": "S14",
+   "size": "CU",
+   "key": 25,
+   "len": 50,
+   "first": 1133,
+   "line": "taxes every copper roof in the empire.",
+   "note": "Roof close: Legionaries stripping copper tiles"
+  },
+  {
+   "id": "S15",
+   "size": "MS",
+   "key": 41,
+   "len": 82,
+   "first": 1183,
+   "line": "Temples. Statues. The coins in your hand. Your",
+   "note": "Statues and coin stacks being confiscated"
+  },
+  {
+   "id": "S16",
+   "size": "MCU",
+   "key": 58,
+   "len": 116,
+   "first": 1265,
+   "line": "sister's lamp is next. The legion is at the door. Give them the spark. Or the city goes",
+   "note": "Domus interior: Sister with spark jar, Legionary at door"
+  },
+  {
+   "id": "S17",
+   "size": "EWS",
+   "key": 19,
+   "len": 39,
+   "first": 1381,
+   "line": "dark. Rome doesn't fall",
+   "note": "Forum plunges into blackout darkness"
+  },
+  {
+   "id": "S18",
+   "size": "TITLE",
+   "key": 54,
+   "len": 108,
+   "first": 1420,
+   "line": "to barbarians. It falls to a fuse. Part one.",
+   "note": "Cliffhanger: Roman fuse blows, PART ONE"
+  }
+ ],
+ "fx": [
+  {
+   "kind": "flash",
+   "color": "#FFD37A",
+   "o": 0.8,
+   "f": 101
+  },
+  {
+   "kind": "flash",
+   "color": "#FFD37A",
+   "o": 0.9,
+   "f": 101
+  },
+  {
+   "kind": "flash",
+   "color": "#6EEDFF",
+   "o": 0.9,
+   "f": 175
+  },
+  {
+   "kind": "flash",
+   "color": "#FFD37A",
+   "o": 0.95,
+   "f": 252
+  },
+  {
+   "kind": "shake",
+   "amp": 10,
+   "len": 6,
+   "f": 1383
+  },
+  {
+   "kind": "flash",
+   "color": "#FF5533",
+   "o": 0.95,
+   "f": 1468
+  }
+ ],
+ "audio": {
+    "voice": "rome-electricity/voice.wav",
+    "voiceVol": 0.8
+  }
+}

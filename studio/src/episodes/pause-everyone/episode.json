@@ -1,0 +1,329 @@
+{
+ "id": "PauseEveryone",
+ "slug": "pause-everyone",
+ "topic": "What if you could pause everyone but you?",
+ "title": [
+  "WHAT IF YOU COULD",
+  "PAUSE EVERYONE BUT YOU?"
+ ],
+ "accent": "YOU?",
+ "power": {
+  "word": "Pause",
+  "rule": "everyone else freezes, you never pause yourself",
+  "look": "a red PAUSE chip; a pulsing red freeze around everyone but you"
+ },
+ "script": [
+  {
+   "beat": "1 cold open, demo 1 (selfish)",
+   "text": "See Mo about to wave. Pause — he's frozen, arm up. You slip past."
+  },
+  {
+   "beat": "1 cold open, demo 2 (useful)",
+   "text": "Pause mum. Grab the cookie she reaches for. Eat it alone."
+  },
+  {
+   "beat": "1 cold open, demo 3 (a little uncanny)",
+   "text": "Pause your friend. You catch him — still frozen."
+  },
+  {
+   "beat": "2 the premise (title card)",
+   "text": "What if you could pause everyone but you?"
+  },
+  {
+   "beat": "3 the fun part, one line",
+   "text": "Sounds amazing."
+  },
+  {
+   "beat": "4 the turn: the cost, one real fact",
+   "text": "One catch: to freeze someone, strip the heat — 21 megajoules. That's real. It's about to ruin your life."
+  }
+ ],
+ "science": [
+  {
+   "claim": "To freeze someone you must strip the heat out of them: about 21 megajoules per person.",
+   "working": "A 70 kg person: body water is ~60% of the body = 42 kg. E = mcΔT + mL = 42×4.19×37 + 42×334 = 6.5e6 + 14.0e6 ≈ 20.5e6 J ≈ 21 MJ.",
+   "source": "Physics: heat capacity of water 4.19 kJ/kg·K and latent heat of fusion 334 kJ/kg; body water ~60% of a 70 kg person."
+  }
+ ],
+ "cast": [
+  "pipHood",
+  "mo",
+  "mom"
+ ],
+ "shots": [
+  {
+   "id": "S1",
+   "size": "wide",
+   "set": "stairwell",
+   "key": 0.73,
+   "note": "Pip walking down the stairs; Mo ahead on the stairs, about to wave"
+  },
+  {
+   "id": "S2",
+   "size": "medium",
+   "set": "stairwell",
+   "key": 2.0,
+   "note": "Mo frozen mid-wave: arm up, smile stuck"
+  },
+  {
+   "id": "S3",
+   "size": "medium",
+   "set": "stairwell",
+   "key": 3.58,
+   "note": "Pip slips past the frozen Mo"
+  },
+  {
+   "id": "S4",
+   "size": "wide",
+   "set": "kitchen",
+   "key": 5.03,
+   "note": "mum passing the counter, reaching for a cookie"
+  },
+  {
+   "id": "S5",
+   "size": "close-up",
+   "set": "kitchen",
+   "key": 6.55,
+   "note": "mum frozen mid-step; Pip grabs the cookie off the plate"
+  },
+  {
+   "id": "S6",
+   "size": "medium",
+   "set": "kitchen",
+   "key": 7.33,
+   "note": "Pip eats the cookie, alone"
+  },
+  {
+   "id": "S7",
+   "size": "wide",
+   "set": "stairwell",
+   "key": 8.15,
+   "note": "Pip's friend (Mo) stepping onto the stairs"
+  },
+  {
+   "id": "S8",
+   "size": "close-up",
+   "set": "stairwell",
+   "key": 9.8,
+   "note": "friend frozen mid-step; Pip's hand reaching toward him"
+  },
+  {
+   "id": "S9",
+   "size": "wide",
+   "set": "rooftop",
+   "key": 12.4,
+   "note": "the premise over the dusk city; Pip on the roof, baffled"
+  },
+  {
+   "id": "S10",
+   "size": "medium",
+   "set": "rooftop",
+   "key": 13.77,
+   "note": "Pip amazed"
+  },
+  {
+   "id": "S11",
+   "size": "medium",
+   "set": "kitchen",
+   "key": 16.47,
+   "note": "Pip presses Pause on mum"
+  },
+  {
+   "id": "S12",
+   "size": "close-up",
+   "set": "kitchen",
+   "key": 19.2,
+   "note": "mum fully frozen with the red pulse; Pip holds the cookie"
+  },
+  {
+   "id": "S13",
+   "size": "medium",
+   "set": "kitchen",
+   "key": 20.1,
+   "note": "Pip walks away with the cookie; mum stays frozen"
+  }
+ ],
+ "edit": [
+  {
+   "shot": "S1",
+   "at": "See"
+  },
+  {
+   "shot": "S2",
+   "at": "Pause"
+  },
+  {
+   "shot": "S3",
+   "at": "slip"
+  },
+  {
+   "shot": "S4",
+   "at": "Pause"
+  },
+  {
+   "shot": "S5",
+   "at": "cookie"
+  },
+  {
+   "shot": "S6",
+   "at": "alone"
+  },
+  {
+   "shot": "S7",
+   "at": "friend"
+  },
+  {
+   "shot": "S8",
+   "at": "You"
+  },
+  {
+   "shot": "S9",
+   "at": "What"
+  },
+  {
+   "shot": "S10",
+   "at": "Sounds"
+  },
+  {
+   "shot": "S11",
+   "at": "One"
+  },
+  {
+   "shot": "S12",
+   "at": "real",
+   "look": "pause"
+  },
+  {
+   "shot": "S13",
+   "at": "ruin"
+  }
+ ],
+ "fx": [
+  {
+   "at": "S2+2",
+   "kind": "flash",
+   "color": "#FF3344"
+  },
+  {
+   "at": "S11",
+   "kind": "flash",
+   "color": "#FF3344"
+  },
+  {
+   "at": "S9",
+   "kind": "flash",
+   "color": "#FFF3DC"
+  }
+ ],
+ "sound": {
+  "clips": {
+   "pause_press": [
+    "a bright screen flash and a soft red pulse beep, sharp attack, short",
+    0.5
+   ],
+   "cookie_grab": [
+    "a hand grabs a small cookie from a plate, soft plastic thump, close, short",
+    0.4
+   ],
+   "cookie_bite": [
+    "one crunchy bite of a cookie, cartoon crunch, close up",
+    0.3
+   ],
+   "mum_pass": [
+    "a woman walking past a kitchen counter on smooth tile, soft footsteps, no voices, short",
+    0.3
+   ],
+   "mo_step": [
+    "a young woman steps onto stairs, cartoony soft thump, short",
+    0.35
+   ],
+   "freeze_pulse": [
+    "a low pulsing red hum, like a slow heartbeat under a door, soft",
+    1.0
+   ],
+   "turn_hit": [
+    "a dark low drone hit, deep cinematic sting, short",
+    0.35
+   ],
+   "pip_walk": [
+    "a woman walks away from a kitchen counter, soft footsteps on tile, cartoony, short",
+    0.3
+   ],
+   "title_boom": [
+    "a cinematic whoosh rising into a deep boom impact",
+    0.35
+   ],
+   "room_tone": [
+    "quiet indoor stairwell and kitchen tone in the evening, faint distant city hum, no voices",
+    12.5
+   ],
+   "music": [
+    "playful quirky cartoon background music, pizzicato strings, glockenspiel and soft bass, light and curious, 110 bpm, no vocals",
+    17.0
+   ]
+  },
+  "events": [
+   [
+    "S1",
+    "room_tone",
+    0.12,
+    "onset",
+    "S5"
+   ],
+   [
+    "S2+2",
+    "pause_press",
+    0.5
+   ],
+   [
+    "S4",
+    "mum_pass",
+    0.3
+   ],
+   [
+    "S5+3",
+    "cookie_grab",
+    0.4
+   ],
+   [
+    "S6+4",
+    "cookie_bite",
+    0.3
+   ],
+   [
+    "S7",
+    "mo_step",
+    0.35
+   ],
+   [
+    "S11",
+    "turn_hit",
+    0.3
+   ],
+   [
+    "S12+3",
+    "freeze_pulse",
+    0.9
+   ],
+   [
+    "S13+3",
+    "pip_walk",
+    0.3
+   ],
+   [
+    "S9",
+    "title_boom",
+    0.35,
+    "peak"
+   ]
+  ],
+  "music": {
+   "clip": "music",
+   "until": "S11"
+  },
+  "levels": {
+   "sfx_lu": -1.5,
+   "music_lu": -9.5
+  }
+ }
+}
