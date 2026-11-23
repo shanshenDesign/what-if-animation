@@ -1,0 +1,252 @@
+{
+ "slug": "pause-everyone",
+ "title": "WHAT IF YOU COULD PAUSE EVERYONE BUT YOU?",
+ "fps": 30,
+ "total": 635,
+ "segments": [
+  {
+   "shot": "S1",
+   "a": 0,
+   "b": 44,
+   "t0": 0,
+   "t1": 44,
+   "line": "See Mo about to wave."
+  },
+  {
+   "shot": "S2",
+   "a": 44,
+   "b": 113,
+   "t0": 0,
+   "t1": 69,
+   "line": "Pause— he's frozen, arm up. You"
+  },
+  {
+   "shot": "S3",
+   "a": 113,
+   "b": 139,
+   "t0": 0,
+   "t1": 26,
+   "line": "slip past."
+  },
+  {
+   "shot": "S4",
+   "a": 139,
+   "b": 177,
+   "t0": 0,
+   "t1": 38,
+   "line": "Pause mum. Grab"
+  },
+  {
+   "shot": "S5",
+   "a": 177,
+   "b": 225,
+   "t0": 0,
+   "t1": 48,
+   "line": "the cookie she reaches for. Eat"
+  },
+  {
+   "shot": "S6",
+   "a": 225,
+   "b": 260,
+   "t0": 0,
+   "t1": 35,
+   "line": "it alone. Pause"
+  },
+  {
+   "shot": "S7",
+   "a": 260,
+   "b": 279,
+   "t0": 0,
+   "t1": 19,
+   "line": "your friend."
+  },
+  {
+   "shot": "S8",
+   "a": 279,
+   "b": 330,
+   "t0": 0,
+   "t1": 51,
+   "line": "You catch him— still frozen."
+  },
+  {
+   "shot": "S9",
+   "a": 330,
+   "b": 393,
+   "t0": 0,
+   "t1": 63,
+   "line": "What if you could pause everyone but you?"
+  },
+  {
+   "shot": "S10",
+   "a": 393,
+   "b": 425,
+   "t0": 0,
+   "t1": 32,
+   "line": "Sounds amazing."
+  },
+  {
+   "shot": "S11",
+   "a": 425,
+   "b": 551,
+   "t0": 0,
+   "t1": 126,
+   "line": "One catch: to freeze someone, strip the heat— 21 megajoules. That's"
+  },
+  {
+   "shot": "S12",
+   "a": 551,
+   "b": 582,
+   "t0": 0,
+   "t1": 31,
+   "line": "real. It's about",
+   "look": "pause"
+  },
+  {
+   "shot": "S13",
+   "a": 582,
+   "b": 635,
+   "t0": 0,
+   "t1": 53,
+   "line": "to ruin your life."
+  }
+ ],
+ "shots": [
+  {
+   "id": "S1",
+   "size": "wide",
+   "key": 0.73,
+   "len": 44,
+   "first": 0,
+   "line": "See Mo about to wave.",
+   "note": "Pip walking down the stairs; Mo ahead on the stairs, about to wave"
+  },
+  {
+   "id": "S2",
+   "size": "medium",
+   "key": 2.0,
+   "len": 69,
+   "first": 44,
+   "line": "Pause— he's frozen, arm up. You",
+   "note": "Mo frozen mid-wave: arm up, smile stuck"
+  },
+  {
+   "id": "S3",
+   "size": "medium",
+   "key": 3.58,
+   "len": 26,
+   "first": 113,
+   "line": "slip past.",
+   "note": "Pip slips past the frozen Mo"
+  },
+  {
+   "id": "S4",
+   "size": "wide",
+   "key": 5.03,
+   "len": 38,
+   "first": 139,
+   "line": "Pause mum. Grab",
+   "note": "mum passing the counter, reaching for a cookie"
+  },
+  {
+   "id": "S5",
+   "size": "close-up",
+   "key": 6.55,
+   "len": 48,
+   "first": 177,
+   "line": "the cookie she reaches for. Eat",
+   "note": "mum frozen mid-step; Pip grabs the cookie off the plate"
+  },
+  {
+   "id": "S6",
+   "size": "medium",
+   "key": 7.33,
+   "len": 35,
+   "first": 225,
+   "line": "it alone. Pause",
+   "note": "Pip eats the cookie, alone"
+  },
+  {
+   "id": "S7",
+   "size": "wide",
+   "key": 8.15,
+   "len": 19,
+   "first": 260,
+   "line": "your friend.",
+   "note": "Pip's friend (Mo) stepping onto the stairs"
+  },
+  {
+   "id": "S8",
+   "size": "close-up",
+   "key": 9.8,
+   "len": 51,
+   "first": 279,
+   "line": "You catch him— still frozen.",
+   "note": "friend frozen mid-step; Pip's hand reaching toward him"
+  },
+  {
+   "id": "S9",
+   "size": "wide",
+   "key": 12.4,
+   "len": 63,
+   "first": 330,
+   "line": "What if you could pause everyone but you?",
+   "note": "the premise over the dusk city; Pip on the roof, baffled"
+  },
+  {
+   "id": "S10",
+   "size": "medium",
+   "key": 13.77,
+   "len": 32,
+   "first": 393,
+   "line": "Sounds amazing.",
+   "note": "Pip amazed"
+  },
+  {
+   "id": "S11",
+   "size": "medium",
+   "key": 16.47,
+   "len": 126,
+   "first": 425,
+   "line": "One catch: to freeze someone, strip the heat— 21 megajoules. That's",
+   "note": "Pip presses Pause on mum"
+  },
+  {
+   "id": "S12",
+   "size": "close-up",
+   "key": 19.2,
+   "len": 31,
+   "first": 551,
+   "line": "real. It's about",
+   "note": "mum fully frozen with the red pulse; Pip holds the cookie"
+  },
+  {
+   "id": "S13",
+   "size": "medium",
+   "key": 20.1,
+   "len": 53,
+   "first": 582,
+   "line": "to ruin your life.",
+   "note": "Pip walks away with the cookie; mum stays frozen"
+  }
+ ],
+ "fx": [
+  {
+   "kind": "flash",
+   "color": "#FF3344",
+   "f": 46
+  },
+  {
+   "kind": "flash",
+   "color": "#FF3344",
+   "f": 425
+  },
+  {
+   "kind": "flash",
+   "color": "#FFF3DC",
+   "f": 330
+  }
+ ],
+ "audio": {
+  "voice": "pause-everyone/voice.wav"
+ }
+}
