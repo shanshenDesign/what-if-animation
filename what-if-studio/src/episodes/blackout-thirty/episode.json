@@ -1,0 +1,154 @@
+{
+  "id": "BlackoutThirty",
+  "slug": "blackout-thirty",
+  "topic": "What If the Internet Went Dark for 30 Days?",
+  "title": [
+    "WHAT IF THE INTERNET WENT",
+    "DARK FOR 30 DAYS?"
+  ],
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "model": "eleven_multilingual_v2",
+    "settings": {
+      "stability": 0.4,
+      "similarity_boost": 0.8,
+      "style": 0.35,
+      "use_speaker_boost": true
+    }
+  },
+  "script": [
+    {
+      "beat": "1 the disconnect",
+      "text": "Every glowing screen, Wi-Fi wave, and city light flickers out in a sudden digital silence. No maps, no feeds, no cloud."
+    },
+    {
+      "beat": "2 digital detox",
+      "text": "Phones turn to glass bricks. People step outside to a quiet night, looking up at a starry sky with zero screen glow."
+    },
+    {
+      "beat": "3 systems stall",
+      "text": "Supply chains freeze. Bank terminals lock. Server racks hum in empty server rooms as the grid hits a critical load."
+    },
+    {
+      "beat": "4 analog revival",
+      "text": "Emergency red lamps glow over paper maps and handwritten ledgers while vacuum-tube radio dials scan for static."
+    },
+    {
+      "beat": "5 local mesh",
+      "text": "Rooftop antennas spring to life, beaming short-range peer-to-peer radio and laser links across neighboring blocks."
+    },
+    {
+      "beat": "6 rebuilding the core",
+      "text": "Engineers in rooftop labs wire up decentralized battery arrays and glowing holographic nodes for a new resilient network."
+    },
+    {
+      "beat": "7 signal restored",
+      "text": "A dramatic cyan wave sweeps across the skyline as clean optical beams reconnect every tower in a global sync."
+    },
+    {
+      "beat": "8 the future payoff",
+      "text": "A solar-punk metropolis hums beneath an unbreakable, decentralized peer-to-peer orbital and rooftop mesh network."
+    }
+  ],
+  "gaps": {
+    "pairs": {
+      "silence|Phones": 0.3,
+      "cloud|Phones": 0.3,
+      "glow|Supply": 0.3,
+      "load|Emergency": 0.3,
+      "static|Rooftop": 0.3,
+      "blocks|Engineers": 0.3,
+      "network|A": 0.3,
+      "sync|A": 0.3
+    }
+  },
+  "cast": [
+    "pipHood"
+  ],
+  "shots": [
+    {
+      "id": "Sh1",
+      "size": "wide",
+      "set": "study",
+      "key": 18,
+      "note": "Day 1 - The Disconnect: screens and lights flicker out"
+    },
+    {
+      "id": "Sh2",
+      "size": "medium",
+      "set": "rooftop",
+      "key": 18,
+      "note": "Day 2 - Digital Detox: looking up at stars with dead phones"
+    },
+    {
+      "id": "Sh3",
+      size": "schematic",
+      "set": "schematic",
+      "key": 18,
+      "note": "Day 6 - Systems Stall: frozen bank terminals and offline server racks"
+    },
+    {
+      "id": "Sh4",
+      size": "medium",
+      "set": "study",
+      "key": 18,
+      "note": "Day 12 - Analog Revival: paper maps, ledgers, radio dials"
+    },
+    {
+      "id": "Sh5",
+      size": "wide",
+      "set": "rooftop",
+      "key": 18,
+      "note": "Day 18 - Local Mesh: rooftop antennas beaming p2p radio links"
+    },
+    {
+      "id": "Sh6",
+      size": "medium",
+      "set": "study",
+      "key": 18,
+      "note": "Day 25 - Rebuilding the Core: holographic network nodes & battery arrays"
+    },
+    {
+      "id": "Sh7",
+      size": "wide",
+      "set": "rooftop",
+      "key": 18,
+      "note": "Day 30 - Signal Restored: sunrise wave and cyan/gold network beams"
+    },
+    {
+      "id": "Sh8",
+      size": "wide",
+      "set": "rooftop",
+      "key": 18,
+      "note": "The Future Payoff: decentralized solarpunk orbital mesh metropolis"
+    }
+  ],
+  "edit": [
+    { "shot": "Sh1", "at": "f:0" },
+    { "shot": "Sh2", "at": "f:180" },
+    { "shot": "Sh3", "at": "f:360" },
+    { "shot": "Sh4", "at": "f:540" },
+    { "shot": "Sh5", "at": "f:720" },
+    { "shot": "Sh6", "at": "f:900" },
+    { "shot": "Sh7", "at": "f:1080" },
+    { "shot": "Sh8", "at": "f:1260" }
+  ],
+  "end": "f:1440",
+  "fx": [
+    { "at": "f:30", "kind": "flash", "color": "#00F0FF" },
+    { "at": "f:360", "kind": "shake", "len": 12, amp: 8 },
+    { "at": "f:1080", "kind": "flash", "color": "#00FFFF" }
+  ],
+  "sound": {
+    "clips": {
+      "disconnect": [],
+      "hum": [],
+      "static": [],
+      "laser": [],
+      "music": []
+    },
+    "events": [],
+    "repeats": [],
+    "levels": { "sfx_lu": 1.5, "music_lu": -10.0 }
+  }
+}
