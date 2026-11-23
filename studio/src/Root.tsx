@@ -10,7 +10,7 @@ import { CastSheet } from './CastSheet';
 //   npx remotion studio src/index.ts --port 3430
 
 export const Root: React.FC = () => {
-  const common = { width: STUDIO.width, height: STUDIO.height, fps: STUDIO.fps };
+  const common = { width: STUDIO.width, height: STUDIO.height, fps: (e as { fps?: number }).fps ?? STUDIO.fps };
   return (
     <>
       {EPISODES.map((e) => (
