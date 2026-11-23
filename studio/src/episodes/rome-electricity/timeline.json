@@ -351,5 +351,8 @@
    "f": 1468
   }
  ],
- "audio": {}
+ "audio": {
+    "voice": "rome-electricity/voice.wav",
+    "voiceVol": 0.8
+  }
 }
