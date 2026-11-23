@@ -103,7 +103,7 @@ export const S1: React.FC<ShotProps> = ({ t }) => {
   return (
     <g>
       <Domus t={t} veil={0.35} />
-      <Hero look={LOOKS.pip} pose={{ ...pose, ...faceAt(t, [[0, 'neutral'], [25, 'happy']]) }} />
+      <Hero look={LOOKS.pip} pose={poseAt(t, [{ f: 0, p: { ...pose, ...faceAt(t, [[0, 'neutral'], [25, 'happy']]) } }])} />
       <VoltaicJar x={1120} y={760} t={t} s={1.35} active={true} />
       <ArcBolt x1={1106} y1={676} x2={1134} y2={676} t={t} color="#FFD37A" />
       <Tag x={1560} y={240} t={t - 8} text="0.7 V" />
@@ -117,7 +117,7 @@ export const S2: React.FC<ShotProps> = ({ t }) => {
   return (
     <g>
       <Thermae t={t} veil={relit ? 0.2 : 0.55} />
-      <Hero look={LOOKS.mo} pose={{ x: 780, y: 750, ...faceAt(t, [[0, 'worried'], [24, 'shock']]) }} />
+      <Hero look={LOOKS.mo} pose={poseAt(t, [{ f: 0, p: { x: 780, y: 750, ...faceAt(t, [[0, 'worried'], [24, 'shock']]) } }])} />
       <VoltaicJar x={1180} y={760} t={t} s={1.1} active={relit} />
       {relit ? (
         <>
@@ -159,7 +159,7 @@ export const S4: React.FC<ShotProps> = ({ t }) => {
   return (
     <g>
       <Domus t={t} veil={pulse ? 0.12 : 0.4} />
-      <Hero look={LOOKS.suit} pose={{ x: 960, y: 740, ...faceAt(t, [[0, 'smug'], [20, 'happy']]) }} />
+      <Hero look={LOOKS.suit} pose={poseAt(t, [{ f: 0, p: { x: 960, y: 740, ...faceAt(t, [[0, 'smug'], [20, 'happy']]) } }])} />
       {[420, 690, 1230, 1500].map((lx, idx) => (
         <VoltaicJar key={idx} x={lx} y={420} t={t + idx * 5} s={0.85} active={pulse} />
       ))}
@@ -209,8 +209,8 @@ export const S8: React.FC<ShotProps> = ({ t }) => (
   <g>
     <Thermae t={t} veil={0.2} />
     <rect x={420} y={620} width={1080} height={260} rx={28} fill="#E07A5F" opacity={0.45} />
-    <Hero look={LOOKS.sis} pose={{ x: 760, y: 730, ...faceAt(t, [[0, 'happy']]) }} />
-    <Hero look={LOOKS.pip} pose={{ x: 1160, y: 730, ...faceAt(t, [[0, 'cool']]) }} />
+    <Hero look={LOOKS.sis} pose={poseAt(t, [{ f: 0, p: { x: 760, y: 730, ...faceAt(t, [[0, 'happy']]) } }])} />
+    <Hero look={LOOKS.pip} pose={poseAt(t, [{ f: 0, p: { x: 1160, y: 730, ...faceAt(t, [[0, 'cool']]) } }])} />
     <SceneBadge title="MIDNIGHT THERMAE" subtitle="HOT BATHS · COLD WINE" />
   </g>
 );
@@ -218,7 +218,7 @@ export const S8: React.FC<ShotProps> = ({ t }) => (
 export const S9: React.FC<ShotProps> = ({ t }) => (
   <g>
     <Forum t={t} veil={0.25} />
-    <Hero look={LOOKS.suit} pose={{ x: 960, y: 720, scale: 1.15, ...faceAt(t, [[0, 'smug'], [12, 'shock']]) }} />
+    <Hero look={LOOKS.suit} pose={poseAt(t, [{ f: 0, p: { x: 960, y: 720, scale: 1.15, ...faceAt(t, [[0, 'smug'], [12, 'shock']]) } }])} />
     <FloatLabel x={960} y={260} t={t} text="MORE POWER!" color="#FF8A3D" size={76} />
     <SceneBadge title="THE EMPEROR" subtitle="DEMANDS INFINITE JARS" />
   </g>
@@ -264,7 +264,7 @@ export const S13: React.FC<ShotProps> = ({ t }) => (
 export const S14: React.FC<ShotProps> = ({ t }) => (
   <g>
     <Rooftop t={t} veil={0.3} />
-    <Hero look={LOOKS.pipInk} pose={{ x: 960, y: 740, ...faceAt(t, [[0, 'neutral']]) }} />
+    <Hero look={LOOKS.pipInk} pose={poseAt(t, [{ f: 0, p: { x: 960, y: 740, ...faceAt(t, [[0, 'neutral']]) } }])} />
     <FloatLabel x={960} y={280} t={t} text="COPPER TAX!" color="#FF5A4A" size={76} />
     <SceneBadge title="ROOFTOP RAID" subtitle="STRIPPING COPPER TILES" />
   </g>
@@ -273,8 +273,8 @@ export const S14: React.FC<ShotProps> = ({ t }) => (
 export const S15: React.FC<ShotProps> = ({ t }) => (
   <g>
     <Forum t={t} veil={0.35} />
-    <Hero look={LOOKS.mom} pose={{ x: 760, y: 750, ...faceAt(t, [[0, 'worried']]) }} />
-    <Hero look={LOOKS.pipInk} pose={{ x: 1180, y: 750, ...faceAt(t, [[0, 'neutral']]) }} />
+    <Hero look={LOOKS.mom} pose={poseAt(t, [{ f: 0, p: { x: 760, y: 750, ...faceAt(t, [[0, 'worried']]) } }])} />
+    <Hero look={LOOKS.pipInk} pose={poseAt(t, [{ f: 0, p: { x: 1180, y: 750, ...faceAt(t, [[0, 'neutral']]) } }])} />
     <SceneBadge title="CONFISCATION" subtitle="TEMPLES · STATUES · COINS" />
   </g>
 );
@@ -282,9 +282,9 @@ export const S15: React.FC<ShotProps> = ({ t }) => (
 export const S16: React.FC<ShotProps> = ({ t }) => (
   <g>
     <Domus t={t} veil={0.45} />
-    <Hero look={LOOKS.sis} pose={{ x: 780, y: 750, ...faceAt(t, [[0, 'worried']]) }} />
+    <Hero look={LOOKS.sis} pose={poseAt(t, [{ f: 0, p: { x: 780, y: 750, ...faceAt(t, [[0, 'worried']]) } }])} />
     <VoltaicJar x={980} y={760} t={t} s={1.15} active={true} />
-    <Hero look={LOOKS.pipInk} pose={{ x: 1240, y: 750, ...faceAt(t, [[0, 'neutral']]) }} />
+    <Hero look={LOOKS.pipInk} pose={poseAt(t, [{ f: 0, p: { x: 1240, y: 750, ...faceAt(t, [[0, 'neutral']]) } }])} />
     <SceneBadge title="AT THE DOOR" subtitle="YOUR SISTER'S LAMP IS NEXT" />
   </g>
 );
