@@ -158,6 +158,7 @@ export const defineEpisode = (id: string, p: EpisodeProps) => ({
   id,
   total: p.timeline.total,
   shotCount: p.timeline.shots.length,
+  fps: p.timeline.fps,
   Main: () => <Episode {...p} />,
   Board: () => <Board timeline={p.timeline} shots={p.shots} grain={p.grain} vignette={p.vignette} bg={p.bg} />,
 });
