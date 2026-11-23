@@ -1,0 +1,39 @@
+{
+  "slug": "blackout-thirty",
+  "title": "WHAT IF THE INTERNET WENT DARK FOR 30 DAYS?",
+  "fps": 24,
+  "total": 1440,
+  "segments": [
+    { "shot": "Sh1", "a": 0, "b": 180, "t0": 0, "t1": 180, "line": "Every glowing screen, Wi-Fi wave, and city light flickers out in a sudden digital silence." },
+    { "shot": "Sh2", "a": 180, "b": 360, "t0": 0, "t1": 180, "line": "Phones turn to glass bricks. People step outside to a quiet night, looking up at a starry sky with zero screen glow." },
+    { "shot": "Sh3", "a": 360, "b": 540, "t0": 0, "t1": 180, "line": "Supply chains freeze. Bank terminals lock. Server racks hum in empty server rooms as the grid hits a critical load." },
+    { "shot": "Sh4", "a": 540, "b": 720, "t0": 0, "t1": 180, "line": "Emergency red lamps glow over paper maps and handwritten ledgers while vacuum-tube radio dials scan for static." },
+    { "shot": "Sh5", "a": 720, "b": 900, "t0": 0, "t1": 180, "line": "Rooftop antennas spring to life, beaming short-range peer-to-peer radio and laser links across neighboring blocks." },
+    { "shot": "Sh6", "a": 900, "b": 1080, "t0": 0, "t1": 180, "line": "Engineers in rooftop labs wire up decentralized battery arrays and glowing holographic nodes for a new resilient network." },
+    { "shot": "Sh7", "a": 1080, "b": 1260, "t0": 0, "t1": 180, "line": "A dramatic cyan wave sweeps across the skyline as clean optical beams reconnect every tower in a global sync." },
+    { "shot": "Sh8", "a": 1260, "b": 1440, "t0": 0, "t1": 180, "line": "A solar-punk metropolis hums beneath an unbreakable, decentralized peer-to-peer orbital and rooftop mesh network." }
+  ],
+  "shots": [
+    { "id": "Sh1", "size": "wide", "key": 18, "len": 180, "first": 0, "line": "Day 1 - The Disconnect", "note": "Screens and lights flicker out" },
+    { "id": "Sh2", "size": "medium", "key": 18, "len": 180, "first": 180, "line": "Day 2 - Digital Detox", "note": "Looking up at stars with dead phones" },
+    { "id": "Sh3", "size": "schematic", "key": 18, "len": 180, "first": 360, "line": "Day 6 - Systems Stall", "note": "Frozen bank terminals and offline server racks" },
+    { "id": "Sh4", "size": "medium", "key": 18, "len": 180, "first": 540, "line": "Day 12 - Analog Revival", "note": "Paper maps, ledgers, radio dials" },
+    { "id": "Sh5", "size": "wide", "key": 18, "len": 180, "first": 720, "line": "Day 18 - Local Mesh", "note": "Rooftop antennas beaming p2p radio links" },
+    { "id": "Sh6", "size": "medium", "key": 18, "len": 180, "first": 900, "line": "Day 25 - Rebuilding Core", "note": "Holographic network nodes & battery arrays" },
+    { "id": "Sh7", "size": "wide", "key": 18, "len": 180, "first": 1080, "line": "Day 30 - Signal Restored", "note": "Sunrise wave and cyan/gold network beams" },
+    { "id": "Sh8", "size": "wide", "key": 18, "len": 180, "first": 1260, "line": "The Future Payoff", "note": "Decentralized solarpunk orbital mesh metropolis" }
+  ],
+  "fx": [
+    { "kind": "flash", "color": "#00F0FF", "f": 30 },
+    { "kind": "shake", "len": 12, "amp": 8, "f": 360 },
+    { "kind": "flash", "color": "#00FFFF", "f": 1080 }
+  ],
+  "audio": {
+    "voice": "blackout-thirty/voice.wav",
+    "sfx": "blackout-thirty/sfx.mp3",
+    "music": "blackout-thirty/music.mp3",
+    "voiceVol": 0.85,
+    "sfxVol": 0.5,
+    "musicVol": 0.2
+  }
+}
