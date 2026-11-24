@@ -15,12 +15,12 @@ on:
       topic:
         description: 'Project folder name in .opencode/skills/faceless-shorts/projects/'
         required: false
-        default: 'locked-doors-45s'
+        default: 'metal-coins-40s'
         type: string
       length:
         description: 'Expected length in seconds (informational; script.json is authoritative)'
         required: false
-        default: '45'
+        default: '40'
         type: string
   push:
     paths:

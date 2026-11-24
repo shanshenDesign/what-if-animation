@@ -1,0 +1,61 @@
+{
+  "title": "What If Paper Money Was Never Invented?",
+  "voice": "am_michael",
+  "speed": 1.1,
+  "lead": 0.45,
+  "outro": 2.6,
+  "gap": 0.35,
+  "music": "bed",
+  "sources": [
+    "Premise is fictional. Supporting mechanics: Encyclopaedia Britannica, money — the first coins were struck in Lydia around 600 BC, while the earliest paper money appeared in China around 1000 AD",
+    "United States Mint, coin specifications — a circulating quarter weighs 5.67 g, so $100 in quarters is about 2.3 kg of metal",
+    "Encyclopaedia Britannica, pound (unit of weight) — the monetary and weight pound both descend from the ancient Roman libra, a balance that weighed out metal"
+  ],
+  "lines": [
+    {
+      "text": "You grab a coffee, drop a clinking pouch of bronze coins on the counter.",
+      "caps": "You grab a *coffee, | drop a *clinking pouch | of *bronze coins | on the *counter.",
+      "gap": 0.45
+    },
+    {
+      "text": "No paper bills means a thick leather belt and pockets that sag.",
+      "caps": "No *paper bills | means a *thick leather | belt and *pockets | that *sag.",
+      "gap": 0.44
+    },
+    {
+      "text": "Then every step drags, because sagging pockets pull your pants down.",
+      "caps": "Then every *step drags, | because *sagging pockets | pull your *pants down.",
+      "gap": 0.43
+    },
+    {
+      "text": "Groceries now come in clinking sacks you haul over one shoulder.",
+      "caps": "Groceries now *come in | clinking sacks you *haul | over one *shoulder.",
+      "gap": 0.42
+    },
+    {
+      "text": "Rent means pushing a metal handcart of coins down the sidewalk.",
+      "caps": "Rent means *pushing a | metal handcart of *coins | down the *sidewalk.",
+      "gap": 0.41
+    },
+    {
+      "text": "At the bank, cashiers weigh stamped silver and copper on brass scales.",
+      "caps": "At the *bank | cashiers weigh *stamped silver | and *copper on | brass *scales.",
+      "gap": 0.4
+    },
+    {
+      "text": "Instead of swiping a card, you watch your change get weighed.",
+      "caps": "Instead of *swiping | a card, you *watch | your *change get weighed.",
+      "gap": 0.39
+    },
+    {
+      "text": "Friday finally pays, and the week's wages land in both hands.",
+      "caps": "Friday finally *pays, | and the *week's wages | land in both *hands.",
+      "gap": 0.38
+    },
+    {
+      "text": "Then your pockets rip straight through the floor.",
+      "caps": "Then your *pockets rip | straight through the *floor.",
+      "gap": 0.35
+    }
+  ]
+}
