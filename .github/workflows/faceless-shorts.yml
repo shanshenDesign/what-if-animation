@@ -1,194 +1,132 @@
-name: Render Faceless Short
+name: Faceless Short (stick-story)
+
+# Renders a pre-built faceless-shorts project from .opencode/skills/faceless-shorts/projects/<topic>/.
+# Works two ways:
+#   1. workflow_dispatch with topic = gravity-35s  → renders that project
+#   2. push / manual run with no topic given      → picks the first project folder that exists in projects/
+# Pipeline on ubuntu-latest: Kokoro TTS (voice.py) → Whisper word alignment (words.py) →
+# headless Chrome frame capture (tools/capture.mjs) → mix.py audio mix → 35 s .mp4 artifact.
 
 on:
   workflow_dispatch:
     inputs:
       topic:
-        description: 'Topic for the short (e.g. "what happens if you hold your breath?")'
-        required: true
-        type: string
-      style:
-        description: 'Visual style'
-        required: true
-        type: choice
-        options:
-          - deep-dive
-          - night-file
-          - inside-out
-          - stick-story
-          - paper-atlas
-          - tall-tale
-        default: 'deep-dive'
-      length:
-        description: 'Target length in seconds'
+        description: 'Project folder name in .opencode/skills/faceless-shorts/projects/'
         required: false
+        default: 'gravity-35s'
         type: string
-        default: '35'
-      voice:
-        description: 'Kokoro voice to use'
-        required: false
-        type: choice
-        options:
-          - am_michael
-          - am_puck
-          - am_fenrir
-          - am_onyx
-          - af_heart
-          - af_bella
-          - af_nicole
-          - bm_george
-          - bm_fable
-          - bf_emma
-        default: 'am_michael'
+  push:
+    paths:
+      - '.opencode/skills/faceless-shorts/projects/**'
+      - '.github/workflows/faceless-shorts.yml'
 
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
-    permissions:
-      contents: read
-      actions: write
+    timeout-minutes: 90
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Cache faceless-shorts Python venv and models
-        id: cache-faceless
+      - name: Resolve project folder
+        id: proj
+        run: |
+          BASE=".opencode/skills/faceless-shorts/projects"
+          TOPIC="${{ github.event.inputs.topic }}"
+          DIR="$BASE/$TOPIC"
+          if [ ! -f "$DIR/script.json" ]; then
+            # fall back to the first pre-built project folder present in the repo
+            DIR=""
+            for d in "$BASE"/*/; do
+              [ -f "$d/script.json" ] && DIR="${d%/}" && break
+            done
+          fi
+          if [ -z "$DIR" ] || [ ! -f "$DIR/script.json" ]; then
+            echo "::error::No ready-to-render project found in $BASE (topic='${TOPIC}')"
+            exit 1
+          fi
+          echo "dir=$DIR" >> "$GITHUB_OUTPUT"
+          echo "name=$(basename "$DIR")" >> "$GITHUB_OUTPUT"
+          echo "Rendering project: $DIR"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install FFmpeg + Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          if ! command -v google-chrome >/dev/null 2>&1 && ! command -v chromium-browser >/dev/null 2>&1; then
+            curl -fsSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb
+            sudo apt-get install -y /tmp/chrome.deb
+          fi
+          google-chrome --version || chromium-browser --version
+
+      - name: Install Python dependencies (Kokoro TTS + Whisper)
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy scipy kokoro-onnx faster-whisper
+
+      - name: Cache Kokoro + Whisper models
         uses: actions/cache@v4
         with:
           path: |
-            ~/.faceless-shorts/venv
             ~/.faceless-shorts/kokoro
-            ~/.faceless-shorts/whisper
-          key: faceless-shorts-${{ runner.os }}-${{ hashFiles('.opencode/skills/faceless-shorts/scripts/setup.sh') }}
-          restore-keys: |
-            faceless-shorts-${{ runner.os }}-
+            ~/.cache/huggingface
+            ~/.cache/whisper
+          key: fs-models-${{ runner.os }}-v1
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            nodejs \
-            npm \
-            ffmpeg \
-            google-chrome-stable \
-            python3.11 \
-            python3.11-venv
-          node --version
-          npm --version
-          ffmpeg -version
-          google-chrome-stable --version
-          python3.11 --version
+      - name: Copy project to workspace root
+        run: cp -R "${{ steps.proj.outputs.dir }}" "./short-project"
 
-      - name: Setup faceless-shorts environment
-        working-directory: .opencode/skills/faceless-shorts
-        run: |
-          bash scripts/setup.sh
+      - name: Kokoro TTS (narration + line timings)
+        working-directory: ./short-project
+        run: python "$GITHUB_WORKSPACE/.opencode/skills/faceless-shorts/scripts/voice.py" .
 
-      - name: Create new video project from style example
-        id: create-project
-        working-directory: .opencode/skills/faceless-shorts
-        env:
-          TOPIC: ${{ inputs.topic }}
-          STYLE: ${{ inputs.style }}
-          LENGTH: ${{ inputs.length }}
-          VOICE: ${{ inputs.voice }}
-        run: |
-          # Create project using the new_video.sh script
-          SHORT_NAME=$(echo "${TOPIC}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-\|-$//g' | cut -c1-50)
-          PROJECT_DIR="$HOME/.faceless-shorts/$SHORT_NAME"
-          
-          bash scripts/new_video.sh "${STYLE}" "$SHORT_NAME"
-          
-          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_OUTPUT
-          echo "SHORT_NAME=$SHORT_NAME" >> $GITHUB_OUTPUT
+      - name: Whisper word alignment
+        working-directory: ./short-project
+        run: python "$GITHUB_WORKSPACE/.opencode/skills/faceless-shorts/scripts/words.py" .
 
-      - name: Generate script.json from topic
-        id: generate-script
-        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
-        env:
-          TOPIC: ${{ inputs.topic }}
-          STYLE: ${{ inputs.style }}
-          LENGTH: ${{ inputs.length }}
-          VOICE: ${{ inputs.voice }}
-        run: |
-          python3 "$GITHUB_WORKSPACE/.opencode/skills/faceless-shorts/scripts/update_script.py"
+      - name: Capture check (Chrome boot + shots + captions)
+        working-directory: ./short-project
+        run: node tools/capture.mjs check
 
-      - name: Generate narration and word timings
-        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
-        env:
-          FACELESS_HOME: ${{ env.HOME }}/.faceless-shorts
-        run: |
-          PYTHON="${FACELESS_HOME}/venv/bin/python"
-          SKILL="${{ github.workspace }}/.opencode/skills/faceless-shorts"
-          
-          # Generate narration
-          "${PYTHON}" "${SKILL}/scripts/voice.py" .
-          
-          # Generate word timings
-          "${PYTHON}" "${SKILL}/scripts/words.py" .
+      - name: Export sound cues
+        working-directory: ./short-project
+        run: node tools/capture.mjs cues
 
-      - name: Generate sound cues and mix audio
-        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
-        run: |
-          node tools/capture.mjs cues
-          python3 tools/mix.py .
+      - name: QA contact sheet (frame every 0.5 s)
+        working-directory: ./short-project
+        run: node tools/capture.mjs sheet review/all.jpg 0.5 9
 
-      - name: Set 3D rendering env vars
-        id: set-3d-env
-        run: |
-          STYLE="${{ inputs.style }}"
-          if [[ "$STYLE" == "deep-dive" || "$STYLE" == "night-file" || "$STYLE" == "tall-tale" ]]; then
-            echo "SOFTWARE_GL=1" >> $GITHUB_OUTPUT
-            echo "QS=&res=0.6&aa=0&shadow=1024" >> $GITHUB_OUTPUT
-            echo "FPS_CHECK=24" >> $GITHUB_OUTPUT
-            echo "FPS_RENDER=30" >> $GITHUB_OUTPUT
-          else
-            echo "SOFTWARE_GL=" >> $GITHUB_OUTPUT
-            echo "QS=" >> $GITHUB_OUTPUT
-            echo "FPS_CHECK=30" >> $GITHUB_OUTPUT
-            echo "FPS_RENDER=30" >> $GITHUB_OUTPUT
-          fi
+      - name: Mix audio (voice + ducked music bed + SFX)
+        working-directory: ./short-project
+        run: python tools/mix.py .
 
-      - name: Validate frames
-        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
-        env:
-          SOFTWARE_GL: ${{ steps.set-3d-env.outputs.SOFTWARE_GL }}
-          QS: ${{ steps.set-3d-env.outputs.QS }}
-          FPS: ${{ steps.set-3d-env.outputs.FPS_CHECK }}
-        run: |
-          node tools/capture.mjs check
+      - name: Render MP4 (Chrome frame capture + mix.wav)
+        working-directory: ./short-project
+        run: node tools/capture.mjs video "renders/${{ steps.proj.outputs.name }}.mp4"
 
-      - name: Render contact sheet for review
-        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
-        env:
-          SOFTWARE_GL: ${{ steps.set-3d-env.outputs.SOFTWARE_GL }}
-          QS: ${{ steps.set-3d-env.outputs.QS }}
-          FPS: ${{ steps.set-3d-env.outputs.FPS_CHECK }}
-        run: |
-          node tools/capture.mjs sheet review/all.jpg 0.5 9
-
-      - name: Render final video
-        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
-        env:
-          SOFTWARE_GL: ${{ steps.set-3d-env.outputs.SOFTWARE_GL }}
-          QS: ${{ steps.set-3d-env.outputs.QS }}
-          FPS: ${{ steps.set-3d-env.outputs.FPS_RENDER }}
-        run: |
-          node tools/capture.mjs video renders/final.mp4
-
-      - name: Upload rendered MP4 artifact
+      - name: Upload finished short (artifact)
         uses: actions/upload-artifact@v4
         with:
-          name: faceless-short-${{ steps.create-project.outputs.SHORT_NAME }}
-          path: ${{ steps.create-project.outputs.PROJECT_DIR }}/renders/final.mp4
+          name: ${{ steps.proj.outputs.name }}-mp4
+          path: short-project/renders/${{ steps.proj.outputs.name }}.mp4
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 14
 
-      - name: Upload contact sheet artifact
+      - name: Upload contact sheet (QA)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: contact-sheet-${{ steps.create-project.outputs.SHORT_NAME }}
-          path: ${{ steps.create-project.outputs.PROJECT_DIR }}/review/all.jpg
-          if-no-files-found: warn
+          name: ${{ steps.proj.outputs.name }}-sheet
+          path: short-project/review/**
+          if-no-files-found: ignore
           retention-days: 7

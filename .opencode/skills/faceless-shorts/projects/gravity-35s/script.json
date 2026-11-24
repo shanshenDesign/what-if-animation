@@ -1,0 +1,44 @@
+{
+  "title": "What If Gravity Turned Off For 35 Seconds?",
+  "voice": "am_michael",
+  "speed": 1.1,
+  "lead": 0.45,
+  "outro": 1.4,
+  "gap": 0.35,
+  "music": "bed",
+  "sources": [
+    "NASA Science, Microgravity: with no apparent gravity people and unsecured objects float and keep drifting",
+    "Newton's first law (NASA): an object at rest stays at rest, and in motion stays in motion, unless a force acts on it - loose things drift until gravity returns",
+    "Ready.gov / general safety: when gravity returns, falling objects are the hazard - get under something sturdy and stay away from windows and shelves"
+  ],
+  "lines": [
+    {
+      "text": "So what would you do if gravity switched off for thirty-five seconds?",
+      "caps": "So what would *you | do if *gravity | switched *off? | thirty-five *seconds?"
+    },
+    {
+      "text": "At first it would be amazing, your feet leave the floor and everything loose floats up.",
+      "caps": "At first it *would | feet leave the *floor | everything loose *floats up."
+    },
+    {
+      "text": "Step one: grab something solid and hold on tight.",
+      "caps": "Step *one: | grab something *solid"
+    },
+    {
+      "text": "Step two: stay away from windows and shelves, because they will come down.",
+      "caps": "Step *two: | stay away from *windows | they come *down."
+    },
+    {
+      "text": "Step three: get under something sturdy, because falling objects are the real danger.",
+      "caps": "Step *three: | get under something *sturdy | the real *danger."
+    },
+    {
+      "text": "Your dog, your coffee, your couch - everything you own is floating above your head.",
+      "caps": "Your *dog, | your *coffee, | everything you own *floating | above your *head."
+    },
+    {
+      "text": "Then, exactly thirty-five seconds later, gravity snaps back - and everything crashes down.",
+      "caps": "Then exactly thirty-five *seconds | gravity snaps *back | everything crashes *down."
+    }
+  ]
+}
