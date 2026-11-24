@@ -2,7 +2,7 @@ name: Faceless Short (stick-story)
 
 # Renders a pre-built faceless-shorts project from .opencode/skills/faceless-shorts/projects/<topic>/.
 # Works two ways:
-#   1. workflow_dispatch with topic = gravity-35s  → renders that project
+#   1. workflow_dispatch with topic = heavy-shadows-35s  → renders that project
 #   2. push / manual run with no topic given      → picks the first project folder that exists in projects/
 # Pipeline on ubuntu-latest: Kokoro TTS (voice.py) → Whisper word alignment (words.py) →
 # headless Chrome frame capture (tools/capture.mjs) → mix.py audio mix → 35 s .mp4 artifact.
@@ -13,7 +13,7 @@ on:
       topic:
         description: 'Project folder name in .opencode/skills/faceless-shorts/projects/'
         required: false
-        default: 'gravity-35s'
+        default: 'heavy-shadows-35s'
         type: string
   push:
     paths:

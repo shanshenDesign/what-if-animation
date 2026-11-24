@@ -1,0 +1,51 @@
+{
+  "title": "What If Shadows Weighed 50 Kilograms?",
+  "voice": "am_michael",
+  "speed": 1.1,
+  "lead": 0.45,
+  "outro": 1.5,
+  "gap": 0.35,
+  "music": "bed",
+  "sources": [
+    "NOAA / National Weather Service, Sun angle and shadows: at local solar noon the sun is at its highest elevation, so a shadow is at its shortest and sits directly beneath the object",
+    "NOAA / National Weather Service: as the sun sinks toward the horizon in the afternoon the same object casts a much longer shadow, because the light rays arrive at a shallow angle",
+    "NASA Science, light travels in straight lines: an opaque object blocks those rays and the blocked region on the ground is the shadow"
+  ],
+  "lines": [
+    {
+      "text": "Just step outside at noon and fifty kilograms locks right onto your ankles.",
+      "caps": "Just *step | outside at *noon | fifty *kilograms | locks onto your *ankles.",
+      "gap": 0.45
+    },
+    {
+      "text": "At high noon, the sun hangs almost straight above your head.",
+      "caps": "At *high noon | the *sun hangs | almost straight *above | your *head.",
+      "gap": 0.45
+    },
+    {
+      "text": "That leaves your shadow as a small dark puddle under your shoes.",
+      "caps": "That leaves your *shadow | a small dark *puddle | under your *shoes.",
+      "gap": 0.43
+    },
+    {
+      "text": "By four o'clock the sun drops low, and stretches your shadow ten feet behind you.",
+      "caps": "By *four o'clock | the sun *drops low | and *stretches | ten feet *behind you.",
+      "gap": 0.41
+    },
+    {
+      "text": "Then that weight yanks you flat onto the sidewalk.",
+      "caps": "Then that *weight | yanks you *flat | onto the *sidewalk.",
+      "gap": 0.39
+    },
+    {
+      "text": "Slip under an umbrella or into a dark room, and the weight drops to zero.",
+      "caps": "Slip under an *umbrella | into a dark *room, | the weight *drops | to *zero.",
+      "gap": 0.37
+    },
+    {
+      "text": "But the second a cloud drifts over, all fifty kilograms slam back onto your heels.",
+      "caps": "But the *second | a cloud *drifts over | all fifty *kilograms | slam back *onto | your *heels.",
+      "gap": 0.35
+    }
+  ]
+}
