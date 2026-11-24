@@ -12,7 +12,6 @@ on:
           - rewind
           - copy-paste
           - blackout-thirty
-          - rome-electricity
       render_board:
         description: 'Render storyboard board instead of final episode'
         required: false
@@ -63,7 +62,6 @@ jobs:
             rewind) composition_id="Rewind" ;;
             copy-paste) composition_id="CopyPaste" ;;
             blackout-thirty) composition_id="BlackoutThirty" ;;
-            rome-electricity) composition_id="RomeElectricity" ;;
             *) echo "Unknown episode slug: ${{ inputs.episode_slug }}" && exit 1 ;;
           esac
           
