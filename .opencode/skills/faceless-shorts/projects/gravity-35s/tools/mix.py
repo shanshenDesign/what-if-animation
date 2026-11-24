@@ -95,7 +95,7 @@ def rumble(d=1.6, **_):
 def crash(d=1.1, **_):
     """everything landing at once: deep slam + soft debris tail (rounded, no harsh top)"""
     t = tt(d); e = env(len(t), 0.002, 4.5)
-    hit = np.sin(2 * np.pi * (58 + 90 * np.exp(-t * 22)) * t) * env(int(0.35 * SR), 0.002, 6)
+    _n_hit = int(0.35 * SR); _t_hit = np.arange(_n_hit) / SR; _raw_hit = np.sin(2 * np.pi * (58 + 90 * np.exp(-_t_hit * 22)) * _t_hit) * env(_n_hit, 0.002, 6); hit = np.zeros_like(t); hit[:min(len(t), _n_hit)] = _raw_hit[:min(len(t), _n_hit)]
     debris = lp(noise(d), 1600) * e * 0.55
     body = np.zeros(len(t)); body[:len(hit)] += hit
     return np.tanh(1.5 * (body + debris)) * 0.95
