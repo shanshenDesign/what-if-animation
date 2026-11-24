@@ -112,49 +112,7 @@ jobs:
           LENGTH: ${{ inputs.length }}
           VOICE: ${{ inputs.voice }}
         run: |
-          python3 << 'PYEOF'
-import json
-import re
-from pathlib import Path
-
-topic = "${{ inputs.topic }}"
-style = "${{ inputs.style }}"
-length = int("${{ inputs.length }}")
-voice = "${{ inputs.voice }}"
-
-# Load the existing script.json (from the style's example)
-script_path = Path("script.json")
-script = json.loads(script_path.read_text())
-
-# Clean the topic
-topic_clean = topic.strip().rstrip('?')
-if not topic_clean.lower().startswith("what"):
-    topic_clean = f"What happens if {topic_clean}"
-
-# Update title and voice
-script["title"] = topic_clean + "?"
-script["voice"] = voice
-
-# Generate new lines based on the topic
-# This is a template - in practice you'd use an LLM for better scripts
-lines = [
-    {"text": f"{topic_clean}?", "caps": f"{topic_clean.upper()}?"},
-    {"text": "Well, let me walk you through what actually happens.", "caps": "WELL, LET ME *WALK | YOU THROUGH *WHAT | ACTUALLY *HAPPENS"},
-    {"text": "First, the immediate reaction kicks in within seconds.", "caps": "FIRST, THE *IMMEDIATE | REACTION *KICKS | IN WITHIN *SECONDS"},
-    {"text": "Then your body starts adapting to the change.", "caps": "THEN YOUR *BODY | STARTS *ADAPTING | TO THE *CHANGE"},
-    {"text": "The surprising part? Most people expect the opposite.", "caps": "THE *SURPRISING PART | MOST PEOPLE *EXPECT | THE *OPPOSITE"},
-    {"text": "Here is what the research actually shows.", "caps": "HERE IS *WHAT | THE RESEARCH *SHOWS"},
-    {"text": "And that is why the myth persists to this day.", "caps": "AND THAT IS *WHY | THE MYTH *PERSISTS | TO THIS *DAY"},
-]
-
-# Adjust number of lines based on target length (~3 seconds per line)
-target_lines = max(5, min(12, length // 3))
-script["lines"] = lines[:target_lines]
-
-# Write updated script.json
-script_path.write_text(json.dumps(script, indent=2))
-print(f"Updated script.json with {len(script['lines'])} lines")
-PYEOF
+          python3 "$GITHUB_WORKSPACE/.opencode/skills/faceless-shorts/scripts/update_script.py"
 
       - name: Generate narration and word timings
         working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
