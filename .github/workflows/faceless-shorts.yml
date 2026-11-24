@@ -2,10 +2,12 @@ name: Faceless Short (stick-story)
 
 # Renders a pre-built faceless-shorts project from .opencode/skills/faceless-shorts/projects/<topic>/.
 # Works two ways:
-#   1. workflow_dispatch with topic = heavy-shadows-35s  → renders that project
+#   1. workflow_dispatch with topic = locked-doors-45s  → renders that project
 #   2. push / manual run with no topic given      → picks the first project folder that exists in projects/
+# `length` is the expected duration in seconds (metadata for the run); the real length always comes
+# from the project's script.json. Any folder in projects/ works (heavy-shadows-35s, gravity-35s, ...).
 # Pipeline on ubuntu-latest: Kokoro TTS (voice.py) → Whisper word alignment (words.py) →
-# headless Chrome frame capture (tools/capture.mjs) → mix.py audio mix → 35 s .mp4 artifact.
+# headless Chrome frame capture (tools/capture.mjs) → mix.py audio mix → .mp4 artifact.
 
 on:
   workflow_dispatch:
@@ -13,7 +15,12 @@ on:
       topic:
         description: 'Project folder name in .opencode/skills/faceless-shorts/projects/'
         required: false
-        default: 'heavy-shadows-35s'
+        default: 'locked-doors-45s'
+        type: string
+      length:
+        description: 'Expected length in seconds (informational; script.json is authoritative)'
+        required: false
+        default: '45'
         type: string
   push:
     paths:
@@ -47,7 +54,8 @@ jobs:
           fi
           echo "dir=$DIR" >> "$GITHUB_OUTPUT"
           echo "name=$(basename "$DIR")" >> "$GITHUB_OUTPUT"
-          echo "Rendering project: $DIR"
+          echo "length=${{ github.event.inputs.length }}" >> "$GITHUB_OUTPUT"
+          echo "Rendering project: $DIR (expected length: ${{ github.event.inputs.length }}s)"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

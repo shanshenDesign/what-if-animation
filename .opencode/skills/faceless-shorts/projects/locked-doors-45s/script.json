@@ -1,0 +1,66 @@
+{
+  "title": "What If Every Door on Earth Locked for 1 Hour?",
+  "voice": "am_michael",
+  "speed": 1.1,
+  "lead": 0.45,
+  "outro": 3.6,
+  "gap": 0.35,
+  "music": "bed",
+  "sources": [
+    "Premise is fictional. Supporting mechanics: Encyclopaedia Britannica, lock and key — a spring-latch bolt is held shut by a spring and retracts only when the handle or key turns it",
+    "ASME A17.1 Safety Code for Elevators and Escalators — hoistway doors must be interlocked so they stay shut while the car is between floors",
+    "Product safety standard BS EN 60335-2-15 — electric kettles are built to shut off automatically once they boil dry"
+  ],
+  "lines": [
+    {
+      "text": "You step outside, and every door on Earth clicks shut at once.",
+      "caps": "You *step outside | every *door on Earth | clicks *shut at once.",
+      "gap": 0.45
+    },
+    {
+      "text": "Elevators freeze right between floors with both doors sealed shut.",
+      "caps": "Elevators *freeze | right between *floors with | both doors *sealed shut.",
+      "gap": 0.45
+    },
+    {
+      "text": "Shoppers and commuters end up standing on the wrong side of the glass.",
+      "caps": "Shoppers and *commuters | end up *standing | on the wrong *side | of the *glass.",
+      "gap": 0.44
+    },
+    {
+      "text": "A kettle simmers away behind a kitchen door that nobody can open.",
+      "caps": "A *kettle | simmers away *behind a | kitchen door that *nobody | can *open.",
+      "gap": 0.43
+    },
+    {
+      "text": "Delivery drivers wait beside idling vans with packages still in hand.",
+      "caps": "Delivery *drivers | wait beside *idling vans | with *packages still | in *hand.",
+      "gap": 0.42
+    },
+    {
+      "text": "Everyone checks the ground-floor windows, and every one of them holds.",
+      "caps": "Everyone *checks the | ground-floor *windows, | and every *one of | them *holds.",
+      "gap": 0.41
+    },
+    {
+      "text": "A sixty-minute countdown ticks down on every screen across the city.",
+      "caps": "A *sixty-minute | countdown *ticks down | on every *screen across | the *city.",
+      "gap": 0.4
+    },
+    {
+      "text": "With ten minutes left, the whole street goes quiet, and everybody just waits.",
+      "caps": "With ten *minutes left, | the whole *street goes | quiet, and *everybody | just *waits.",
+      "gap": 0.39
+    },
+    {
+      "text": "At one hour exactly, every lock on Earth clicks open together.",
+      "caps": "At one *hour exactly, | every lock on *Earth | clicks open *together.",
+      "gap": 0.38
+    },
+    {
+      "text": "Except one stuck bathroom latch that won't budge.",
+      "caps": "Except one *stuck bathroom | latch that *won't budge.",
+      "gap": 0.35
+    }
+  ]
+}
