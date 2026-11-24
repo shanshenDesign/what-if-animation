@@ -1,0 +1,236 @@
+name: Render Faceless Short
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Topic for the short (e.g. "what happens if you hold your breath?")'
+        required: true
+        type: string
+      style:
+        description: 'Visual style'
+        required: true
+        type: choice
+        options:
+          - deep-dive
+          - night-file
+          - inside-out
+          - stick-story
+          - paper-atlas
+          - tall-tale
+        default: 'deep-dive'
+      length:
+        description: 'Target length in seconds'
+        required: false
+        type: string
+        default: '35'
+      voice:
+        description: 'Kokoro voice to use'
+        required: false
+        type: choice
+        options:
+          - am_michael
+          - am_puck
+          - am_fenrir
+          - am_onyx
+          - af_heart
+          - af_bella
+          - af_nicole
+          - bm_george
+          - bm_fable
+          - bf_emma
+        default: 'am_michael'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache faceless-shorts Python venv and models
+        id: cache-faceless
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.faceless-shorts/venv
+            ~/.faceless-shorts/kokoro
+            ~/.faceless-shorts/whisper
+          key: faceless-shorts-${{ runner.os }}-${{ hashFiles('.opencode/skills/faceless-shorts/scripts/setup.sh') }}
+          restore-keys: |
+            faceless-shorts-${{ runner.os }}-
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            nodejs \
+            npm \
+            ffmpeg \
+            google-chrome-stable \
+            python3.11 \
+            python3.11-venv
+          node --version
+          npm --version
+          ffmpeg -version
+          google-chrome-stable --version
+          python3.11 --version
+
+      - name: Setup faceless-shorts environment
+        working-directory: .opencode/skills/faceless-shorts
+        run: |
+          bash scripts/setup.sh
+
+      - name: Create new video project from style example
+        id: create-project
+        working-directory: .opencode/skills/faceless-shorts
+        env:
+          TOPIC: ${{ inputs.topic }}
+          STYLE: ${{ inputs.style }}
+          LENGTH: ${{ inputs.length }}
+          VOICE: ${{ inputs.voice }}
+        run: |
+          # Create project using the new_video.sh script
+          SHORT_NAME=$(echo "${TOPIC}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-\|-$//g' | cut -c1-50)
+          PROJECT_DIR="$HOME/.faceless-shorts/$SHORT_NAME"
+          
+          bash scripts/new_video.sh "${STYLE}" "$SHORT_NAME"
+          
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_OUTPUT
+          echo "SHORT_NAME=$SHORT_NAME" >> $GITHUB_OUTPUT
+
+      - name: Generate script.json from topic
+        id: generate-script
+        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
+        env:
+          TOPIC: ${{ inputs.topic }}
+          STYLE: ${{ inputs.style }}
+          LENGTH: ${{ inputs.length }}
+          VOICE: ${{ inputs.voice }}
+        run: |
+          python3 << 'PYEOF'
+import json
+import re
+from pathlib import Path
+
+topic = "${{ inputs.topic }}"
+style = "${{ inputs.style }}"
+length = int("${{ inputs.length }}")
+voice = "${{ inputs.voice }}"
+
+# Load the existing script.json (from the style's example)
+script_path = Path("script.json")
+script = json.loads(script_path.read_text())
+
+# Clean the topic
+topic_clean = topic.strip().rstrip('?')
+if not topic_clean.lower().startswith("what"):
+    topic_clean = f"What happens if {topic_clean}"
+
+# Update title and voice
+script["title"] = topic_clean + "?"
+script["voice"] = voice
+
+# Generate new lines based on the topic
+# This is a template - in practice you'd use an LLM for better scripts
+lines = [
+    {"text": f"{topic_clean}?", "caps": f"{topic_clean.upper()}?"},
+    {"text": "Well, let me walk you through what actually happens.", "caps": "WELL, LET ME *WALK | YOU THROUGH *WHAT | ACTUALLY *HAPPENS"},
+    {"text": "First, the immediate reaction kicks in within seconds.", "caps": "FIRST, THE *IMMEDIATE | REACTION *KICKS | IN WITHIN *SECONDS"},
+    {"text": "Then your body starts adapting to the change.", "caps": "THEN YOUR *BODY | STARTS *ADAPTING | TO THE *CHANGE"},
+    {"text": "The surprising part? Most people expect the opposite.", "caps": "THE *SURPRISING PART | MOST PEOPLE *EXPECT | THE *OPPOSITE"},
+    {"text": "Here is what the research actually shows.", "caps": "HERE IS *WHAT | THE RESEARCH *SHOWS"},
+    {"text": "And that is why the myth persists to this day.", "caps": "AND THAT IS *WHY | THE MYTH *PERSISTS | TO THIS *DAY"},
+]
+
+# Adjust number of lines based on target length (~3 seconds per line)
+target_lines = max(5, min(12, length // 3))
+script["lines"] = lines[:target_lines]
+
+# Write updated script.json
+script_path.write_text(json.dumps(script, indent=2))
+print(f"Updated script.json with {len(script['lines'])} lines")
+PYEOF
+
+      - name: Generate narration and word timings
+        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
+        env:
+          FACELESS_HOME: ${{ env.HOME }}/.faceless-shorts
+        run: |
+          PYTHON="${FACELESS_HOME}/venv/bin/python"
+          SKILL="${{ github.workspace }}/.opencode/skills/faceless-shorts"
+          
+          # Generate narration
+          "${PYTHON}" "${SKILL}/scripts/voice.py" .
+          
+          # Generate word timings
+          "${PYTHON}" "${SKILL}/scripts/words.py" .
+
+      - name: Generate sound cues and mix audio
+        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
+        run: |
+          node tools/capture.mjs cues
+          python3 tools/mix.py .
+
+      - name: Set 3D rendering env vars
+        id: set-3d-env
+        run: |
+          STYLE="${{ inputs.style }}"
+          if [[ "$STYLE" == "deep-dive" || "$STYLE" == "night-file" || "$STYLE" == "tall-tale" ]]; then
+            echo "SOFTWARE_GL=1" >> $GITHUB_OUTPUT
+            echo "QS=&res=0.6&aa=0&shadow=1024" >> $GITHUB_OUTPUT
+            echo "FPS_CHECK=24" >> $GITHUB_OUTPUT
+            echo "FPS_RENDER=30" >> $GITHUB_OUTPUT
+          else
+            echo "SOFTWARE_GL=" >> $GITHUB_OUTPUT
+            echo "QS=" >> $GITHUB_OUTPUT
+            echo "FPS_CHECK=30" >> $GITHUB_OUTPUT
+            echo "FPS_RENDER=30" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate frames
+        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
+        env:
+          SOFTWARE_GL: ${{ steps.set-3d-env.outputs.SOFTWARE_GL }}
+          QS: ${{ steps.set-3d-env.outputs.QS }}
+          FPS: ${{ steps.set-3d-env.outputs.FPS_CHECK }}
+        run: |
+          node tools/capture.mjs check
+
+      - name: Render contact sheet for review
+        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
+        env:
+          SOFTWARE_GL: ${{ steps.set-3d-env.outputs.SOFTWARE_GL }}
+          QS: ${{ steps.set-3d-env.outputs.QS }}
+          FPS: ${{ steps.set-3d-env.outputs.FPS_CHECK }}
+        run: |
+          node tools/capture.mjs sheet review/all.jpg 0.5 9
+
+      - name: Render final video
+        working-directory: ${{ steps.create-project.outputs.PROJECT_DIR }}
+        env:
+          SOFTWARE_GL: ${{ steps.set-3d-env.outputs.SOFTWARE_GL }}
+          QS: ${{ steps.set-3d-env.outputs.QS }}
+          FPS: ${{ steps.set-3d-env.outputs.FPS_RENDER }}
+        run: |
+          node tools/capture.mjs video renders/final.mp4
+
+      - name: Upload rendered MP4 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: faceless-short-${{ steps.create-project.outputs.SHORT_NAME }}
+          path: ${{ steps.create-project.outputs.PROJECT_DIR }}/renders/final.mp4
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload contact sheet artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: contact-sheet-${{ steps.create-project.outputs.SHORT_NAME }}
+          path: ${{ steps.create-project.outputs.PROJECT_DIR }}/review/all.jpg
+          if-no-files-found: warn
+          retention-days: 7
