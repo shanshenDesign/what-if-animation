@@ -1,0 +1,77 @@
+{
+  "title": "What if unlocking your phone at night triggered a flashbang warning?",
+  "slug": "flashbang-phone-40s",
+  "duration": 40,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_heart",
+    "lang": "en-us",
+    "speed": 1.06,
+    "lead": 0.35,
+    "outro": 0.45,
+    "gap_target": 39.85,
+    "gap_min": 0.14,
+    "gap_max": 0.34
+  },
+  "lines": [
+    {
+      "text": "One thirty A M. You tap your phone in the dark. Bad idea.",
+      "caps": ["One thirty A M.", "You tap your phone in the dark.", "Bad idea."]
+    },
+    {
+      "text": "A cyan reticle locks onto your face. Tactical flashbang in three. Two. One.",
+      "caps": ["A cyan reticle locks onto your face.", "Tactical flashbang in three.", "Two. One."]
+    },
+    {
+      "text": "You panic. Max brightness. Auto dim is offline. The buttons do nothing.",
+      "caps": ["You panic.", "Max brightness. Auto dim is offline.", "The buttons do nothing."]
+    },
+    {
+      "text": "Then the screen detonates. A hundred percent of brightness, straight into your eyeballs.",
+      "caps": ["Then the screen detonates.", "A hundred percent of brightness,", "straight into your eyeballs."]
+    },
+    {
+      "text": "The whole bedroom goes stadium bright. Dust everywhere. The frame is shaking.",
+      "caps": ["The whole bedroom goes stadium bright.", "Dust everywhere.", "The frame is shaking."]
+    },
+    {
+      "text": "Silence. Smoke off your head. Retina damage: ninety nine percent.",
+      "caps": ["Silence.", "Smoke off your head.", "Retina damage: ninety nine percent."]
+    },
+    {
+      "text": "Recovery time: six hours. You are legally blind until sunrise.",
+      "caps": ["Recovery time: six hours.", "You are legally blind until sunrise."]
+    },
+    {
+      "text": "So naturally, you reach up and tap the screen one more time.",
+      "caps": ["So naturally,", "you reach up and tap the screen", "one more time."]
+    },
+    {
+      "text": "Checking notifications. Round two is already charging up.",
+      "caps": ["Checking notifications.", "Round two is already charging up."]
+    }
+  ],
+  "scenes": [
+    { "id": "hook_dark", "from": 0, "to": 0 },
+    { "id": "countdown_panic", "from": 1, "to": 2 },
+    { "id": "detonation", "from": 3, "to": 4 },
+    { "id": "aftermath", "from": 5, "to": 6 },
+    { "id": "punchline", "from": 7, "to": 8 }
+  ],
+  "sfx": [
+    { "kind": "whoosh", "line": 0, "chunk": 1, "offset": 0.02 },
+    { "kind": "beep", "line": 1, "chunk": 0, "offset": 0.0 },
+    { "kind": "charge", "line": 1, "chunk": 2, "offset": 0.0 },
+    { "kind": "alarm", "line": 2, "chunk": 0, "offset": 0.02 },
+    { "kind": "tick", "line": 2, "chunk": 2, "offset": 0.0 },
+    { "kind": "laser", "line": 3, "chunk": 0, "offset": 0.03 },
+    { "kind": "whoosh", "line": 4, "chunk": 1, "offset": 0.0 },
+    { "kind": "pop", "line": 5, "chunk": 1, "offset": 0.0 },
+    { "kind": "glitch", "line": 5, "chunk": 2, "offset": 0.0 },
+    { "kind": "charge", "line": 7, "chunk": 1, "offset": 0.0 },
+    { "kind": "beep", "line": 8, "chunk": 0, "offset": 0.1 },
+    { "kind": "alarm", "line": 8, "chunk": 1, "offset": 0.0 }
+  ]
+}
