@@ -1,0 +1,74 @@
+{
+  "title": "Why does everyone else's life look effortless while yours feels behind?",
+  "slug": "feeling-behind-35s-02",
+  "duration": 35,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_heart",
+    "lang": "en-us",
+    "speed": 1.02,
+    "lead": 0.4,
+    "outro": 0.7,
+    "gap_target": 34.9,
+    "gap_min": 0.2,
+    "gap_max": 0.7
+  },
+  "lines": [
+    {
+      "text": "Everyone else's life looks effortless. Yours feels like you're always three steps behind.",
+      "caps": ["Everyone else's life", "looks effortless.", "Yours feels like you're", "always three steps behind."]
+    },
+    {
+      "text": "But you're comparing your raw footage to their highlight reel.",
+      "caps": ["But you're comparing", "your raw footage", "to their highlight reel."]
+    },
+    {
+      "text": "They edited out the panic, the retries, the 2 AM meltdowns.",
+      "caps": ["They edited out the panic,", "the retries,", "the 2 AM meltdowns."]
+    },
+    {
+      "text": "Nobody posts the failed drafts or the fourth attempt.",
+      "caps": ["Nobody posts the failed drafts", "or the fourth attempt."]
+    },
+    {
+      "text": "Behind the scenes, everyone is just guessing what they're doing.",
+      "caps": ["Behind the scenes,", "everyone is just guessing", "what they're doing."]
+    },
+    {
+      "text": "Your timeline isn't late. It's just unedited.",
+      "caps": ["Your timeline isn't late.", "It's just unedited."]
+    },
+    {
+      "text": "So stop refreshing their chapter while you're still writing yours.",
+      "caps": ["So stop refreshing their chapter", "while you're still writing yours."]
+    },
+    {
+      "text": "Do the next small thing, today.",
+      "caps": ["Do the next small thing,", "today."]
+    },
+    {
+      "text": "Effortless is just effort nobody filmed.",
+      "caps": ["Effortless is just effort", "nobody filmed."]
+    },
+    {
+      "text": "Your turn is coming. Keep going.",
+      "caps": ["Your turn is coming.", "Keep going."]
+    }
+  ],
+  "scenes": [
+    { "id": "scroll", "from": 0, "to": 0 },
+    { "id": "reel", "from": 1, "to": 1 },
+    { "id": "edit", "from": 2, "to": 3 },
+    { "id": "guess", "from": 4, "to": 5 },
+    { "id": "next", "from": 6, "to": 7 },
+    { "id": "keep", "from": 8, "to": 9 }
+  ],
+  "sfx": [
+    { "kind": "pop", "line": 0, "chunk": 1, "offset": 0.15 },
+    { "kind": "whoosh", "line": 1, "chunk": 0, "offset": 0.1 },
+    { "kind": "thud", "line": 7, "chunk": 0, "offset": 0.12 },
+    { "kind": "chime", "line": 9, "chunk": 0, "offset": 0.05 }
+  ]
+}
