@@ -1,0 +1,38 @@
+{
+  "title": "What if a glowing probability meter popped up every time you hesitated?",
+  "slug": "scifi-toon-10s",
+  "duration": 10,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_heart",
+    "lang": "en-us",
+    "speed": 1.04,
+    "lead": 0.4,
+    "outro": 0.5,
+    "gap_target": 9.8,
+    "gap_min": 0.15,
+    "gap_max": 0.4
+  },
+  "lines": [
+    {
+      "text": "What if a glowing probability meter popped up every time you hesitated?",
+      "caps": ["What if a glowing probability meter", "popped up every time you hesitated?"]
+    },
+    {
+      "text": "Confidence drops to four percent. Time to abort mission.",
+      "caps": ["Confidence drops to four percent.", "Time to abort mission."]
+    }
+  ],
+  "scenes": [
+    { "id": "hesitate", "from": 0, "to": 0 },
+    { "id": "abort", "from": 1, "to": 1 }
+  ],
+  "sfx": [
+    { "kind": "whoosh", "line": 0, "chunk": 0, "offset": 0.05 },
+    { "kind": "pop", "line": 0, "chunk": 1, "offset": 0.02 },
+    { "kind": "tick", "line": 1, "chunk": 0, "offset": 0.04 },
+    { "kind": "whoosh", "line": 1, "chunk": 1, "offset": 0.0 }
+  ]
+}
