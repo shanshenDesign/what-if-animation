@@ -27,8 +27,9 @@ jobs:
           BASE=".opencode/skills/stickman-video-director/projects"
           PROJECT_INPUT="${{ github.event.inputs.project }}"
           TARGET_DIR="$BASE/$PROJECT_INPUT"
-          
-          if [ -d "$TARGET_DIR" ]; then
+
+          # Empty input (push trigger) must not resolve to "$BASE/" with name=""
+          if [ -n "$PROJECT_INPUT" ] && [ -d "$TARGET_DIR" ]; then
             echo "dir=$TARGET_DIR" >> "$GITHUB_OUTPUT"
             echo "name=$PROJECT_INPUT" >> "$GITHUB_OUTPUT"
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -67,11 +68,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install System Dependencies (FFmpeg)
+      - name: Install System Dependencies (FFmpeg + fonts)
         if: steps.proj.outputs.found == 'true'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+
+      - name: Cache Kokoro TTS model (353 MB, downloaded once)
+        if: steps.proj.outputs.found == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.stickman-director/kokoro
+          key: kokoro-v1.0-model
 
       - name: Run Code Engine (B) Render Pipeline
         if: steps.proj.outputs.found == 'true'
@@ -113,7 +121,7 @@ jobs:
         if: steps.proj.outputs.found == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.project || 'test' }}-mp4
+          name: ${{ steps.proj.outputs.name }}-mp4
           path: ${{ steps.proj.outputs.dir }}/renders/${{ steps.proj.outputs.name }}.mp4
           if-no-files-found: error
           retention-days: 14

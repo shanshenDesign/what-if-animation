@@ -1,0 +1,74 @@
+{
+  "title": "Why does your brain suddenly remember every awkward moment at 2 AM?",
+  "slug": "2am-overthinking-35s",
+  "duration": 35,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_heart",
+    "lang": "en-us",
+    "speed": 1.02,
+    "lead": 0.4,
+    "outro": 0.7,
+    "gap_target": 34.9,
+    "gap_min": 0.2,
+    "gap_max": 0.7
+  },
+  "lines": [
+    {
+      "text": "It's 2 AM. You're exhausted, so why is your brain finally doing this?",
+      "caps": ["It's 2 AM.", "You're exhausted —", "so why is your brain finally doing this?"]
+    },
+    {
+      "text": "Remember when you waved back at someone who wasn't even waving?",
+      "caps": ["Remember when you waved back", "at someone who wasn't even waving?"]
+    },
+    {
+      "text": "It's not random. When you finally stop, your prefrontal cortex clocks out.",
+      "caps": ["It's not random.", "When you finally stop,", "your prefrontal cortex clocks out."]
+    },
+    {
+      "text": "Every memory it was blocking rushes the stage.",
+      "caps": ["Every memory it was blocking", "rushes the stage."]
+    },
+    {
+      "text": "No daylight, no task, no distraction, so your brain tags every cringe as urgent.",
+      "caps": ["No daylight, no task,", "no distraction —", "so your brain tags every cringe", "as urgent."]
+    },
+    {
+      "text": "And then it replays them. Loudly. On loop.",
+      "caps": ["And then it replays them.", "Loudly.", "On loop."]
+    },
+    {
+      "text": "The fix? Not your phone.",
+      "caps": ["The fix?", "Not your phone."]
+    },
+    {
+      "text": "Breathe. Name it. Let it pass.",
+      "caps": ["Breathe.", "Name it.", "Let it pass."]
+    },
+    {
+      "text": "Now close your eyes. It's just a memory.",
+      "caps": ["Now close your eyes.", "It's just a memory."]
+    },
+    {
+      "text": "Tomorrow night, your brain picks better.",
+      "caps": ["Tomorrow night,", "your brain picks better."]
+    }
+  ],
+  "scenes": [
+    { "id": "bed", "from": 0, "to": 0 },
+    { "id": "wave", "from": 1, "to": 1 },
+    { "id": "bouncer", "from": 2, "to": 3 },
+    { "id": "stage", "from": 4, "to": 5 },
+    { "id": "fix", "from": 6, "to": 7 },
+    { "id": "dawn", "from": 8, "to": 9 }
+  ],
+  "sfx": [
+    { "kind": "pop", "line": 1, "chunk": 0, "offset": 0.15 },
+    { "kind": "whoosh", "line": 3, "chunk": 0, "offset": 0.1 },
+    { "kind": "thud", "line": 4, "chunk": 3, "offset": 0.12 },
+    { "kind": "chime", "line": 9, "chunk": 0, "offset": 0.05 }
+  ]
+}
