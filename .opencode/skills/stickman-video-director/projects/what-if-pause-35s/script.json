@@ -1,0 +1,89 @@
+{
+  "title": "What if you could pause time for 10 seconds whenever you mess up?",
+  "slug": "what-if-pause-35s",
+  "duration": 35,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_heart",
+    "lang": "en-us",
+    "speed": 1.04,
+    "lead": 0.4,
+    "outro": 0.7,
+    "gap_target": 34.9,
+    "gap_min": 0.18,
+    "gap_max": 0.62
+  },
+  "lines": [
+    {
+      "text": "You drop your coffee. Time freezes.",
+      "caps": ["You drop your coffee.", "Time freezes."]
+    },
+    {
+      "text": "Ten seconds. The splash just hangs there.",
+      "caps": ["Ten seconds.", "The splash just hangs there."]
+    },
+    {
+      "text": "So you don't clean it up. You pose instead.",
+      "caps": ["So you don't clean it up.", "You pose instead."]
+    },
+    {
+      "text": "Chin up. One hand on the counter. Flawless.",
+      "caps": ["Chin up.", "One hand on the counter.", "Flawless."]
+    },
+    {
+      "text": "Wrong meeting? Freeze. Swap the slides.",
+      "caps": ["Wrong meeting?", "Freeze.", "Swap the slides."]
+    },
+    {
+      "text": "Bad haircut? Freeze. Walk out backwards.",
+      "caps": ["Bad haircut?", "Freeze.", "Walk out backwards."]
+    },
+    {
+      "text": "Ten seconds is enough to fix almost anything.",
+      "caps": ["Ten seconds is enough", "to fix almost anything."]
+    },
+    {
+      "text": "Then the clock clicks, and the world unpauses.",
+      "caps": ["Then the clock clicks,", "and the world unpauses."]
+    },
+    {
+      "text": "Coffee lands. Nobody saw a single thing.",
+      "caps": ["Coffee lands.", "Nobody saw a single thing."]
+    },
+    {
+      "text": "Except the security camera in the corner.",
+      "caps": ["Except the security camera", "in the corner."]
+    },
+    {
+      "text": "That one never freezes. It records everything.",
+      "caps": ["That one never freezes.", "It records everything."]
+    },
+    {
+      "text": "At normal speed. For the staff party tonight.",
+      "caps": ["At normal speed.", "For the staff party tonight."]
+    }
+  ],
+  "scenes": [
+    { "id": "spill", "from": 0, "to": 1 },
+    { "id": "pose", "from": 2, "to": 3 },
+    { "id": "fixes", "from": 4, "to": 6 },
+    { "id": "resume", "from": 7, "to": 8 },
+    { "id": "camera", "from": 9, "to": 11 }
+  ],
+  "sfx": [
+    { "kind": "whoosh", "line": 0, "chunk": 0, "offset": 0.05 },
+    { "kind": "freeze", "line": 0, "chunk": 1, "offset": 0.02 },
+    { "kind": "tick", "line": 1, "chunk": 0, "offset": 0.04 },
+    { "kind": "pop", "line": 2, "chunk": 1, "offset": 0.0 },
+    { "kind": "chime", "line": 3, "chunk": 2, "offset": 0.0 },
+    { "kind": "pop", "line": 4, "chunk": 2, "offset": 0.0 },
+    { "kind": "whoosh", "line": 5, "chunk": 2, "offset": 0.0 },
+    { "kind": "tick", "line": 7, "chunk": 0, "offset": 0.0 },
+    { "kind": "freeze", "line": 7, "chunk": 1, "offset": 0.0 },
+    { "kind": "splash", "line": 8, "chunk": 0, "offset": 0.0 },
+    { "kind": "record", "line": 10, "chunk": 0, "offset": 0.0 },
+    { "kind": "pop", "line": 11, "chunk": 1, "offset": 0.0 }
+  ]
+}
