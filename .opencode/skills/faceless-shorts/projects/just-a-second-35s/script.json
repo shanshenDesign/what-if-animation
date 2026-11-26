@@ -1,0 +1,22 @@
+{
+  "title": "What If 'Just a Second' Froze Time for 10 Minutes?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.45,
+  "outro": 0.9,
+  "gap": 0.28,
+  "music": "bed",
+  "sources": [
+    "Original concept: 'just a second' as a literal time-freeze trigger (creative speculation)",
+    "Time perception psychology: subjective time dilation in boredom vs flow states (Wittmann & Paulus, 2008)"
+  ],
+  "lines": [
+    { "text": "What if every time someone said just a second, time actually froze for ten minutes?", "caps": "WHAT IF *EVERY TIME | YOU SAID *JUST A SECOND | TIME *FROZE | FOR TEN *MINUTES?" },
+    { "text": "You're brushing your teeth, you mutter it, and suddenly you're late for work.", "caps": "BRUSHING *TEETH | YOU MUTTER *IT | SUDDENLY *LATE | FOR *WORK" },
+    { "text": "Your boss says it in a meeting — the whole room freezes. Ten minutes gone.", "caps": "BOSS *SAYS IT | WHOLE ROOM *FREEZES | TEN MINUTES *GONE" },
+    { "text": "You say it on a first date. The awkward silence becomes ten minutes of frozen stares.", "caps": "FIRST *DATE | AWKWARD *SILENCE | TEN MINUTES | FROZEN *STARES" },
+    { "text": "The microwave beeps. You say it. Your burrito's cold but the timer hasn't moved.", "caps": "MICROWAVE *BEEPS | BURRITO'S *COLD | TIMER *HASN'T MOVED" },
+    { "text": "But if you say it right before a deadline, you get infinite time. Everyone else? Frozen.", "caps": "RIGHT BEFORE *DEADLINE | YOU GET *INFINITE | TIME *EVERYONE *ELSE | *FROZEN" },
+    { "text": "So maybe just say one moment instead.", "caps": "SO *MAYBE | JUST SAY | ONE *MOMENT *INSTEAD" }
+  ]
+}
