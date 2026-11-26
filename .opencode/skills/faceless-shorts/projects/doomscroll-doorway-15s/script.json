@@ -1,0 +1,19 @@
+{
+  "title": "The Accidental Portal",
+  "voice": "am_michael",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 1.2,
+  "gap": 0.18,
+  "music": "bounce",
+  "sources": [
+    "Thought experiment: Scrolling loops vs subjective time distortion",
+    "Tall tale physics: Extra video cost in surreal world minutes"
+  ],
+  "lines": [
+    { "text": "What if scrolling for just two minutes before getting up", "caps": "Just | two | minutes" },
+    { "text": "accidentally opens a doorway into another world?" },
+    { "text": "Where one extra video costs thirty real world minutes", "caps": "Thirty | real | minutes" },
+    { "text": "before you finally snap back." }
+  ]
+}

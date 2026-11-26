@@ -1,0 +1,157 @@
+[
+  {
+    "word": "What",
+    "start": 0.3,
+    "end": 0.6
+  },
+  {
+    "word": "if",
+    "start": 0.65,
+    "end": 0.95
+  },
+  {
+    "word": "scrolling",
+    "start": 1.0,
+    "end": 1.3
+  },
+  {
+    "word": "for",
+    "start": 1.35,
+    "end": 1.65
+  },
+  {
+    "word": "just",
+    "start": 1.7,
+    "end": 2.0
+  },
+  {
+    "word": "two",
+    "start": 2.05,
+    "end": 2.35
+  },
+  {
+    "word": "minutes",
+    "start": 2.4,
+    "end": 2.7
+  },
+  {
+    "word": "before",
+    "start": 2.75,
+    "end": 3.05
+  },
+  {
+    "word": "getting",
+    "start": 3.1,
+    "end": 3.4
+  },
+  {
+    "word": "up",
+    "start": 3.45,
+    "end": 3.75
+  },
+  {
+    "word": "accidentally",
+    "start": 4.0,
+    "end": 4.3
+  },
+  {
+    "word": "opens",
+    "start": 4.35,
+    "end": 4.65
+  },
+  {
+    "word": "a",
+    "start": 4.7,
+    "end": 5.0
+  },
+  {
+    "word": "doorway",
+    "start": 5.05,
+    "end": 5.35
+  },
+  {
+    "word": "into",
+    "start": 5.4,
+    "end": 5.7
+  },
+  {
+    "word": "another",
+    "start": 5.75,
+    "end": 6.05
+  },
+  {
+    "word": "world?",
+    "start": 6.1,
+    "end": 6.4
+  },
+  {
+    "word": "Where",
+    "start": 6.65,
+    "end": 6.95
+  },
+  {
+    "word": "one",
+    "start": 7.0,
+    "end": 7.3
+  },
+  {
+    "word": "extra",
+    "start": 7.35,
+    "end": 7.65
+  },
+  {
+    "word": "video",
+    "start": 7.7,
+    "end": 8.0
+  },
+  {
+    "word": "costs",
+    "start": 8.05,
+    "end": 8.35
+  },
+  {
+    "word": "thirty",
+    "start": 8.4,
+    "end": 8.7
+  },
+  {
+    "word": "real",
+    "start": 8.75,
+    "end": 9.05
+  },
+  {
+    "word": "world",
+    "start": 9.1,
+    "end": 9.4
+  },
+  {
+    "word": "minutes",
+    "start": 9.45,
+    "end": 9.75
+  },
+  {
+    "word": "before",
+    "start": 10.0,
+    "end": 10.3
+  },
+  {
+    "word": "you",
+    "start": 10.35,
+    "end": 10.65
+  },
+  {
+    "word": "finally",
+    "start": 10.7,
+    "end": 11.0
+  },
+  {
+    "word": "snap",
+    "start": 11.05,
+    "end": 11.35
+  },
+  {
+    "word": "back.",
+    "start": 11.4,
+    "end": 11.7
+  }
+]

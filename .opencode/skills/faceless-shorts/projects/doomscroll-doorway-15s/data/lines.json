@@ -1,0 +1,36 @@
+{
+ "duration": 15.0,
+ "estimated": true,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Just two minutes, thumb already scrolling.",
+   "start": 0.3,
+   "end": 2.501
+  },
+  {
+   "i": 1,
+   "text": "One more video, and the wall swings open like a door.",
+   "start": 2.721,
+   "end": 6.622
+  },
+  {
+   "i": 2,
+   "text": "He steps through, where a minute lasts an hour.",
+   "start": 6.922,
+   "end": 10.144
+  },
+  {
+   "i": 3,
+   "text": "Then he blinks, back on the bed.",
+   "start": 10.364,
+   "end": 12.904
+  },
+  {
+   "i": 4,
+   "text": "Thirty minutes, gone.",
+   "start": 13.254,
+   "end": 14.435
+  }
+ ]
+}
