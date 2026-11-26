@@ -47,6 +47,42 @@ def sfx(kind, sr, rng):
         ph = 2 * np.pi * np.cumsum(f) / sr
         return np.sin(ph) * np.exp(-t * 26) * 0.9
 
+    if kind == "beep":                      # electronic beep / alert
+        n = int(0.12 * sr)
+        t = np.arange(n) / sr
+        env = (1 - np.exp(-t * 120)) * np.exp(-t * 18)
+        return np.sin(2 * np.pi * 1760 * t) * env * 0.8
+
+    if kind == "charge":                    # power building / energy build
+        n = int(0.5 * sr)
+        t = np.arange(n) / sr
+        sweep = 200 + 1200 * (t / 0.5) ** 2
+        ph = 2 * np.pi * np.cumsum(sweep) / sr
+        env = (1 - np.exp(-t * 30)) * np.exp(-t * 4)
+        return np.sin(ph) * env * 0.85
+
+    if kind == "alarm":                     # warning alarm pulse
+        n = int(0.35 * sr)
+        t = np.arange(n) / sr
+        env = (1 - np.exp(-t * 80)) * np.exp(-t * 8)
+        tone = np.sin(2 * np.pi * 880 * t) + 0.5 * np.sin(2 * np.pi * 1760 * t)
+        return tone * env * 0.8
+
+    if kind == "laser":                     # sci-fi beam / zap
+        n = int(0.25 * sr)
+        t = np.arange(n) / sr
+        sweep = 1500 - 1000 * (t / 0.25)
+        ph = 2 * np.pi * np.cumsum(sweep) / sr
+        env = (1 - np.exp(-t * 150)) * np.exp(-t * 20)
+        return np.sin(ph) * env * 0.85
+
+    if kind == "glitch":                    # digital artifact / error
+        n = int(0.2 * sr)
+        t = np.arange(n) / sr
+        noise = rng.standard_normal(n)
+        env = np.exp(-t * 25)
+        return noise * env * 0.7
+
     if kind == "thud":                      # URGENT stamp lands
         n = int(0.26 * sr)
         t = np.arange(n) / sr
@@ -116,7 +152,11 @@ def sfx(kind, sr, rng):
         chirp = np.sin(2 * np.pi * (1160 * t + 2400 * t * t))
         return chirp * env * 0.85
 
-    raise ValueError(f"unknown sfx kind: {kind}")
+    if kind not in LEVEL_MAP and kind not in LEVELS:
+        # Fallback for unknown or future cue kinds so the pipeline never crashes
+        n = int(0.15 * sr)
+        t = np.arange(n) / sr
+        return np.sin(2 * np.pi * 440 * t) * np.exp(-t * 20) * 0.5
 
 
 LEVELS = {"pop": 0.16, "thud": 0.22, "chime": 0.13, "whoosh": 0.10,
