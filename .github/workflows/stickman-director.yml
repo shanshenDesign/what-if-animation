@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       project:
-        description: 'Project folder name in .opencode/skills/stickman-video-director/projects/'
+        description: 'Project folder name in .opencode/skills/stickman-video-director/projects/ (or "changed" / empty)'
         required: false
-        default: 'test'
+        default: 'changed'
         type: string
   push:
     paths:
@@ -17,76 +17,108 @@ jobs:
   render:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    outputs:
+      found: ${{ steps.proj.outputs.found }}
+      projects: ${{ steps.proj.outputs.projects }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Resolve project folder
+      - name: Resolve project folders
         id: proj
         run: |
           BASE=".opencode/skills/stickman-video-director/projects"
           PROJECT_INPUT="${{ github.event.inputs.project }}"
-          TARGET_DIR="$BASE/$PROJECT_INPUT"
-
-          # Empty input (push trigger) must not resolve to "$BASE/" with name=""
-          if [ -n "$PROJECT_INPUT" ] && [ -d "$TARGET_DIR" ]; then
-            echo "dir=$TARGET_DIR" >> "$GITHUB_OUTPUT"
-            echo "name=$PROJECT_INPUT" >> "$GITHUB_OUTPUT"
-            echo "found=true" >> "$GITHUB_OUTPUT"
-            echo "Found requested project: $TARGET_DIR"
-          else
-            # Try to find any project folder inside BASE
-            DIR=""
-            if [ -d "$BASE" ]; then
-              for d in "$BASE"/*/; do
-                if [ -d "$d" ]; then
-                  DIR="${d%/}"
-                  break
-                fi
-              done
-            fi
-            if [ -n "$DIR" ]; then
-              echo "dir=$DIR" >> "$GITHUB_OUTPUT"
-              echo "name=$(basename "$DIR")" >> "$GITHUB_OUTPUT"
-              echo "found=true" >> "$GITHUB_OUTPUT"
-              echo "Found existing project: $DIR"
+          
+          TARGETS=""
+          if [ "${{ github.event_name }}" = "push" ] || [ "$PROJECT_INPUT" = "changed" ] || [ -z "$PROJECT_INPUT" ]; then
+            echo "Detecting changed project directories from git diff..."
+            if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+              CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
             else
-              echo "found=false" >> "$GITHUB_OUTPUT"
-              echo "::notice::No project folders exist yet in $BASE. Exiting cleanly."
+              CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD || git ls-files)
             fi
+            
+            for file in $CHANGED_FILES; do
+              if [[ "$file" =~ ^\.opencode/skills/stickman-video-director/projects/([^/]+)/ ]]; then
+                PROJ_NAME="${BASH_REMATCH[1]}"
+                PROJ_DIR="$BASE/$PROJ_NAME"
+                if [ -d "$PROJ_DIR" ]; then
+                  case " $TARGETS " in
+                    *" $PROJ_NAME "*) ;;
+                    *) TARGETS="$TARGETS $PROJ_NAME" ;;
+                  esac
+                fi
+              fi
+            done
+            
+            if [ -z "$TARGETS" ]; then
+              echo "No specific project found in git diff, scanning all projects in $BASE..."
+              if [ -d "$BASE" ]; then
+                for d in "$BASE"/*/; do
+                  if [ -d "$d" ]; then
+                    pname=$(basename "$d")
+                    TARGETS="$TARGETS $pname"
+                  fi
+                done
+              fi
+            fi
+          elif [ -n "$PROJECT_INPUT" ] && [ "$PROJECT_INPUT" != "changed" ]; then
+            TARGETS="$PROJECT_INPUT"
           fi
 
+          TARGETS="$(echo "$TARGETS" | xargs)"
+          if [ -n "$TARGETS" ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            # Format projects as JSON array for matrix
+            JSON_ARR=$(python3 -c "import json, sys; print(json.dumps(sys.argv[1].split()))" "$TARGETS")
+            echo "projects=$JSON_ARR" >> "$GITHUB_OUTPUT"
+            echo "Found target projects: $TARGETS"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "projects=[]" >> "$GITHUB_OUTPUT"
+            echo "::notice::No target projects found to render."
+          fi
+
+  dispatch-renders:
+    needs: render
+    if: needs.render.outputs.found == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.render.outputs.projects) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup Node.js
-        if: steps.proj.outputs.found == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Setup Python
-        if: steps.proj.outputs.found == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install System Dependencies (FFmpeg + fonts)
-        if: steps.proj.outputs.found == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg fonts-dejavu-core
 
       - name: Cache Kokoro TTS model (353 MB, downloaded once)
-        if: steps.proj.outputs.found == 'true'
         uses: actions/cache@v4
         with:
           path: ~/.stickman-director/kokoro
           key: kokoro-v1.0-model
 
       - name: Run Code Engine (B) Render Pipeline
-        if: steps.proj.outputs.found == 'true'
-        working-directory: ${{ steps.proj.outputs.dir }}
+        working-directory: .opencode/skills/stickman-video-director/projects/${{ matrix.project }}
         run: |
-          echo "Running render pipeline for project: ${{ steps.proj.outputs.name }}"
-          # If a render script or Makefile exists, execute it. Otherwise check for package.json / render command.
+          echo "Running render pipeline for project: ${{ matrix.project }}"
           if [ -f "render.sh" ]; then
             bash render.sh
           elif [ -f "package.json" ]; then
@@ -95,33 +127,28 @@ jobs:
           elif [ -f "Makefile" ]; then
             make render || make
           else
-            # Generic fallback check or search for mp4 output generator
             echo "No explicit render script found, checking project structure..."
             mkdir -p renders
-            # If there's python scripts or similar
             if [ -f "main.py" ]; then
               python main.py
             fi
           fi
           
-          # Ensure an mp4 exists in renders/ or output/ for artifact upload
           mkdir -p renders
-          if [ ! -f "renders/${{ steps.proj.outputs.name }}.mp4" ]; then
-            # Search for any produced mp4 or create a dummy test mp4 if none generated yet for pipeline verification
+          if [ ! -f "renders/${{ matrix.project }}.mp4" ]; then
             FOUND_MP4=$(find . -name "*.mp4" | head -n 1)
             if [ -n "$FOUND_MP4" ]; then
-              cp "$FOUND_MP4" "renders/${{ steps.proj.outputs.name }}.mp4"
+              cp "$FOUND_MP4" "renders/${{ matrix.project }}.mp4"
             else
               echo "Generating placeholder test mp4 for workflow validation..."
-              ffmpeg -f lavfi -i color=c=black:s=1280x720:d=5 -c:v libx264 -t 5 -pix_fmt yuv420p "renders/${{ steps.proj.outputs.name }}.mp4"
+              ffmpeg -f lavfi -i color=c=black:s=1280x720:d=5 -c:v libx264 -t 5 -pix_fmt yuv420p "renders/${{ matrix.project }}.mp4"
             fi
           fi
 
       - name: Upload Finished MP4 Artifact
-        if: steps.proj.outputs.found == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.proj.outputs.name }}-mp4
-          path: ${{ steps.proj.outputs.dir }}/renders/${{ steps.proj.outputs.name }}.mp4
+          name: ${{ matrix.project }}-mp4
+          path: .opencode/skills/stickman-video-director/projects/${{ matrix.project }}/renders/${{ matrix.project }}.mp4
           if-no-files-found: error
           retention-days: 14
