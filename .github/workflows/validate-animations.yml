@@ -1,0 +1,77 @@
+name: Validate Animations
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      target_path:
+        description: 'Target path to validate'
+        required: true
+        default: '.opencode/skills'
+        type: string
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Determine target path
+        id: set-target
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ -n "${{ inputs.target_path }}" ]; then
+            echo "TARGET_PATH=${{ inputs.target_path }}" >> $GITHUB_ENV
+          else
+            echo "TARGET_PATH=.opencode/skills" >> $GITHUB_ENV
+          fi
+
+      - name: Run Python syntax check (py_compile)
+        shell: bash
+        run: |
+          echo "Checking python files in ${{ env.TARGET_PATH }}"
+          find "${{ env.TARGET_PATH }}" -type f -name "*.py" -not -path "*/node_modules/*" | while read -r f; do
+            echo "Compiling $f"
+            python3 -m py_compile "$f"
+          done
+
+      - name: Run JSON validation (json.tool)
+        shell: bash
+        run: |
+          echo "Checking JSON files in ${{ env.TARGET_PATH }}"
+          find "${{ env.TARGET_PATH }}" -type f -name "*.json" -not -path "*/node_modules/*" | while read -r f; do
+            echo "Checking JSON $f"
+            python3 -m json.tool "$f" > /dev/null
+          done
+
+      - name: Run JavaScript syntax check (node --check)
+        shell: bash
+        run: |
+          echo "Checking JavaScript files in ${{ env.TARGET_PATH }}"
+          find "${{ env.TARGET_PATH }}" -type f \( -name "*.js" -o -name "*.mjs" \) -not -path "*/node_modules/*" | while read -r f; do
+            echo "Checking JS $f"
+            node --check "$f"
+          done
+
+      - name: Run Bash syntax check (bash -n)
+        shell: bash
+        run: |
+          echo "Checking Bash scripts in ${{ env.TARGET_PATH }}"
+          find "${{ env.TARGET_PATH }}" -type f \( -name "*.sh" -o -name "*.bash" \) -not -path "*/node_modules/*" | while read -r f; do
+            echo "Checking bash $f"
+            bash -n "$f"
+          done
