@@ -53,6 +53,7 @@ jobs:
             fi
           else
             PROJECT="$INPUT_PATH"
+          fi
           echo "project=$PROJECT" >> $GITHUB_OUTPUT
           echo "Selected project: $PROJECT"
 
