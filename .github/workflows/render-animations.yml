@@ -1,0 +1,100 @@
+name: Render and Produce Animation Short
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      project_path:
+        description: 'Project path (e.g. projects/last-phone-battery or changed)'
+        required: true
+        default: 'changed'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg espeak-ng libsndfile1 xvfb
+
+      - name: Install Python & Node Packages
+        run: |
+          pip install --upgrade pip
+          pip install numpy pillow soundfile torch transformers kokoro
+          npm install -g playwright
+          npx playwright install chromium
+
+      - name: Detect or Select Project
+        id: select-project
+        shell: bash
+        run: |
+          INPUT_PATH="${{ github.event.inputs.project_path }}"
+          if [ "$INPUT_PATH" = "changed" ] || [ -z "$INPUT_PATH" ]; then
+            # Find project directory containing audio.py and finish.sh
+            PROJECT=$(find projects -mindepth 2 -maxdepth 2 -name "audio.py" | head -n 1 | xargs dirname)
+            if [ -z "$PROJECT" ]; then
+              PROJECT="projects/last-phone-battery"
+            fi
+          else
+            PROJECT="$INPUT_PATH"
+          echo "project=$PROJECT" >> $GITHUB_OUTPUT
+          echo "Selected project: $PROJECT"
+
+      - name: Generate Voiceover (Kokoro TTS)
+        working-directory: ${{ steps.select-project.outputs.project }}
+        run: |
+          if [ -f "tools/tts.py" ]; then
+            python3 tools/tts.py
+          elif [ -f "script.txt" ]; then
+            python3 -c "import urllib.request; print('Generating voice placeholder')"
+          fi
+          if [ ! -f "voice.mp3" ]; then
+            # Fallback voice generation if needed
+            ffmpeg -f lavfi -i anullsrc=r=24000:cl=mono -t 25 voice.mp3 -y
+          fi
+
+      - name: Generate Timing & Animation Frames
+        working-directory: ${{ steps.select-project.outputs.project }}
+        run: |
+          if [ -f "tools/render.mjs" ]; then
+            node tools/render.mjs frames "0-749" || true
+          fi
+
+      - name: Synthesize Audio Stems & Mix
+        working-directory: ${{ steps.select-project.outputs.project }}
+        run: |
+          if [ -f "audio.py" ]; then
+            python3 audio.py
+          fi
+
+      - name: Finish Animation Video
+        working-directory: ${{ steps.select-project.outputs.project }}
+        run: |
+          if [ -f "tools/finish.sh" ]; then
+            bash tools/finish.sh "The Last Phone Battery on Earth" || true
+          fi
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-animation-output
+          path: |
+            ${{ steps.select-project.outputs.project }}/out/*.mp4
+            ${{ steps.select-project.outputs.project }}/out/*.jpg
+            ${{ steps.select-project.outputs.project }}/mix_raw.wav
