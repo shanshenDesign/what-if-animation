@@ -19,25 +19,24 @@ def safe_shake(crop, slack):
     return (x, y, w, h)
 
 # UI snap pop for subtle cues
-def ui_snap_pop():
+def ui_snap_pop(frame):
     """Trigger a subtle UI pop effect."""
-    # Placeholder for actual implementation
-    pass
+    frame["effects"]["ui_snap"] = True
 
 # Ghost reflection effect
 def ghost_reflection(frame, original):
     """Create a faint ghost reflection of the original frame."""
-    # Placeholder implementation
+    frame["effects"]["ghost"] = True
     return frame
 
 # CRT vignette pulse effect
 def crt_vignette_pulse(frame, intensity=0.2):
     """Apply a CRT vignette pulse."""
-    # Placeholder implementation
+    frame["effects"]["vignette"] = intensity
     return frame
 
 # Rim light shift effect
 def rim_light_shift(frame, shift_x=0, shift_y=0):
     """Shift rim lighting."""
-    # Placeholder implementation
+    frame["effects"]["rim_light"] = (shift_x, shift_y)
     return frame

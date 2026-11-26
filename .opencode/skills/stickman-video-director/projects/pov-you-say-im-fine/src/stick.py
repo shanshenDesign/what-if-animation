@@ -36,15 +36,13 @@ class Stickman:
         else:
             self.expression = "neutral"
 
-    def blink(self):
+    def blink(self, frame):
         """Trigger a blink."""
-        # Simple blink implementation
-        self.pose = "blinking"
-        # Reset after short time (handled externally)
+        frame["effects"]["blink"] = True
 
-    def gaze_shift(self, left, right):
+    def gaze_shift(self, frame, left, right):
         """Shift gaze direction."""
-        self.eye_dir = [left, right]
+        frame["effects"]["gaze"] = [left, right]
 
     def lip_sync(self, frames):
         """Sync mouth to audio frames."""
@@ -52,18 +50,24 @@ class Stickman:
 
     def apply_effects(self, frame):
         """Apply visual effects to the frame."""
+        # Apply safe shake (no change)
+        safe_shake((frame["width"], frame["height"], 1, 1), (0, 0, 0, 0))
+
         if self.expression == "polite":
+            self.blink(frame)
+            self.gaze_shift(frame, 0.1, -0.1)
             frame = ghost_reflection(frame, frame)
             frame = crt_vignette_pulse(frame, 0.1)
         elif self.expression == "tired":
+            self.blink(frame)
             frame = crt_vignette_pulse(frame, 0.3)
         elif self.expression == "honest":
+            self.gaze_shift(frame, -0.1, 0.1)
             frame = rim_light_shift(frame, 5, 5)
         return frame
 
     def draw(self, canvas):
         """Draw the stickman on the canvas."""
-        # Simplified drawing: just a rectangle for now
         r, g, b, a = COLOR_POLITE
         if self.expression == "tired":
             r, g, b, a = COLOR_TIRED

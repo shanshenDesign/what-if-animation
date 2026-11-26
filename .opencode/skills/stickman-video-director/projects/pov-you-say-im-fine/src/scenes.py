@@ -25,28 +25,36 @@ def get_scene_id_by_index(idx):
 def apply_scene_effects(stickman, frame, scene_id):
     """Apply visual effects based on scene."""
     if scene_id == SCENE_YOU_GOOD_HOOK:
-        # Polite expression, slight vignette
         stickman.set_expression("polite")
+        stickman.blink(frame)
+        stickman.gaze_shift(frame, 0.1, -0.1)
         frame = ghost_reflection(frame, frame)
         frame = crt_vignette_pulse(frame, 0.1)
+        safe_shake((frame["width"], frame["height"], 1, 1), (0, 0, 0, 0))
     elif scene_id == SCENE_CROWD_NOISE_BLUR:
-        # Slight blur effect (placeholder)
-        pass
-    elif scene_id == SCENE_DOOR_CLICK_SHUT:
-        # Door click, light fade
         stickman.set_expression("neutral")
+        stickman.gaze_shift(frame, 0.2, -0.2)
+        safe_shake((frame["width"], frame["height"], 1, 1), (0, 0, 0, 0))
+    elif scene_id == SCENE_DOOR_CLICK_SHUT:
+        stickman.set_expression("neutral")
+        stickman.blink(frame)
         frame = crt_vignette_pulse(frame, 0.2)
+        safe_shake((frame["width"], frame["height"], 1, 1), (0, 0, 0, 0))
     elif scene_id == SCENE_MASK_DROP_BREATH:
-        # Mask drop, tired expression
         stickman.set_expression("tired")
+        stickman.blink(frame)
         frame = ghost_reflection(frame, frame)
         frame = crt_vignette_pulse(frame, 0.3)
+        safe_shake((frame["width"], frame["height"], 1, 1), (0, 0, 0, 0))
+        ui_snap_pop(frame)
     elif scene_id == SCENE_QUIET_ROOM_HONESTY:
-        # Honest expression, rim light
         stickman.set_expression("honest")
+        stickman.gaze_shift(frame, -0.1, 0.1)
         frame = rim_light_shift(frame, 5, 5)
+        safe_shake((frame["width"], frame["height"], 1, 1), (0, 0, 0, 0))
     elif scene_id == SCENE_TAKE_A_BREATH_END:
-        # Calm ending
         stickman.set_expression("honest")
+        stickman.blink(frame)
         frame = crt_vignette_pulse(frame, 0.1)
+        safe_shake((frame["width"], frame["height"], 1, 1), (0, 0, 0, 0))
     return frame

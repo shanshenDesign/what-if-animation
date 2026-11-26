@@ -34,3 +34,10 @@ def get_sfx_info():
         {"kind": "chime", "description": "Chime"},
         {"kind": "whoosh", "description": "Breath whoosh"},
     ]
+
+def play_sfx_line(line_idx, chunk_idx):
+    """Play SFX associated with a given line and chunk."""
+    sfx_list = get_sfx_info()
+    for sfx in sfx_list:
+        if sfx["line"] == line_idx and sfx["chunk"] == chunk_idx:
+            play_sound(sfx["kind"], line_idx, chunk_idx, sfx["offset"])
