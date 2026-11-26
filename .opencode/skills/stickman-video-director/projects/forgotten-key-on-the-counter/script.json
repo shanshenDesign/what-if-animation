@@ -1,0 +1,83 @@
+{
+  "title": "You get home late and the key is on the counter, behind the glass.",
+  "slug": "forgotten-key-on-the-counter",
+  "duration": 40,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_heart",
+    "lang": "en-us",
+    "speed": 1.05,
+    "lead": 0.35,
+    "outro": 0.5,
+    "gap_target": 39.85,
+    "gap_min": 0.16,
+    "gap_max": 0.36
+  },
+  "lines": [
+    {
+      "text": "Late at night you reach the front door, and the lock will not turn.",
+      "caps": ["Late at night you reach the front door,", "and the lock will not turn."]
+    },
+    {
+      "text": "You pat every pocket in rising panic, and there it is, glinting on the counter behind the glass.",
+      "caps": ["You pat every pocket in rising panic,", "and there it is, glinting on the counter,", "behind the glass."]
+    },
+    {
+      "text": "You slip inside, into a hallway where the shadows stretch longer than the hall.",
+      "caps": ["You slip inside,", "into a hallway where the shadows", "stretch longer than the hall."]
+    },
+    {
+      "text": "One floorboard creaks, and you freeze mid-step, listening.",
+      "caps": ["One floorboard creaks,", "and you freeze mid-step,", "listening."]
+    },
+    {
+      "text": "At the glass door, cyan and magenta street neon slices across the room and blinds your reflection.",
+      "caps": ["At the glass door, cyan and magenta street neon", "slices across the room", "and blinds your reflection."]
+    },
+    {
+      "text": "You crouch-sprint past table and chair silhouettes toward the kitchen counter edge.",
+      "caps": ["You crouch-sprint past table and chair silhouettes,", "toward the kitchen counter edge."]
+    },
+    {
+      "text": "Your fingers close around the key, brass and finally real.",
+      "caps": ["Your fingers close around the key,", "brass and finally real."]
+    },
+    {
+      "text": "You slide back to the door and turn the cylinder.",
+      "caps": ["You slide back to the door", "and turn the cylinder."]
+    },
+    {
+      "text": "One clean click, and you step through into the night.",
+      "caps": ["One clean click,", "and you step through into the night."]
+    }
+  ],
+  "scenes": [
+    { "id": "door_lock_panic", "from": 0, "to": 1 },
+    { "id": "hallway_shadow", "from": 2, "to": 2 },
+    { "id": "floorboard_creak", "from": 3, "to": 3 },
+    { "id": "window_neon_glare", "from": 4, "to": 4 },
+    { "id": "counter_dash", "from": 5, "to": 5 },
+    { "id": "key_grab_unlock", "from": 6, "to": 8 }
+  ],
+  "sfx": [
+    { "kind": "latch", "line": 0, "chunk": 1, "offset": 0.05 },
+    { "kind": "pat", "line": 1, "chunk": 0, "offset": 0.0 },
+    { "kind": "pat", "line": 1, "chunk": 0, "offset": 0.42 },
+    { "kind": "glint", "line": 1, "chunk": 1, "offset": 0.18 },
+    { "kind": "step", "line": 2, "chunk": 0, "offset": 0.05 },
+    { "kind": "hum", "line": 2, "chunk": 1, "offset": 0.1 },
+    { "kind": "step", "line": 2, "chunk": 2, "offset": 0.3 },
+    { "kind": "creak", "line": 3, "chunk": 0, "offset": 0.06 },
+    { "kind": "hum", "line": 4, "chunk": 1, "offset": 0.0 },
+    { "kind": "step", "line": 4, "chunk": 2, "offset": 0.35 },
+    { "kind": "step", "line": 5, "chunk": 0, "offset": 0.1 },
+    { "kind": "slide", "line": 5, "chunk": 1, "offset": 0.25 },
+    { "kind": "jingle", "line": 6, "chunk": 0, "offset": 0.05 },
+    { "kind": "glint", "line": 6, "chunk": 1, "offset": 0.1 },
+    { "kind": "slide", "line": 7, "chunk": 0, "offset": 0.12 },
+    { "kind": "unlock", "line": 8, "chunk": 0, "offset": 0.02 },
+    { "kind": "step", "line": 8, "chunk": 1, "offset": 0.45 }
+  ]
+}
