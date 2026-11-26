@@ -397,7 +397,7 @@ class GlassTapHook(Scene):
                         ctx.arc([hand[0] - rr, hand[1] - rr,
                                  hand[0] + rr, hand[1] + rr],
                                 300, 60 if i % 2 else 120,
-                                fill=NEON_CYAN + (int(215 * (1 - kk)),), w=5)
+                                fill=(*NEON_CYAN[:3], int(215 * (1 - kk)),), w=5)
 
         # ---- her hand pushed at the glass while she calls you out
         if t >= c0:
@@ -502,7 +502,7 @@ class ThumbLoopMirror(Scene):
                     ctx.arc([hand[0] - rr, hand[1] - rr * 1.15,
                              hand[0] + rr, hand[1] + rr * 1.15],
                             200 if i % 2 else 250, 340 if i % 2 else 40,
-                            fill=NEON_MAGENTA + (int(190 * (1 - k)),), w=4)
+                            fill=(*NEON_MAGENTA[:3], int(190 * (1 - k)),), w=4)
 
         # ---- the rhythm labels
         if b0 <= t < b1 + 0.6:
@@ -597,7 +597,7 @@ class ClockNumbersDrop(Scene):
             if 0 < rk < 1:
                 rr = 40 + 200 * rk
                 ctx.arc([cx - rr, y - rr * 0.55, cx + rr, y + rr * 0.55],
-                        200, 340, fill=HOUR_AMBER + (int(200 * (1 - rk)),), w=5)
+                        200, 340, fill=(*HOUR_AMBER[:3], int(200 * (1 - rk)),), w=5)
 
         # ---- the counters keep glowing after the last one lands
         if t >= b2:
@@ -623,7 +623,7 @@ class ClockNumbersDrop(Scene):
                 k = ((lt - b0) * 1.4 + i / 3.0) % 1.0
                 ctx.line([(head[0] + 34 + i * 22, head[1] - 66 - 30 * k),
                           (head[0] + 44 + i * 22, head[1] - 96 - 30 * k)],
-                         fill=HOUR_AMBER + (int(190 * (1 - k)),), w=4)
+                         fill=(*HOUR_AMBER[:3], int(190 * (1 - k)),), w=4)
 
         self.hud(ctx, lt)
 
@@ -969,7 +969,7 @@ class ScreenOffChoice(Scene):
             k = clamp((t - (p0 - 0.2)) / 1.1)
             hx = lerp(x0 - 60, x1 + 90, ease_in_out(k))
             ctx.line([(hx - 120, cy + 70), (hx, cy + 10)],
-                     fill=NEON_AMBER + (int(210 * (1 - k)),), w=8)
+                     fill=(*NEON_AMBER[:3], int(210 * (1 - k)),), w=8)
             ctx.glow((hx, cy), 90, NEON_AMBER, alpha=int(120 * (1 - k)))
 
         # ---- power off: the picture collapses into one bright line
@@ -979,9 +979,9 @@ class ScreenOffChoice(Scene):
                 hh = (1.0 - k) * 380 + 3
                 ctx.poly([(0, 360 - hh), (W, 360 - hh), (W, 360 + hh),
                           (0, 360 + hh)],
-                         fill=NEON_CYAN + (int(120 * (1 - k)),))
+                         fill=(*NEON_CYAN[:3], int(120 * (1 - k)),))
                 ctx.line([(0, 360), (W, 360)],
-                         fill=WHITE + (int(235 * (1 - k * k)),),
+                         fill=(*WHITE[:3], int(235 * (1 - k * k)),),
                          w=max(2, int(3 + 12 * (1 - k))))
             # the room settles into a clean amber-and-cyan closing frame
             dk = ease_in_out(clamp((t - p0 - 0.5) / 1.4))
@@ -991,9 +991,9 @@ class ScreenOffChoice(Scene):
                 ctx.glow((640, 664), 300, HORIZON_AMBER,
                          alpha=int(46 * dk * (0.7 + 0.3 * pulse(t, 1.2))))
                 ctx.line([(40, 664), (W - 40, 664)],
-                         fill=HORIZON_AMBER + (int(230 * dk)), w=5)
+                         fill=(*HORIZON_AMBER[:3], int(230 * dk)), w=5)
                 ctx.line([(40, 674), (W - 40, 674)],
-                         fill=NEON_CYAN + (int(120 * dk)), w=3)
+                         fill=(*NEON_CYAN[:3], int(120 * dk)), w=3)
                 ctx.glow((640, 360), 520, NEON_CYAN, alpha=int(26 * dk))
 
         # ---- closing words
