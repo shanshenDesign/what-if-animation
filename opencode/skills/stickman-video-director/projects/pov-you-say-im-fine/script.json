@@ -1,0 +1,68 @@
+{
+  "title": "You Say You're Fine",
+  "slug": "pov-you-say-im-fine",
+  "duration": 40,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_bella",
+    "lang": "en-us",
+    "speed": 1.05,
+    "lead": 0.35,
+    "outro": 0.5,
+    "gap_target": 39.85,
+    "gap_min": 0.16,
+    "gap_max": 0.36
+  },
+  "lines": [
+    {
+      "text": "Imagine you...",
+      "caps": ["Imagine you..."]
+    },
+    {
+      "text": "Someone asks, 'you good?' and you smile, 'yeah, just tired'.",
+      "caps": ["Someone asks,", "'you good?'", "and you smile,", "'yeah, just tired'."]
+    },
+    {
+      "text": "The hallway buzzes, people blur past in neon.",
+      "caps": ["The hallway buzzes,", "people blur past", "in neon."]
+    },
+    {
+      "text": "Door clicks shut, the light fades.",
+      "caps": ["Door clicks shut,", "the light fades."]
+    },
+    {
+      "text": "I'm really not okay.",
+      "caps": ["I'm really not okay."]
+    },
+    {
+      "text": "It's been a long day, I'm exhausted.",
+      "caps": ["It's been a long day,", "I'm exhausted."]
+    },
+    {
+      "text": "Take a breath, let it go.",
+      "caps": ["Take a breath,", "let it go."]
+    }
+  ],
+  "scenes": [
+    { "id": "you_good_hook", "from": 0, "to": 6 },
+    { "id": "crowd_noise_blur", "from": 6, "to": 12 },
+    { "id": "door_click_shut", "from": 12, "to": 15 },
+    { "id": "mask_drop_breath", "from": 15, "to": 22 },
+    { "id": "quiet_room_honesty", "from": 22, "to": 30 },
+    { "id": "take_a_breath_end", "from": 30, "to": 40 }
+  ],
+  "sfx": [
+    { "kind": "tap", "line": 1, "chunk": 0, "offset": 0.15 },
+    { "kind": "tap", "line": 1, "chunk": 1, "offset": 0.10 },
+    { "kind": "swipe", "line": 2, "chunk": 0, "offset": 0.15 },
+    { "kind": "swipe", "line": 2, "chunk": 1, "offset": 0.20 },
+    { "kind": "tick", "line": 4, "chunk": 0, "offset": 0.10 },
+    { "kind": "tick", "line": 4, "chunk": 0, "offset": 0.95 },
+    { "kind": "hum", "line": 5, "chunk": 0, "offset": 0.0 },
+    { "kind": "hum", "line": 5, "chunk": 2, "offset": 0.30 },
+    { "kind": "whoosh", "line": 5, "chunk": 1, "offset": 0.10 },
+    { "kind": "chime", "line": 6, "chunk": 0, "offset": 0.55 }
+  ]
+}

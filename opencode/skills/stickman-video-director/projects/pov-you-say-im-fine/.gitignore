@@ -1,0 +1,13 @@
+# Stickman Director project files
+*.mp4
+*.wav
+*.png
+*.jpg
+*.jpeg
+*.gif
+renders/
+*.tmp
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
