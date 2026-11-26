@@ -1,0 +1,78 @@
+{
+  "title": "What if your phone died at 1% with one urgent message left to send?",
+  "slug": "last-charge-1-percent",
+  "duration": 40,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_heart",
+    "lang": "en-us",
+    "speed": 1.05,
+    "lead": 0.35,
+    "outro": 0.5,
+    "gap_target": 39.85,
+    "gap_min": 0.16,
+    "gap_max": 0.36
+  },
+  "lines": [
+    {
+      "text": "One percent. You have one urgent message left, and the screen is already dimming.",
+      "caps": ["One percent.", "You have one urgent message left,", "and the screen is already dimming."]
+    },
+    {
+      "text": "Outside, the neon streetlamp floods your glass until the screen goes white.",
+      "caps": ["Outside, the neon streetlamp", "floods your glass", "until the screen goes white."]
+    },
+    {
+      "text": "You slip into the dark hallway. The door creaks open at the corner.",
+      "caps": ["You slip into the dark hallway.", "The door creaks open", "at the corner."]
+    },
+    {
+      "text": "You keep moving, thumb off the brightness you cannot spare.",
+      "caps": ["You keep moving,", "thumb off the brightness", "you cannot spare."]
+    },
+    {
+      "text": "A puddle throws the neon sign straight back into your face.",
+      "caps": ["A puddle throws the neon sign", "straight back into your face."]
+    },
+    {
+      "text": "You snatch the phone up. The battery icon turns red.",
+      "caps": ["You snatch the phone up.", "The battery icon turns red."]
+    },
+    {
+      "text": "The outlet is three steps ahead, past the charger on the floor.",
+      "caps": ["The outlet is three steps ahead,", "past the charger on the floor."]
+    },
+    {
+      "text": "You dive. The screen dims to nothing while your hand is moving.",
+      "caps": ["You dive.", "The screen dims to nothing", "while your hand is moving."]
+    },
+    {
+      "text": "Plug. One percent comes back, and the message sends to yourself.",
+      "caps": ["Plug.", "One percent comes back,", "and the message sends to yourself."]
+    }
+  ],
+  "scenes": [
+    { "id": "hook_1pct", "from": 0, "to": 0 },
+    { "id": "street_glare", "from": 1, "to": 1 },
+    { "id": "hallway_creak", "from": 2, "to": 3 },
+    { "id": "puddle_neon", "from": 4, "to": 5 },
+    { "id": "outlet_run", "from": 6, "to": 6 },
+    { "id": "outlet_reach", "from": 7, "to": 8 }
+  ],
+  "sfx": [
+    { "kind": "drain", "line": 0, "chunk": 0, "offset": 0.02 },
+    { "kind": "beep", "line": 0, "chunk": 1, "offset": 0.0 },
+    { "kind": "buzz", "line": 1, "chunk": 0, "offset": 0.0 },
+    { "kind": "glitch", "line": 1, "chunk": 2, "offset": 0.0 },
+    { "kind": "creak", "line": 2, "chunk": 1, "offset": 0.05 },
+    { "kind": "tick", "line": 3, "chunk": 1, "offset": 0.0 },
+    { "kind": "ripple", "line": 4, "chunk": 1, "offset": 0.04 },
+    { "kind": "alarm", "line": 5, "chunk": 1, "offset": 0.0 },
+    { "kind": "whoosh", "line": 6, "chunk": 0, "offset": 0.0 },
+    { "kind": "thud", "line": 7, "chunk": 1, "offset": 0.02 },
+    { "kind": "plug", "line": 8, "chunk": 0, "offset": 0.0 },
+    { "kind": "chime", "line": 8, "chunk": 2, "offset": 0.05 }
+  ]
+}
