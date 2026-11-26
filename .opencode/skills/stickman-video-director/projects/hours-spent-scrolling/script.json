@@ -1,0 +1,82 @@
+{
+  "title": "She counts the hours you spend scrolling, then reaches for the switch.",
+  "slug": "hours-spent-scrolling",
+  "duration": 40,
+  "fps": 30,
+  "size": [1280, 720],
+  "voice": {
+    "engine": "kokoro-onnx",
+    "id": "af_bella",
+    "lang": "en-us",
+    "speed": 1.05,
+    "lead": 0.35,
+    "outro": 0.5,
+    "gap_target": 39.85,
+    "gap_min": 0.16,
+    "gap_max": 0.36
+  },
+  "lines": [
+    {
+      "text": "Quick question: how many hours did you spend scrolling today?",
+      "caps": ["Quick question:", "how many hours did you spend scrolling today?"]
+    },
+    {
+      "text": "Don't look away — I can see you through this screen.",
+      "caps": ["Don't look away —", "I can see you through this screen."]
+    },
+    {
+      "text": "Up, up, down. Your thumb knows the rhythm better than you do.",
+      "caps": ["Up, up, down.", "Your thumb knows the rhythm", "better than you do."]
+    },
+    {
+      "text": "One hour. Three hours. Five plus, and the counter just keeps glowing.",
+      "caps": ["One hour. Three hours.", "Five plus,", "and the counter just keeps glowing."]
+    },
+    {
+      "text": "The room goes dark, but that cyan light stays stuck on your face.",
+      "caps": ["The room goes dark,", "but that cyan light", "stays stuck on your face."]
+    },
+    {
+      "text": "So tell me — what do you actually remember from the last hour?",
+      "caps": ["So tell me —", "what do you actually remember", "from the last hour?"]
+    },
+    {
+      "text": "Nothing? Thought so.",
+      "caps": ["Nothing? Thought so."]
+    },
+    {
+      "text": "The switch is right here, glowing amber, waiting for your hand.",
+      "caps": ["The switch is right here,", "glowing amber,", "waiting for your hand."]
+    },
+    {
+      "text": "Swipe it off. I'll be here when you come back.",
+      "caps": ["Swipe it off.", "I'll be here when you come back."]
+    }
+  ],
+  "scenes": [
+    { "id": "glass_tap_hook", "from": 0, "to": 1 },
+    { "id": "thumb_loop_mirror", "from": 2, "to": 2 },
+    { "id": "clock_numbers_drop", "from": 3, "to": 3 },
+    { "id": "room_fade_shadow", "from": 4, "to": 4 },
+    { "id": "pause_quiet_beat", "from": 5, "to": 5 },
+    { "id": "screen_off_choice", "from": 6, "to": 8 }
+  ],
+  "sfx": [
+    { "kind": "tap", "line": 0, "chunk": 0, "offset": 0.15 },
+    { "kind": "tap", "line": 0, "chunk": 1, "offset": 0.10 },
+    { "kind": "tap", "line": 1, "chunk": 0, "offset": 0.05 },
+    { "kind": "swipe", "line": 2, "chunk": 0, "offset": 0.15 },
+    { "kind": "swipe", "line": 2, "chunk": 1, "offset": 0.20 },
+    { "kind": "swipe", "line": 2, "chunk": 2, "offset": 0.15 },
+    { "kind": "tick", "line": 3, "chunk": 0, "offset": 0.10 },
+    { "kind": "tick", "line": 3, "chunk": 0, "offset": 0.95 },
+    { "kind": "tick", "line": 3, "chunk": 1, "offset": 0.15 },
+    { "kind": "hum", "line": 4, "chunk": 1, "offset": 0.0 },
+    { "kind": "hum", "line": 4, "chunk": 2, "offset": 0.30 },
+    { "kind": "chime", "line": 5, "chunk": 0, "offset": 0.10 },
+    { "kind": "hum", "line": 5, "chunk": 2, "offset": 0.20 },
+    { "kind": "swipe", "line": 7, "chunk": 1, "offset": 0.15 },
+    { "kind": "power", "line": 8, "chunk": 0, "offset": 0.05 },
+    { "kind": "chime", "line": 8, "chunk": 1, "offset": 0.55 }
+  ]
+}

@@ -1,0 +1,4 @@
+build/
+preview/
+renders/*.mp4
+__pycache__/
