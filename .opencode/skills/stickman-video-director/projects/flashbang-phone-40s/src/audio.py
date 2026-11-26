@@ -160,7 +160,9 @@ def sfx(kind, sr, rng):
 
 
 LEVELS = {"pop": 0.16, "thud": 0.22, "chime": 0.13, "whoosh": 0.10,
-          "freeze": 0.18, "tick": 0.11, "splash": 0.17, "record": 0.14}
+          "freeze": 0.18, "tick": 0.11, "splash": 0.17, "record": 0.14,
+          "beep": 0.15, "charge": 0.18, "alarm": 0.16, "laser": 0.16,
+          "glitch": 0.14}
 
 
 def main():
@@ -191,7 +193,9 @@ def main():
 
     rng = np.random.default_rng(7)
     for cue in tl.get("sfx", []):
-        s = sfx(cue["kind"], sr, rng) * LEVELS[cue["kind"]]
+        kind = cue["kind"]
+        level = LEVELS.get(kind, 0.15)
+        s = sfx(kind, sr, rng) * level
         a = int(cue["t"] * sr)
         b = min(len(x), a + len(s))
         if a < len(x):
