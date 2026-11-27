@@ -55,6 +55,8 @@ echo "All required functions present."
 
 # Stage 4/5: Prepare build directory
 echo "Stage 4/5: Preparing build directory..."
+python3 -m pip install --upgrade pillow || python3 -m pip install --break-system-packages pillow || true
+python3 -c "import PIL" || { echo "Error: PIL/Pillow is required" >&2; exit 1; }
 rm -rf build renders
 mkdir -p build
 mkdir -p build/frames
