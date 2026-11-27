@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-PROJECT_DIR=".opencode/skills/stickman-video-director/projects/pov-you-say-im-fine"
-cd "$PROJECT_DIR"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 # Stage 0/5: Verify required files
 echo "Stage 0/5: Verifying required files..."
