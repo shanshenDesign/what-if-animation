@@ -24,7 +24,24 @@ def mix_audio(segments):
     mixed = np.clip(mixed, -1.0, 1.0)
     return (mixed * max_val).astype(np.int16)
 
-def generate_mix_wav(filename="build/mix.wav"):
+def play_sound(sfx_type, volume=0.5):
+    """Play or generate a sound effect helper matching render.sh requirement."""
+    if sfx_type == "tap":
+        return generate_tone(880, 0.2, volume=volume)
+    elif sfx_type == "swipe":
+        return generate_tone(440, 0.2, volume=volume)
+    elif sfx_type == "tick":
+        return generate_tone(1000, 0.1, volume=volume)
+    elif sfx_type == "hum":
+        return generate_tone(110, 0.5, volume=volume)
+    elif sfx_type == "whoosh":
+        sample_rate = 44100
+        return np.random.normal(0, 0.3, int(sample_rate * 0.5)).astype(np.float32) * volume
+    elif sfx_type == "chime":
+        return generate_tone(1568, 0.3, volume=volume)
+    else:
+        return generate_tone(440, 0.2, volume=volume)
+
     """Generate mix.wav with procedural SFX."""
     sample_rate = 44100
     total_duration = 40.0  # match video duration
