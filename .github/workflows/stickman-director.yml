@@ -108,8 +108,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg fonts-dejavu-core python3-pip
-          python3 -m pip install --upgrade pip pillow || python3 -m pip install --break-system-packages pillow
-          python3 -c "import PIL; print('Pillow version:', PIL.__version__)"
+          python3 -m pip install --upgrade pip pillow numpy || python3 -m pip install --break-system-packages pillow numpy
+          python3 -c "import PIL, numpy; print('Pillow & NumPy version:', PIL.__version__, numpy.__version__)"
 
       - name: Cache Kokoro TTS model (353 MB, downloaded once)
         uses: actions/cache@v4
