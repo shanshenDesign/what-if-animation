@@ -1,5 +1,4 @@
 # Stickman rig definition
-
 from .common import rgba, safe_shake, ui_snap_pop, ghost_reflection, crt_vignette_pulse, rim_light_shift
 
 # Define colors

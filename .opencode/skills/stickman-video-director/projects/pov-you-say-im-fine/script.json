@@ -37,32 +37,25 @@
       "caps": ["I'm really not okay."]
     },
     {
-      "text": "It's been a long day, I'm exhausted.",
-      "caps": ["It's been a long day,", "I'm exhausted."]
-    },
-    {
-      "text": "Take a breath, let it go.",
-      "caps": ["Take a breath,", "let it go."]
+      "text": "It's been a long day, I'm exhausted. Take a breath, let it go.",
+      "caps": ["It's been a long day,", "I'm exhausted.", "Take a breath,", "let it go."]
     }
   ],
   "scenes": [
-    { "id": "you_good_hook", "from": 0, "to": 6 },
-    { "id": "crowd_noise_blur", "from": 6, "to": 12 },
-    { "id": "door_click_shut", "from": 12, "to": 15 },
-    { "id": "mask_drop_breath", "from": 15, "to": 22 },
-    { "id": "quiet_room_honesty", "from": 22, "to": 30 },
-    { "id": "take_a_breath_end", "from": 30, "to": 40 }
+    { "id": "you_good_hook", "from": 0, "to": 0 },
+    { "id": "crowd_noise_blur", "from": 1, "to": 1 },
+    { "id": "door_click_shut", "from": 2, "to": 2 },
+    { "id": "mask_drop_breath", "from": 3, "to": 3 },
+    { "id": "quiet_room_honesty", "from": 4, "to": 4 },
+    { "id": "take_a_breath_end", "from": 5, "to": 5 }
   ],
   "sfx": [
-    { "kind": "tap", "line": 1, "chunk": 0, "offset": 0.15 },
-    { "kind": "tap", "line": 1, "chunk": 1, "offset": 0.10 },
-    { "kind": "swipe", "line": 2, "chunk": 0, "offset": 0.15 },
-    { "kind": "swipe", "line": 2, "chunk": 1, "offset": 0.20 },
+    { "kind": "tap", "line": 0, "chunk": 0, "offset": 0.15 },
+    { "kind": "tap", "line": 1, "chunk": 0, "offset": 0.10 },
+    { "kind": "swipe", "line": 1, "chunk": 1, "offset": 0.20 },
     { "kind": "tick", "line": 4, "chunk": 0, "offset": 0.10 },
-    { "kind": "tick", "line": 4, "chunk": 0, "offset": 0.95 },
     { "kind": "hum", "line": 5, "chunk": 0, "offset": 0.0 },
-    { "kind": "hum", "line": 5, "chunk": 2, "offset": 0.30 },
     { "kind": "whoosh", "line": 5, "chunk": 1, "offset": 0.10 },
-    { "kind": "chime", "line": 6, "chunk": 0, "offset": 0.55 }
+    { "kind": "chime", "line": 5, "chunk": 1, "offset": 0.55 }
   ]
 }

@@ -1,43 +1,73 @@
 # Audio handling for Stickman Director
-
+import wave
+import struct
 import time
+import numpy as np
 
-# Placeholder for audio engine (Kokoro TTS)
-def load_voice_engine():
-    """Load the voice engine (placeholder)."""
-    print("[Audio] Loading voice engine...")
-    # In real implementation, this would initialize Kokoro TTS
-    return "Kokoro Engine"
+def generate_tone(frequency, duration, volume=0.5, sample_rate=44100):
+    """Generate a sine wave tone."""
+    t = np.linspace(0, duration, int(sample_rate * duration), False)
+    tone = volume * np.sin(2 * np.pi * frequency * t)
+    return tone.astype(np.float32)
 
-def play_sound(sound_kind, line_idx, chunk_idx, offset):
-    """Play a sound effect."""
-    print(f"[Audio] Playing {sound_kind} (line {line_idx}, chunk {chunk_idx}, offset {offset}s)")
-    # Placeholder: actual playback would go here
-    # e.g., if sound_kind == "tap": play_tap()
-    #       elif sound_kind == "swipe": play_swipe()
+def generate_silence(duration, sample_rate=44100):
+    """Generate silence."""
+    return np.zeros(int(sample_rate * duration), dtype=np.float32)
 
-def play_voice_line(line_idx, speed=1.0, lead=0.35):
-    """Play a voice line with given parameters."""
-    print(f"[Audio] Playing voice line {line_idx} (speed {speed}, lead {lead})")
-    # Placeholder for TTS synthesis
-    # In real implementation, this would send text to TTS and play audio
-    time.sleep(0.1)  # Simulate small delay
+def mix_audio(segments):
+    """Mix audio segments (simple addition with clipping)."""
+    max_val = 32767.0
+    mixed = np.zeros_like(segments[0])
+    for seg in segments:
+        mixed += seg
+    # Clip to int16 range
+    mixed = np.clip(mixed, -1.0, 1.0)
+    return (mixed * max_val).astype(np.int16)
 
-def get_sfx_info():
-    """Return list of SFX definitions."""
-    # This could be loaded from script.json
-    return [
-        {"kind": "tap", "description": "Tap sound"},
-        {"kind": "swipe", "description": "Swipe sound"},
-        {"kind": "tick", "description": "Tick sound"},
-        {"kind": "hum", "description": "Hum background"},
-        {"kind": "chime", "description": "Chime"},
-        {"kind": "whoosh", "description": "Breath whoosh"},
-    ]
+def generate_mix_wav(filename="build/mix.wav"):
+    """Generate mix.wav with procedural SFX."""
+    sample_rate = 44100
+    total_duration = 40.0  # match video duration
+    segments = []
 
-def play_sfx_line(line_idx, chunk_idx):
-    """Play SFX associated with a given line and chunk."""
-    sfx_list = get_sfx_info()
-    for sfx in sfx_list:
-        if sfx["line"] == line_idx and sfx["chunk"] == chunk_idx:
-            play_sound(sfx["kind"], line_idx, chunk_idx, sfx["offset"])
+    # Continuous hum (low frequency)
+    hum = generate_tone(110, total_duration, volume=0.2)
+    segments.append(hum)
+
+    # Tap at 5s
+    tap = generate_tone(880, 0.2, volume=0.5)
+    segments.append(tap)
+
+    # Swipe at 10s
+    swipe = generate_tone(440, 0.2, volume=0.5)
+    segments.append(swipe)
+
+    # Tick at 15s
+    tick = generate_tone(1000, 0.1, volume=0.5)
+    segments.append(tick)
+
+    # Hum continues (already added)
+
+    # Chime at 20s
+    chime = generate_tone(1568, 0.3, volume=0.6)
+    segments.append(chime)
+
+    # Whoosh at 25s (white noise sweep)
+    whoosh = np.random.normal(0, 0.3, int(sample_rate * 0.5))
+    segments.append(whoosh)
+
+    # Ensure total length matches
+    # Mix all segments
+    mixed = mix_audio(segments)
+
+    # Write WAV file
+    os.makedirs("build", exist_ok=True)
+    with wave.open(filename, 'wb') as wav_file:
+        wav_file.setnchannels(1)
+        wav_file.setsampwidth(2)  # 16-bit
+        wav_file.setframerate(sample_rate)
+        wav_file.writeframes(mixed.tobytes())
+    print(f"[Audio] Generated {filename}")
+
+if __name__ == "__main__":
+    generate_mix_wav()
