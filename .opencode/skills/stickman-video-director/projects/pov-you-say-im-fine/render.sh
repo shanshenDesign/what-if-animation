@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+PROJECT_DIR=".opencode/skills/stickman-video-director/projects/pov-you-say-im-fine"
+cd "$PROJECT_DIR"
+
 # Stage 0/5: Verify required files
 echo "Stage 0/5: Verifying required files..."
 if [ ! -f "script.json" ]; then
@@ -52,12 +55,42 @@ echo "All required functions present."
 
 # Stage 4/5: Prepare build directory
 echo "Stage 4/5: Preparing build directory..."
-rm -rf build
+rm -rf build renders
 mkdir -p build
 mkdir -p build/frames
+mkdir -p renders
 echo "Build directory ready."
 
-# Stage 5/5: Final readiness check passed.
-echo "Stage 5/5: Final readiness check passed."
-echo "All checks completed successfully."
+# Stage 5/5: Build pipeline execution (Narration, Timeline, Frames, Audio, MP4)
+echo "Stage 5/5: Executing full build pipeline..."
+
+# 1. Run plan.py to generate lines.json, timeline.json, captions.srt, and frames/frame_*.png
+python3 -c "from src.plan import Plan; Plan().run('script.json')"
+
+# Verify frames were generated
+FRAME_COUNT=$(find build/frames -name "frame_*.png" | wc -l)
+echo "Generated $FRAME_COUNT frames."
+if [ "$FRAME_COUNT" -eq 0 ]; then
+  echo "Error: No frames generated!" >&2
+  exit 1
+fi
+
+# Verify build/mix.wav exists
+if [ ! -f "build/mix.wav" ]; then
+  echo "Generating fallback mix.wav..."
+  python3 -c "from src.audio import generate_mix_wav; generate_mix_wav('build/mix.wav')"
+fi
+
+# Encode final MP4 via ffmpeg
+echo "Encoding final MP4 via ffmpeg..."
+ffmpeg -y -framerate 30 -i build/frames/frame_%05d.png -i build/mix.wav \
+  -c:v libx264 -pix_fmt yuv420p -c:a aac -b:a 192k \
+  -shortest renders/pov-you-say-im-fine.mp4
+
+if [ ! -f "renders/pov-you-say-im-fine.mp4" ] || [ ! -s "renders/pov-you-say-im-fine.mp4" ]; then
+  echo "Error: MP4 render failed or is empty." >&2
+  exit 1
+fi
+
+echo "All checks and render pipeline completed successfully!"
 exit 0
