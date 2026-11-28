@@ -21,13 +21,18 @@ REQUIRED_FILES = [
     "src/sentence_times.json",
     "scripts/generate_voiceover.py",
     ".github/workflows/render-video.yml",
+    "../.github/workflows/render-new-madrid-1811.yml",
 ]
 
 
 def main():
     errors = []
     for rel in REQUIRED_FILES:
-        if not os.path.exists(rel):
+        # Check both direct path and relative parent if run from inside new-madrid-1811
+        check_path = rel
+        if rel.startswith("../") and not os.path.exists(check_path):
+            check_path = rel[3:] # fallback
+        if not os.path.exists(rel) and not os.path.exists(check_path):
             errors.append(f"Missing required file: {rel}")
 
     if os.path.exists("src/sentence_times.json"):
@@ -37,8 +42,8 @@ def main():
             errors.append(f"Expected voice 'am_fenrir' in sentence_times.json, got {st.get('voice')}")
         if not st.get("sentences"):
             errors.append("sentence_times.json has empty 'sentences' list.")
-        if len(st.get("cuts", [])) < 2:
-            errors.append("sentence_times.json 'cuts' must contain at least [0.0, end].")
+        if len(st.get("cuts", [])) != len(st.get("sentences", [])) + 1:
+            errors.append(f"sentence_times.json cuts length ({len(st.get('cuts', []))}) must equal sentences length + 1 ({len(st.get('sentences', [])) + 1}).")
 
     if os.path.exists("scripts/generate_voiceover.py"):
         with open("scripts/generate_voiceover.py", "r", encoding="utf-8") as f:
@@ -46,14 +51,18 @@ def main():
         if 'VOICE_NAME = "am_fenrir"' not in py_txt:
             errors.append("scripts/generate_voiceover.py is missing VOICE_NAME = 'am_fenrir'.")
 
-    if os.path.exists("render.bat"):
-        with open("render.bat", "rb") as f:
-            raw = f.read()
-        if b"\r\n" not in raw:
-            errors.append("render.bat must use Windows CRLF line endings.")
+    for bat_file in ["render.bat", "test_render.bat"]:
+        if os.path.exists(bat_file):
+            with open(bat_file, "rb") as f:
+                raw = f.read()
+            if b"\r\n" not in raw or b"\n" not in raw:
+                errors.append(f"{bat_file} must use Windows CRLF line endings.")
 
-    if os.path.exists(".github/workflows/render-video.yml"):
-        with open(".github/workflows/render-video.yml", "r", encoding="utf-8") as f:
+    wf_path = ".github/workflows/render-video.yml"
+    if not os.path.exists(wf_path) and os.path.exists("../.github/workflows/render-new-madrid-1811.yml"):
+        wf_path = "../.github/workflows/render-new-madrid-1811.yml"
+    if os.path.exists(wf_path):
+        with open(wf_path, "r", encoding="utf-8") as f:
             yml_txt = f.read()
         for token in ["generate_voiceover.py", "remotion render", "upload-artifact"]:
             if token not in yml_txt:
