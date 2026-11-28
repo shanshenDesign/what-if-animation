@@ -19,15 +19,13 @@ const OnScreenCaption = ({ text }) => {
   if (!text) return null;
   const visibleLines = text.split(' ').reduce((acc, word) => {
     const lastLine = acc[acc.length - 1];
-    if (!lastLine) {
-      acc.push(word);
-    } else if (lastLine.join(' ').split(' ').length >= 12) {
-      acc.push(word);
+    if (!lastLine || lastLine.join(' ').split(' ').length >= 12) {
+      acc.push([word]);
     } else {
       lastLine.push(word);
     }
     return acc;
-  }, []).slice(0, 3).map((line) => line.join(' '));
+  }, []).slice(0, 3).map((words) => words.join(' '));
 
   return (
     <div
@@ -178,13 +176,10 @@ const SceneRunner = () => {
       <AbsoluteFill
         style={{
           backgroundColor: '#f4ebd9',
-          opacity: 0, // creamOpacity removed for now; can re-enable if desired
+          opacity: 0,
           pointerEvents: 'none',
         }}
       />
-
-      {/* On-screen caption synced to narration beats */}
-      <OnScreenCaption text={captionText} />
     </>
   );
 };
@@ -199,6 +194,15 @@ export const Full = () => {
     const dist = Math.abs(t - cut);
     if (dist < 0.2) {
       creamOpacity = Math.max(creamOpacity, interpolate(dist, [0, 0.2], [1, 0]));
+    }
+  }
+
+  // Determine the current sentence text for on-screen captions
+  let captionText = null;
+  for (const sent of sentenceTimes.sentences) {
+    if (t >= sent.start && t < sent.end) {
+      captionText = sent.text;
+      break;
     }
   }
 
@@ -222,6 +226,8 @@ export const Full = () => {
           pointerEvents: 'none',
         }}
       />
+      {/* On-screen caption synced to narration beats */}
+      <OnScreenCaption text={captionText} />
     </AbsoluteFill>
   );
 };

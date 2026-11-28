@@ -97,7 +97,18 @@ def main():
         if "position.y" not in char3_js:
             errors.append("src/char3.js: characters lack Y-plane positioning.")
 
-    # Check JS syntax for standard JS files
+    # Check that HTML/caption div elements are not placed inside R3F ThreeCanvas blocks
+    if os.path.exists("src/Full.jsx"):
+        with open("src/Full.jsx", "r", encoding="utf-8") as f:
+            full_code = f.read()
+        # Find ThreeCanvas or Canvas component bounds
+        tc_idx = full_code.find("<ThreeCanvas")
+        if tc_idx != -1:
+            tc_end = full_code.find("</ThreeCanvas>", tc_idx)
+            if tc_end != -1:
+                r3f_block = full_code[tc_idx:tc_end]
+                if "<div" in r3f_block or "<Div" in r3f_block or "OnScreenCaption" in r3f_block:
+                    errors.append("HTML elements or OnScreenCaption placed inside ThreeCanvas block in src/Full.jsx")
     for js_file in ["src/char3.js", "src/worlds.js", "src/kit.js"]:
         if os.path.exists(js_file):
             res = os.system(f"node -c {js_file} > /dev/null 2>&1")
