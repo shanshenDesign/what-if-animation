@@ -26,6 +26,7 @@ function drawCharacterCanvas({
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
 
+  ctx.save();
   const ink = (width = 11) => {
     ctx.strokeStyle = '#351f22';
     ctx.lineWidth = width;
@@ -328,6 +329,19 @@ function drawCharacterCanvas({
   ctx.arc(335, 625, 14, 0, Math.PI * 2);
   ctx.fill();
 
+  // ---- Grounded boots / feet ----
+  // Left boot
+  ctx.fillStyle = coatColor;
+  ctx.beginPath();
+  ctx.roundRect(150, 630, 25, 25, 3);
+  ctx.fill();
+  ink(6);
+  // Right boot
+  ctx.beginPath();
+  ctx.roundRect(310, 630, 25, 25, 3);
+  ctx.fill();
+  ink(6);
+
   // ---- Secondary motion guides (drawn lightly) ----
   // Breathing-induced body sway hint (visual aid not rendered as separate mesh,
   // the THREEGROUP.update will handle actual motion)
@@ -376,6 +390,7 @@ function drawCharacterCanvas({
     pupil: expr.pupil,
   };
 
+  ctx.restore();
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
   return tex;

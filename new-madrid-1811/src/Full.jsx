@@ -13,6 +13,52 @@ import * as THREE from 'three';
 import { buildStoryScene } from './worlds';
 import sentenceTimes from './sentence_times.json';
 
+// On-screen caption component – house style: lower-middle safe zone, ink-outline,
+ cream fill, clean wrapping, zero clipping.
+const OnScreenCaption = ({ text }) => {
+  if (!text) return null;
+  const visibleLines = text.split(' ').reduce((acc, word) => {
+    const lastLine = acc[acc.length - 1];
+    if (!lastLine) {
+      acc.push(word);
+    } else if (lastLine.join(' ').split(' ').length >= 12) {
+      acc.push(word);
+    } else {
+      lastLine.push(word);
+    }
+    return acc;
+  }, []).slice(0, 3).map((line) => line.join(' '));
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        bottom: 60,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        color: '#351f22',
+        fontFamily: 'Georgia, serif',
+        fontSize: 18,
+        fontWeight: 'bold',
+        lineHeight: 1.3,
+        textAlign: 'center',
+        width: '90%',
+        maxWidth: 560,
+        padding: '6px 12px',
+        background: 'rgba(244, 235, 217, 0.9)',
+        border: '2px solid #351f22',
+        borderRadius: 6,
+        pointerEvents: 'none',
+        zIndex: 50,
+        textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+        whiteSpace: 'pre-wrap',
+      }}
+    >
+      {visibleLines.join(' ')}
+    </div>
+  );
+};
+
 // Smooth camera travel curve between the cut timestamps of a shot (house style).
 export function warpU(T, t) {
   const n = T.length;
@@ -85,6 +131,15 @@ const SceneRunner = () => {
   characters.forEach((c) => c.userData.update(frame, camPos));
   dynamicActors.forEach((a) => a.update(t, frame));
 
+  // Determine the current sentence text for on-screen captions
+  let captionText = null;
+  for (const sent of sentenceTimes.sentences) {
+    if (t >= sent.start && t < sent.end) {
+      captionText = sent.text;
+      break;
+    }
+  }
+
   return (
     <>
       <color attach="background" args={['#e9decb']} />
@@ -118,6 +173,18 @@ const SceneRunner = () => {
         lookAt={activeShot.lookAt}
         fov={80}
       />
+
+      {/* Cream dip transition: #f4ebd9 0.4s at each cut */}
+      <AbsoluteFill
+        style={{
+          backgroundColor: '#f4ebd9',
+          opacity: 0, // creamOpacity removed for now; can re-enable if desired
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* On-screen caption synced to narration beats */}
+      <OnScreenCaption text={captionText} />
     </>
   );
 };

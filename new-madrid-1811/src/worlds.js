@@ -351,7 +351,27 @@ export function buildStoryScene() {
   // Add tremor crack marker near levee
   const tremor1 = createTremorCrack(gradientMap, 0.3);
   tremor1.position.set(1.0, 0.1, -3.0);
-  staticObjects.push(walk1, sign1, sign1b, lamp1, barrel1, tremor1);
+  // Add river reversal marker
+  const riverMarker1 = createRiverReversalMarker(gradientMap);
+  riverMarker1.position.set(-4.0, 0, 2.5);
+  // Add background townsfolk reacting to the tremors
+  const char1b = createCharacter({
+    coatColor: '#5c4d3c',
+    vestColor: '#d4b475',
+    hat: 'cap',
+    glasses: false,
+    emotion: 'curious',
+  });
+  char1b.position.set(-1.8, 0.16, -0.2);
+  const char1c = createCharacter({
+    coatColor: '#6b4a55',
+    vestColor: '#cba86f',
+    hat: 'engineer',
+    glasses: true,
+    emotion: 'shocked',
+  });
+  char1c.position.set(-0.5, 0.16, -0.8);
+  staticObjects.push(walk1, sign1, sign1b, lamp1, barrel1, tremor1, riverMarker1, char1b, char1c);
 
   const water1 = createWater({ width: 11, depth: 3.0, gradientMap, bars: 7 });
   water1.position.set(0, 0, 2.1);
@@ -395,7 +415,24 @@ export function buildStoryScene() {
   // Add river reversal marker
   const riverMarker2 = createRiverReversalMarker(gradientMap);
   riverMarker2.position.set(40, 0, 3.0);
-  staticObjects.push(sign2, lamp2, crate2, riverMarker2);
+  // Add background townsfolk reacting to the fissure
+  const char2b = createCharacter({
+    coatColor: '#4a5a68',
+    vestColor: '#c9a66b',
+    hat: 'tophat',
+    glasses: true,
+    emotion: 'calm',
+  });
+  char2b.position.set(43.5, 0, -0.5);
+  const char2c = createCharacter({
+    coatColor: '#5b4a3a',
+    vestColor: '#c9a66b',
+    hat: 'tophat',
+    glasses: true,
+    emotion: 'relieved',
+  });
+  char2c.position.set(45.0, 0, -0.3);
+  staticObjects.push(sign2, lamp2, crate2, riverMarker2, char2b, char2c);
 
   const crackLeft = toonBox(4.6, 0.5, 5.2, '#7a5c41', gradientMap);
   crackLeft.position.set(37.4, 0.12, 1.4);
@@ -461,7 +498,24 @@ export function buildStoryScene() {
   sign3.position.set(82.6, 0, -1.4);
   const barrel3 = createBarrel(gradientMap);
   barrel3.position.set(77.4, 0.425, 0.7);
-  staticObjects.push(cabin3, cabin3b, walk3, sign3, barrel3);
+  // Add background townsfolk looking up at falling chimneys
+  const char3b = createCharacter({
+    coatColor: '#4a5a68',
+    vestColor: '#c9a66b',
+    hat: 'tophat',
+    glasses: true,
+    emotion: 'shocked',
+  });
+  char3b.position.set(78.5, 0.16, -0.8);
+  const char3c = createCharacter({
+    coatColor: '#5c4d3c',
+    vestColor: '#d4b475',
+    hat: 'cap',
+    glasses: false,
+    emotion: 'tense',
+  });
+  char3c.position.set(83.0, 0.16, -0.3);
+  staticObjects.push(cabin3, cabin3b, walk3, sign3, barrel3, char3b, char3c);
 
   const chimney3 = createChimney(gradientMap);
   chimney3.position.set(77.6, 4.4, -3.7);
@@ -494,7 +548,24 @@ export function buildStoryScene() {
   sign4.position.set(117.6, 0, -1.6);
   const lamp4 = createLampPost(gradientMap, 3.3);
   lamp4.position.set(123.4, 0, -1.2);
-  staticObjects.push(church4, arch4, sign4, lamp4);
+  // Add background townsfolk pointing at the church
+  const char4b = createCharacter({
+    coatColor: '#3f5248',
+    vestColor: '#d4b475',
+    hat: 'cap',
+    glasses: false,
+    emotion: 'tense',
+  });
+  char4b.position.set(118.5, 0, -0.3);
+  const char4c = createCharacter({
+    coatColor: '#6b4a55',
+    vestColor: '#cba86f',
+    hat: 'engineer',
+    glasses: true,
+    emotion: 'shocked',
+  });
+  char4c.position.set(122.0, 0, -0.5);
+  staticObjects.push(church4, arch4, sign4, lamp4, char4b, char4c);
 
   const bell4 = new THREE.Group();
   const bellBody = new THREE.Mesh(
@@ -553,7 +624,24 @@ export function buildStoryScene() {
   sign5b.position.set(160, 5.3, -3.95);
   const barrel5 = createBarrel(gradientMap);
   barrel5.position.set(163.2, 0.425, 0.5);
-  staticObjects.push(facade5, walk5, sign5, sign5b, barrel5);
+  // Add background townsfolk running from the reversed river
+  const char5b = createCharacter({
+    coatColor: '#5b4a3a',
+    vestColor: '#c9a66b',
+    hat: 'tophat',
+    glasses: true,
+    emotion: 'relieved',
+  });
+  char5b.position.set(158.5, 0.16, -0.3);
+  const char5c = createCharacter({
+    coatColor: '#41525f',
+    vestColor: '#d0a86c',
+    hat: 'cap',
+    glasses: false,
+    emotion: 'shocked',
+  });
+  char5c.position.set(162.5, 0.16, -0.5);
+  staticObjects.push(facade5, walk5, sign5, sign5b, barrel5, char5b, char5c);
 
   const water5 = createWater({ width: 12, depth: 3.4, gradientMap, bars: 8 });
   water5.position.set(160, 0, 2.3);
@@ -592,7 +680,24 @@ export function buildStoryScene() {
   sign6.position.set(202.2, 0, -1.5);
   const walk6 = createPlankSidewalk(8, 1.3, gradientMap);
   walk6.position.set(200, 0, -0.2);
-  staticObjects.push(house6, house6b, sign6, walk6);
+  // Add background settlers helping each other
+  const char6b = createCharacter({
+    coatColor: '#4a5a68',
+    vestColor: '#c29b61',
+    hat: 'bowler',
+    glasses: false,
+    emotion: 'determined',
+  });
+  char6b.position.set(205.0, 0.16, -0.5);
+  const char6c = createCharacter({
+    coatColor: '#5b4a3a',
+    vestColor: '#c9a66b',
+    hat: 'tophat',
+    glasses: true,
+    emotion: 'relieved',
+  });
+  char6c.position.set(207.0, 0.16, -0.3);
+  staticObjects.push(house6, house6b, sign6, walk6, char6b, char6c);
 
   const crate6a = createCrate(gradientMap, 0.95);
   crate6a.position.set(197.4, 0.475, 0.3);
@@ -639,7 +744,24 @@ export function buildStoryScene() {
   fence7.position.set(241.0, 1.34, 0.4);
   const barrel7 = createBarrel(gradientMap);
   barrel7.position.set(236.2, 1.425, 2.2);
-  staticObjects.push(ground7, sign7, facade7, fence7, barrel7);
+  // Add background figures helping with evacuation
+  const char7b = createCharacter({
+    coatColor: '#5b4a3a',
+    vestColor: '#c9a66b',
+    hat: 'cap',
+    glasses: true,
+    emotion: 'relieved',
+  });
+  char7b.position.set(242.0, 1.0, 2.8);
+  const char7c = createCharacter({
+    coatColor: '#4a5a68',
+    vestColor: '#c29b61',
+    hat: 'bowler',
+    glasses: false,
+    emotion: 'determined',
+  });
+  char7c.position.set(243.5, 1.0, 3.5);
+  staticObjects.push(ground7, sign7, facade7, fence7, barrel7, char7b, char7c);
 
   dynamicActors.push({
     mesh: field7,
@@ -674,7 +796,24 @@ export function buildStoryScene() {
   dock8.position.set(278.4, 0.42, 2.4);
   const facade8 = createFacade({ color: '#a8674c', gradientMap, width: 5.4, height: 3.8 });
   facade8.position.set(280, -0.6, -4.8);
-  staticObjects.push(sign8, sign8b, post8a, dock8, facade8);
+  // Add background figures observing the new lake
+  const char8b = createCharacter({
+    coatColor: '#3f5248',
+    vestColor: '#d4b475',
+    hat: 'cap',
+    glasses: false,
+    emotion: 'relieved',
+  });
+  char8b.position.set(282.0, 0.54, 2.0);
+  const char8c = createCharacter({
+    coatColor: '#54485c',
+    vestColor: '#cbb075',
+    hat: 'engineer',
+    glasses: true,
+    emotion: 'determined',
+  });
+  char8c.position.set(284.0, 0.54, 3.0);
+  staticObjects.push(sign8, sign8b, post8a, dock8, facade8, char8b, char8c);
 
   const water8 = createWater({ width: 13, depth: 4.6, gradientMap, bars: 8 });
   water8.position.set(280, -0.3, 1.6);
@@ -718,7 +857,24 @@ export function buildStoryScene() {
   facade9.position.set(320, 0, -4.6);
   const barrel9 = createBarrel(gradientMap);
   barrel9.position.set(324.6, 0.425, 1.0);
-  staticObjects.push(sign9, deck9, facade9, barrel9);
+  // Add background figures studying the depth gauge
+  const char9b = createCharacter({
+    coatColor: '#54485c',
+    vestColor: '#cbb075',
+    hat: 'engineer',
+    glasses: true,
+    emotion: 'determined',
+  });
+  char9b.position.set(322.5, 1.27, -1.8);
+  const char9c = createCharacter({
+    coatColor: '#4a5a68',
+    vestColor: '#c9a66b',
+    hat: 'cap',
+    glasses: false,
+    emotion: 'relieved',
+  });
+  char9c.position.set(324.0, 1.27, -1.2);
+  staticObjects.push(sign9, deck9, facade9, barrel9, char9b, char9c);
 
   const gauge9 = new THREE.Group();
   for (let i = 0; i < 6; i++) {
@@ -762,7 +918,24 @@ export function buildStoryScene() {
   lamp10.position.set(363.4, 0, -0.4);
   const facade10 = createFacade({ color: '#b86b52', gradientMap, width: 5.6, height: 4.0 });
   facade10.position.set(360, 0, -4.8);
-  staticObjects.push(sign10, walk10, lamp10, facade10);
+  // Add background figures reflecting on two centuries
+  const char10b = createCharacter({
+    coatColor: '#4a5a68',
+    vestColor: '#c9a66b',
+    hat: 'none',
+    glasses: false,
+    emotion: 'relieved',
+  });
+  char10b.position.set(362.5, 0.47, 2.2);
+  const char10c = createCharacter({
+    coatColor: '#54485c',
+    vestColor: '#cbb075',
+    hat: 'engineer',
+    glasses: true,
+    emotion: 'determined',
+  });
+  char10c.position.set(364.5, 0.47, 1.6);
+  staticObjects.push(sign10, walk10, lamp10, facade10, char10b, char10c);
 
   const water10 = createWater({ width: 13, depth: 4.2, gradientMap, bars: 8 });
   water10.position.set(360, 0, 3.0);

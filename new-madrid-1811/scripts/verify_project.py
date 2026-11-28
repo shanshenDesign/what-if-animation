@@ -68,6 +68,35 @@ def main():
             if token not in yml_txt:
                 errors.append(f"GitHub workflow missing step containing: {token}")
 
+    # Check on-screen captions are supported in Full.jsx
+    if os.path.exists("src/Full.jsx"):
+        with open("src/Full.jsx", "r", encoding="utf-8") as f:
+            full_jsx = f.read()
+        if "OnScreenCaption" not in full_jsx:
+            errors.append("src/Full.jsx does not include OnScreenCaption component for on-screen captions.")
+        if "sentenceTimes" not in full_jsx:
+            errors.append("src/Full.jsx does not reference sentenceTimes for caption sync.")
+
+    # Check crowd/scene richness: multiple characters and dynamic actors
+    if os.path.exists("src/worlds.js"):
+        with open("src/worlds.js", "r", encoding="utf-8") as f:
+            worlds_js = f.read()
+        char_count = worlds_js.count("createCharacter")
+        actor_count = worlds_js.count("dynamicActors.push")
+        if char_count < 3:
+            errors.append(f"src/worlds.js has only {char_count} createCharacter call(s); expected at least 3 for crowd richness.")
+        if actor_count < 3:
+            errors.append(f"src/worlds.js has only {actor_count} dynamic actor update(s); expected at least 3 for scene richness.")
+
+    # Check character grounding: characters should have Y position near ground plane
+    if os.path.exists("src/char3.js"):
+        with open("src/char3.js", "r", encoding="utf-8") as f:
+            char3_js = f.read()
+        if "shadow" not in char3_js.lower():
+            errors.append("src/char3.js: characters lack ground-contact shadow.")
+        if "position.y" not in char3_js:
+            errors.append("src/char3.js: characters lack Y-plane positioning.")
+
     if errors:
         print("VERIFICATION FAILED:")
         for e in errors:
