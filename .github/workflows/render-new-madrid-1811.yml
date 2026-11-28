@@ -1,0 +1,64 @@
+# House-style render for new-madrid-1811.
+# GitHub only loads workflows from the repository root, so this is the runnable copy of
+# new-madrid-1811/.github/workflows/render-video.yml (which is kept as the kit of record).
+name: Render 3D Story Video (Kokoro am_fenrir + Remotion)
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: new-madrid-1811
+
+jobs:
+  render-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python for free Kokoro TTS
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system dependencies for Chromium/WebGL & audio
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libasound2 libpangocairo-1.0-0 libgtk-3-0 mesa-utils xvfb
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Install Kokoro TTS (free am_fenrir voice)
+        run: pip install kokoro-onnx soundfile numpy
+
+      - name: Generate voice-over with Kokoro (am_fenrir)
+        run: python scripts/generate_voiceover.py
+
+      - name: Verify project & timing
+        run: python scripts/verify_project.py
+
+      - name: Render Remotion 9:16 3D/2D video
+        run: |
+          mkdir -p out
+          xvfb-run -a npx remotion render src/index.jsx AnimatedStory out/full_silent.mp4 --gl=swangle --concurrency=2 --image-format=jpeg --jpeg-quality=92 --crf=17
+
+      - name: Mux am_fenrir voice-over into final.mp4
+        run: |
+          npx remotion ffmpeg -y -i out/full_silent.mp4 -i public/voiceover.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest out/final.mp4
+          ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,width,height,r_frame_rate -of default=noprint_wrappers=1 out/final.mp4
+
+      - name: Upload final.mp4 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-madrid-1811-mp4
+          path: new-madrid-1811/out/final.mp4
+          retention-days: 14

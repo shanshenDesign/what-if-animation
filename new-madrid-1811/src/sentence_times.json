@@ -1,0 +1,82 @@
+{
+  "voice": "am_fenrir",
+  "engine": "kokoro-onnx (free local/CI TTS)",
+  "hasAudio": false,
+  "wordsPerSecond": 3.35,
+  "note": "Estimated 3.35 words/sec + 0.22s pause per sentence. Run scripts/generate_voiceover.py to overwrite start/end/cuts with exact Kokoro am_fenrir timestamps.",
+  "cuts": [
+    0.0,
+    4.399,
+    8.798,
+    13.496,
+    17.895,
+    22.593,
+    27.29,
+    31.988,
+    36.387,
+    41.085,
+    45.186
+  ],
+  "sentences": [
+    {
+      "id": 1,
+      "text": "December 16, 1811: the Mississippi River, the widest highway in America, suddenly ran backwards.",
+      "start": 0.0,
+      "end": 4.399
+    },
+    {
+      "id": 2,
+      "text": "Three great shocks rocked the New Madrid fault, and the strongest hit magnitude 7.9.",
+      "start": 4.399,
+      "end": 8.798
+    },
+    {
+      "id": 3,
+      "text": "Waves of ground rolled as far as Boston, and church bells rang on their own.",
+      "start": 8.798,
+      "end": 13.496
+    },
+    {
+      "id": 4,
+      "text": "But the worst was still coming, because the river was about to be flipped.",
+      "start": 13.496,
+      "end": 17.895
+    },
+    {
+      "id": 5,
+      "text": "Then on February 7, 1812, a magnitude 7.9 shock dropped whole farms under dark water.",
+      "start": 17.895,
+      "end": 22.593
+    },
+    {
+      "id": 6,
+      "text": "Settlers lost their fences, their crops and their chimneys, and New Madrid emptied in days.",
+      "start": 22.593,
+      "end": 27.29
+    },
+    {
+      "id": 7,
+      "text": "You see, the quake didn't split the land; it sank a valley into a lake.",
+      "start": 27.29,
+      "end": 31.988
+    },
+    {
+      "id": 8,
+      "text": "That sunken ground filled to become Reelfoot Lake, fifteen to twenty-five thousand acres wide.",
+      "start": 31.988,
+      "end": 36.387
+    },
+    {
+      "id": 9,
+      "text": "So Tennessee gained a shallow lake five to eighteen feet deep, and kept it forever.",
+      "start": 36.387,
+      "end": 41.085
+    },
+    {
+      "id": 10,
+      "text": "Two centuries later, Reelfoot Lake still remembers the night the whole river reversed.",
+      "start": 41.085,
+      "end": 45.186
+    }
+  ]
+}

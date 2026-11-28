@@ -1,0 +1,21 @@
+{
+  "name": "new-madrid-1811",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Episode 4 - New Madrid Earthquake Reverses the Mississippi (1811-1812): vertical 9:16 3D-world + 2D-character story video (Remotion + Three.js + Kokoro am_fenrir)",
+  "scripts": {
+    "start": "remotion studio src/index.jsx",
+    "still": "remotion still src/index.jsx AnimatedStory out/preview.png --scale=0.5 --gl=angle",
+    "render:video": "remotion render src/index.jsx AnimatedStory out/full_silent.mp4 --gl=angle --concurrency=4 --image-format=jpeg --jpeg-quality=92 --crf=17",
+    "render:test": "remotion render src/index.jsx AnimatedStory out/test_30f.mp4 --frames=0-29 --gl=angle"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.220",
+    "@remotion/three": "^4.0.220",
+    "@react-three/fiber": "^8.17.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.220",
+    "three": "^0.169.0"
+  }
+}
