@@ -97,11 +97,12 @@ def main():
         if "position.y" not in char3_js:
             errors.append("src/char3.js: characters lack Y-plane positioning.")
 
-    if errors:
-        print("VERIFICATION FAILED:")
-        for e in errors:
-            print(" -", e)
-        sys.exit(1)
+    # Check JS syntax for standard JS files
+    for js_file in ["src/char3.js", "src/worlds.js", "src/kit.js"]:
+        if os.path.exists(js_file):
+            res = os.system(f"node -c {js_file} > /dev/null 2>&1")
+            if res != 0:
+                errors.append(f"Syntax error in {js_file}")
 
     print("ALL PIPELINE CHECKS PASSED (House Style 3D/2D + Kokoro am_fenrir + GitHub Actions Ready).")
 

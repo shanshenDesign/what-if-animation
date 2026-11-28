@@ -14,7 +14,7 @@ import { buildStoryScene } from './worlds';
 import sentenceTimes from './sentence_times.json';
 
 // On-screen caption component – house style: lower-middle safe zone, ink-outline,
- cream fill, clean wrapping, zero clipping.
+// cream fill, clean wrapping, zero clipping.
 const OnScreenCaption = ({ text }) => {
   if (!text) return null;
   const visibleLines = text.split(' ').reduce((acc, word) => {
