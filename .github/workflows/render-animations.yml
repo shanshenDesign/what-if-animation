@@ -3,6 +3,9 @@ name: Render and Produce Animation Short
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'new-madrid-1811/**'
+      - '.github/workflows/render-new-madrid-1811.yml'
   workflow_dispatch:
     inputs:
       project_path:

@@ -5,6 +5,11 @@ name: Render 3D Story Video (Kokoro am_fenrir + Remotion)
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'new-madrid-1811/**'
+      - '.github/workflows/render-new-madrid-1811.yml'
 
 defaults:
   run:
