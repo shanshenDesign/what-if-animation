@@ -175,6 +175,150 @@ function createFenceRow(gradientMap, posts = 7) {
   return group;
 }
 
+// NEW: createBuildingTrim – adds window grids, door patterns, cornices
+function createBuildingTrim({ width, height, depth, color, gradientMap, windowCountX = 4, windowCountY = 3 }) {
+  const group = new THREE.Group();
+
+  // Window matte material with wear
+  const windowColor = color;
+  const winMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture(windowColor),
+    gradientMap,
+  });
+
+  // Individual window
+  function makeWindow(x, y, w, h) {
+    const win = new THREE.Mesh(
+      new THREE.BoxGeometry(w - 0.1, h - 0.1, depth + 0.02),
+      winMat
+    );
+    win.position.set(x, y, depth / 2 + 0.01);
+    win.castShadow = true;
+    win.receiveShadow = true;
+    addInkOutline(win, 0.01);
+    return win;
+  }
+
+// Grid of windows (simulated recesses)
+  const halfW = width / 2;
+  const halfH = height / 2;
+  const winW = (width - 0.6) / windowCountX;
+  const winHt = (height - 0.4) / windowCountY;
+
+  for (let xi = 0; xi < windowCountX; xi++) {
+    for (let yi = 0; yi < windowCountY; yi++) {
+      const wx = -halfW + xi * winW + winW / 2;
+      const wy = -halfH + yi * winHt + winHt / 2;
+      group.add(makeWindow(wx, wy, winW, winHt));
+    }
+  }
+
+  // Cornice (top trim)
+  const corniceMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture('#8b6248'),
+    gradientMap,
+  });
+  const cornice = new THREE.Mesh(
+    new THREE.BoxGeometry(width + 0.4, 0.25, depth + 0.35),
+    corniceMat
+  );
+  cornice.position.set(0, height + 0.12, depth / 2);
+  addInkOutline(cornice, 0.025);
+  group.add(cornice);
+
+  // Door – plank style
+  const doorW = 1.15;
+  const doorH = 2.25;
+  const doorMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture('#5d4037'),
+    gradientMap,
+  });
+  const door = new THREE.Mesh(
+    new THREE.BoxGeometry(doorW, doorH, depth + 0.05),
+    doorMat
+  );
+  door.position.set(0, -height / 2 + doorH / 2, depth / 2 + 0.025);
+  addInkOutline(door, 0.018);
+  group.add(door);
+
+  // Door knob accent
+  ctxKnobMat = new THREE.MeshBasicMaterial({ color: '#c9a66b' });
+  // Note: door knob simplified as small mesh; in full scene handled separately
+
+  return group;
+}
+
+// NEW: createRiverReversalCue – animated river flow direction change marker
+function createRiverReversalMarker(gradientMap) {
+  const group = new THREE.Group();
+
+  // Direction indicator plates (left/right arrows)
+  const arrowMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture('#f3e8d2'),
+    gradientMap,
+  });
+
+  // Left arrow (upstream indicator)
+  const leftArrow = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.6, 0.3),
+    arrowMat
+  );
+  leftArrow.position.set(-3.5, 0.1, 0);
+  leftArrow.rotation.z = Math.PI / 2;
+  addInkOutline(leftArrow, 0.02);
+  group.add(leftArrow);
+
+  // Right arrow (downstream indicator)
+  const rightArrow = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.6, 0.3),
+    arrowMat
+  );
+  rightArrow.position.set(3.5, 0.1, 0);
+  rightArrow.rotation.z = -Math.PI / 2;
+  addInkOutline(rightArrow, 0.02);
+  group.add(rightArrow);
+
+  // Current flow label (text on board)
+  const flowBoard = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.2, 0.4),
+    new THREE.MeshBasicMaterial({ map: createPaintedTexture('#7f9aa4') })
+  );
+  flowBoard.position.set(0, 0.3, 0.1);
+  addInkOutline(flowBoard, 0.02);
+  group.add(flowBoard);
+
+  return group;
+}
+
+// NEW: createTremorCrack – animated fracture effect on ground
+function createTremorCrack(gradientMap, intensity = 1) {
+  const group = new THREE.Group();
+
+  // Crack segments that animate during tremor
+  const crackMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture('#7a5c41'),
+    gradientMap,
+  });
+
+  for (let i = 0; i < 4; i++) {
+    const crack = new THREE.Mesh(
+      new THREE.BoxGeometry(4.6 + Math.random() * 2, 0.5, 0.2),
+      crackMat
+    );
+    crack.position.set(
+      -2 + i * 2.5 + Math.random() * 0.5,
+      0.12,
+      1.4 + Math.random() * 1
+    );
+    crack.rotation.z = (0.07 + Math.random() * 0.35) * intensity;
+    crack.castShadow = true;
+    addInkOutline(crack, 0.03);
+    group.add(crack);
+  }
+
+  return group;
+}
+
 export function buildStoryScene() {
   const gradientMap = createToonGradient();
   const staticObjects = [];
@@ -184,6 +328,10 @@ export function buildStoryScene() {
   // LOCATION 1 (x = 0): Mississippi levee — 16 December 1811
   const facade1 = createFacade({ color: '#b86b52', gradientMap, width: 7, height: 5.2 });
   facade1.position.set(0, 0, -4.2);
+  // Add building trim detail
+  const trim1 = createBuildingTrim({ width: 7, height: 5.2, depth: 0.48, color: '#b86b52', gradientMap });
+  trim1.position.set(0, 0, -4.2);
+  staticObjects.push(facade1, trim1);
   const walk1 = createPlankSidewalk(10, 1.4, gradientMap);
   walk1.position.set(0, 0, 0.05);
   const sign1 = postedSign('DEC 16 1811', gradientMap, 2.7, 0.74, 1.55);
@@ -194,7 +342,10 @@ export function buildStoryScene() {
   lamp1.position.set(3.6, 0, -1.4);
   const barrel1 = createBarrel(gradientMap);
   barrel1.position.set(3.1, 0.425, 0.6);
-  staticObjects.push(facade1, walk1, sign1, sign1b, lamp1, barrel1);
+  // Add tremor crack marker near levee
+  const tremor1 = createTremorCrack(gradientMap, 0.3);
+  tremor1.position.set(1.0, 0.1, -3.0);
+  staticObjects.push(walk1, sign1, sign1b, lamp1, barrel1, tremor1);
 
   const water1 = createWater({ width: 11, depth: 3.0, gradientMap, bars: 7 });
   water1.position.set(0, 0, 2.1);
@@ -217,6 +368,7 @@ export function buildStoryScene() {
     vestColor: '#c9a66b',
     hat: 'tophat',
     glasses: true,
+    emotion: 'calm',
   });
   char1.position.set(1.4, 0.16, 0.45);
   characters.push(char1);
@@ -224,13 +376,20 @@ export function buildStoryScene() {
   // LOCATION 2 (x = 40): New Madrid fissure & sand blows
   const facade2 = createFacade({ color: '#a85f48', gradientMap, width: 7.5, height: 5.0 });
   facade2.position.set(40, 0, -4.4);
+  // Add building trim
+  const trim2 = createBuildingTrim({ width: 7.5, height: 5.0, depth: 0.48, color: '#a85f48', gradientMap });
+  trim2.position.set(40, 0, -4.4);
+  staticObjects.push(facade2, trim2);
   const sign2 = postedSign('NEW MADRID', gradientMap, 2.6, 0.72, 1.5);
   sign2.position.set(42.4, 0, -1.7);
   const lamp2 = createLampPost(gradientMap, 3.0);
   lamp2.position.set(36.6, 0, -1.9);
   const crate2 = createCrate(gradientMap, 0.9);
   crate2.position.set(37.2, 0.45, -0.4);
-  staticObjects.push(sign2, lamp2, crate2);
+  // Add river reversal marker
+  const riverMarker2 = createRiverReversalMarker(gradientMap);
+  riverMarker2.position.set(40, 0, 3.0);
+  staticObjects.push(sign2, lamp2, crate2, riverMarker2);
 
   const crackLeft = toonBox(4.6, 0.5, 5.2, '#7a5c41', gradientMap);
   crackLeft.position.set(37.4, 0.12, 1.4);
@@ -280,6 +439,7 @@ export function buildStoryScene() {
     vestColor: '#d4b475',
     hat: 'cap',
     glasses: false,
+    emotion: 'curious',
   });
   char2.position.set(41.2, 0, 0.2);
   characters.push(char2);
@@ -314,6 +474,7 @@ export function buildStoryScene() {
     vestColor: '#c29b61',
     hat: 'bowler',
     glasses: false,
+    emotion: 'tense',
   });
   char3.position.set(81.4, 0.16, 0.3);
   characters.push(char3);
@@ -370,6 +531,7 @@ export function buildStoryScene() {
     vestColor: '#cba86f',
     hat: 'engineer',
     glasses: true,
+    emotion: 'shocked',
   });
   char4.position.set(121.4, 0, 0.6);
   characters.push(char4);
@@ -410,6 +572,7 @@ export function buildStoryScene() {
     vestColor: '#d0a86c',
     hat: 'cap',
     glasses: false,
+    emotion: 'shocked',
   });
   char5.position.set(161.4, 0.16, 0.4);
   characters.push(char5);
@@ -452,6 +615,7 @@ export function buildStoryScene() {
     vestColor: '#c9a66b',
     hat: 'tophat',
     glasses: true,
+    emotion: 'relieved',
   });
   char6.position.set(201.6, 0.16, 0.3);
   characters.push(char6);
@@ -488,6 +652,7 @@ export function buildStoryScene() {
     vestColor: '#c29b61',
     hat: 'bowler',
     glasses: false,
+    emotion: 'determined',
   });
   char7.position.set(239.6, 1.0, 3.4);
   characters.push(char7);
@@ -527,6 +692,7 @@ export function buildStoryScene() {
     vestColor: '#d4b475',
     hat: 'cap',
     glasses: false,
+    emotion: 'relieved',
   });
   char8.position.set(281.0, 0.54, 2.4);
   characters.push(char8);
@@ -576,6 +742,7 @@ export function buildStoryScene() {
     vestColor: '#cbb075',
     hat: 'engineer',
     glasses: true,
+    emotion: 'determined',
   });
   char9.position.set(321.4, 1.27, -1.4);
   characters.push(char9);
@@ -619,6 +786,7 @@ export function buildStoryScene() {
     vestColor: '#c9a66b',
     hat: 'none',
     glasses: false,
+    emotion: 'relieved',
   });
   char10.position.set(361.6, 0.47, 1.9);
   characters.push(char10);

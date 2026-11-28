@@ -320,6 +320,147 @@ export function createBarrel(gradientMap) {
   return addInkOutline(barrel, 0.04);
 }
 
+export function createBuildingTrim({
+  width,
+  height,
+  depth,
+  color,
+  gradientMap,
+  windowCountX = 4,
+  windowCountY = 3,
+}) {
+  const group = new THREE.Group();
+
+  // Individual window
+  function makeWindow(x, y, w, h) {
+    const win = new THREE.Mesh(
+      new THREE.BoxGeometry(w - 0.1, h - 0.1, depth + 0.02),
+      new THREE.MeshToonMaterial({
+        map: createPaintedTexture(color),
+        gradientMap,
+      })
+    );
+    win.position.set(x, y, depth / 2 + 0.01);
+    win.castShadow = true;
+    win.receiveShadow = true;
+    addInkOutline(win, 0.01);
+    return win;
+  }
+
+  // Grid of windows
+  const halfW = width / 2;
+  const halfH = height / 2;
+  const winW = (width - 0.6) / windowCountX;
+  const winHt = (height - 0.4) / windowCountY;
+
+  for (let xi = 0; xi < windowCountX; xi++) {
+    for (let yi = 0; yi < windowCountY; yi++) {
+      const wx = -halfW + xi * winW + winW / 2;
+      const wy = -halfH + yi * winHt + winHt / 2;
+      group.add(makeWindow(wx, wy, winW, winHt));
+    }
+  }
+
+  // Cornice (top trim)
+  const corniceMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture('#8b6248'),
+    gradientMap,
+  });
+  const cornice = new THREE.Mesh(
+    new THREE.BoxGeometry(width + 0.4, 0.25, depth + 0.35),
+    corniceMat
+  );
+  cornice.position.set(0, height + 0.12, depth / 2);
+  addInkOutline(cornice, 0.025);
+  group.add(cornice);
+
+  // Door – plank style
+  const doorW = 1.15;
+  const doorH = 2.25;
+  const doorMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture('#5d4037'),
+    gradientMap,
+  });
+  const door = new THREE.Mesh(
+    new THREE.BoxGeometry(doorW, doorH, depth + 0.05),
+    doorMat
+  );
+  door.position.set(0, -height / 2 + doorH / 2, depth / 2 + 0.025);
+  addInkOutline(door, 0.018);
+  group.add(door);
+
+  return group;
+}
+
+export function createRiverReversalMarker(gradientMap) {
+  const group = new THREE.Group();
+
+  // Arrow materials
+  const arrowColor = '#f3e8d2';
+  const arrowMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture(arrowColor),
+    gradientMap,
+  });
+
+  // Left arrow (upstream indicator)
+  const leftArrow = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.6, 0.3),
+    arrowMat
+  );
+  leftArrow.position.set(0, 0.1, 0);
+  leftArrow.rotation.z = Math.PI / 2;
+  addInkOutline(leftArrow, 0.02);
+  group.add(leftArrow);
+
+  // Right arrow (downstream indicator)
+  const rightArrow = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.6, 0.3),
+    arrowMat
+  );
+  rightArrow.position.set(0, 0.1, 0);
+  rightArrow.rotation.z = -Math.PI / 2;
+  addInkOutline(rightArrow, 0.02);
+  group.add(rightArrow);
+
+  // Flow label board
+  const flowBoard = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.2, 0.4),
+    new THREE.MeshBasicMaterial({ map: createPaintedTexture('#7f9aa4') })
+  );
+  flowBoard.position.set(0, 0.3, 0.1);
+  addInkOutline(flowBoard, 0.02);
+  group.add(flowBoard);
+
+  return group;
+}
+
+export function createTremorCrack(gradientMap, intensity = 1) {
+  const group = new THREE.Group();
+
+  const crackMat = new THREE.MeshToonMaterial({
+    map: createPaintedTexture('#7a5c41'),
+    gradientMap,
+  });
+
+  for (let i = 0; i < 4; i++) {
+    const crack = new THREE.Mesh(
+      new THREE.BoxGeometry(4.6 + Math.random() * 2, 0.5, 0.2),
+      crackMat
+    );
+    crack.position.set(
+      -2 + i * 2.5 + Math.random() * 0.5,
+      0.12,
+      1.4 + Math.random() * 1
+    );
+    crack.rotation.z = (0.07 + Math.random() * 0.35) * intensity;
+    crack.castShadow = true;
+    addInkOutline(crack, 0.03);
+    group.add(crack);
+  }
+
+  return group;
+}
+
 export function createWorldSign(text, width = 2.6, height = 0.72) {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
