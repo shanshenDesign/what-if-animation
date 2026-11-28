@@ -172,15 +172,7 @@ const SceneRunner = () => {
         fov={80}
       />
 
-      {/* Cream dip transition: #f4ebd9 0.4s at each cut */}
-      <AbsoluteFill
-        style={{
-          backgroundColor: '#f4ebd9',
-          opacity: 0,
-          pointerEvents: 'none',
-        }}
-      />
-    </>
+</>
   );
 };
 
