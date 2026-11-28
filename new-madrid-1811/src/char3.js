@@ -474,7 +474,7 @@ export function createCharacter(options = {}) {
     const armLSway = Math.sin(ud.armLPhase) * 0.02 * ud.beatIntensity;
     const armRSway = Math.sin(ud.armRPhase) * 0.02 * ud.beatIntensity;
     // Arm positions are baked into the canvas drawing; we adjust group position slightly
-    group.position.y = 1.15 + bounceSin * 0.01;
+    group.position.y = 1.15 + breatheSin * 0.01;
 
     // --- Emotion-driven eye/mouth/gaze update (read from canvas userData) ---
     // These are already baked into the texture, but we can modulate them per-frame:
