@@ -242,8 +242,14 @@ function createBuildingTrim({ width, height, depth, color, gradientMap, windowCo
   group.add(door);
 
   // Door knob accent
-  ctxKnobMat = new THREE.MeshBasicMaterial({ color: '#c9a66b' });
-  // Note: door knob simplified as small mesh; in full scene handled separately
+  const knobMat = new THREE.MeshBasicMaterial({ color: '#c9a66b' });
+  const knob = new THREE.Mesh(
+    new THREE.SphereGeometry(0.3, 12, 12),
+    knobMat
+  );
+  knob.position.set(0, -height / 2 + 0.8, depth / 2 + 0.15);
+  addInkOutline(knob, 0.01);
+  group.add(knob);
 
   return group;
 }
